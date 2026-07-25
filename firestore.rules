@@ -1,0 +1,62 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Testler
+    match /quizzes/{quizId} {
+      // Herkes (anonim dahil) bir testi okuyabilir — link ile açan oynayabilsin.
+      allow read: if true;
+
+      // Yalnızca giriş yapmış kullanıcı, kendi adına (creatorId == uid) test
+      // oluşturabilir ve alan biçimleri doğruysa.
+      allow create: if request.auth != null
+        && request.resource.data.creatorId == request.auth.uid
+        && request.resource.data.cat is string
+        && request.resource.data.name is string
+        && request.resource.data.answers is list
+        && request.resource.data.answers.size() <= 30
+        && request.resource.data.playCount == 0;
+
+      // Testi yalnızca sahibi güncelleyebilir/silebilir.
+      // (playCount artışı client'ta yapılıyor; sahibi olmayan değiştiremez.)
+      allow update, delete: if request.auth != null
+        && resource.data.creatorId == request.auth.uid;
+
+      // Gizli sahip verisi (push token): yalnızca test sahibi okuyabilir/yazabilir.
+      // Herkese açık quiz dokümanından ayrı tutulur ki token sızmasın.
+      // Cloud Function admin yetkisiyle okur (kurallar onu bağlamaz).
+      match /private/{doc} {
+        allow read, create, delete: if request.auth != null
+          && get(/databases/$(database)/documents/quizzes/$(quizId)).data.creatorId == request.auth.uid;
+        allow update: if false;
+      }
+
+      // Sonuçlar: herkes ekleyebilir (çözen anonim olabilir), kimse değiştiremez.
+      // Okumayı yalnızca test sahibine aç.
+      match /results/{resultId} {
+        // Sahte/abartılı sonuç enjeksiyonuna karşı sınır kontrolleri:
+        // yalnızca geçerli aralıkta, var olan bir teste sonuç yazılabilir.
+        allow create: if request.resource.data.percent is int
+          && request.resource.data.percent >= 0
+          && request.resource.data.percent <= 100
+          && request.resource.data.correct is int
+          && request.resource.data.correct >= 0
+          && request.resource.data.total is int
+          && request.resource.data.total > 0
+          && request.resource.data.total <= 30
+          && request.resource.data.correct <= request.resource.data.total
+          && exists(/databases/$(database)/documents/quizzes/$(quizId));
+        allow read: if request.auth != null
+          && get(/databases/$(database)/documents/quizzes/$(quizId)).data.creatorId == request.auth.uid;
+        allow update, delete: if false;
+      }
+    }
+
+    // Huni analitiği: istemci yalnızca olay EKLEYEBİLİR, hiçbirini okuyamaz.
+    // İnceleme Firebase Console / BigQuery üzerinden (admin) yapılır.
+    match /events/{eventId} {
+      allow create: if request.resource.data.event is string;
+      allow read, update, delete: if false;
+    }
+  }
+}

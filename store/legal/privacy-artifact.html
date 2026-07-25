@@ -1,0 +1,137 @@
+<title>Heartprint — Gizlilik Politikası</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #faf8fd;
+    --text: #232135;
+    --muted: #6b6880;
+    --border: #e9e5f2;
+    --accent: #8b2fd6;
+    --grad: linear-gradient(100deg, #FF3E6C, #B033D9 55%, #6A2BF2);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0F0F1A;
+      --surface: #171626;
+      --text: #E8E8F0;
+      --muted: #9a97b3;
+      --border: #262438;
+      --accent: #b98bff;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #ffffff; --surface: #faf8fd; --text: #232135; --muted: #6b6880; --border: #e9e5f2; --accent: #8b2fd6;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0F0F1A; --surface: #171626; --text: #E8E8F0; --muted: #9a97b3; --border: #262438; --accent: #b98bff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 42rem; margin: 0 auto; padding: 4rem 1.5rem 6rem; }
+  .brand {
+    font-size: 1.6rem; font-weight: 800; letter-spacing: -.02em;
+    background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+    display: inline-block;
+  }
+  .eyebrow {
+    text-transform: uppercase; letter-spacing: .14em; font-size: .72rem; font-weight: 700;
+    color: var(--muted); margin: 2.4rem 0 .4rem;
+  }
+  h1 { font-size: 2.1rem; font-weight: 820; letter-spacing: -.025em; margin: .2rem 0 .3rem; text-wrap: balance; }
+  h2 { font-size: 1.18rem; font-weight: 750; letter-spacing: -.01em; margin: 2.6rem 0 .5rem; text-wrap: balance; }
+  p, li { color: var(--text); }
+  .updated { color: var(--muted); font-size: .9rem; margin-top: 0; }
+  .lead { font-size: 1.08rem; color: var(--muted); }
+  ul { padding-left: 1.1rem; display: flex; flex-direction: column; gap: .5rem; margin: .6rem 0; }
+  li::marker { color: var(--accent); }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 35%, transparent); }
+  a:hover { border-bottom-color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+  .rule { height: 1px; background: var(--border); border: 0; margin: 2.6rem 0; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    padding: 1rem 1.2rem; margin-top: .8rem;
+  }
+  .card strong { color: var(--accent); }
+  .foot { color: var(--muted); font-size: .85rem; margin-top: 3rem; }
+  .accentbar { height: 4px; width: 56px; border-radius: 2px; background: var(--grad); margin: 1.4rem 0 0; }
+</style>
+
+<div class="wrap">
+  <span class="brand">heartprint</span>
+  <div class="accentbar"></div>
+
+  <p class="eyebrow">Yasal</p>
+  <h1>Gizlilik Politikası</h1>
+  <p class="updated">Son güncelleme: 16 Temmuz 2026</p>
+
+  <p class="lead">Bu politika, Heartprint uygulamasının verilerinizi nasıl
+  topladığını, kullandığını ve koruduğunu sade bir dille açıklar. Uygulamayı
+  kullanarak bu politikayı kabul etmiş olursunuz.</p>
+
+  <h2>1. Topladığımız veriler</h2>
+  <ul>
+    <li><strong>Girdiğiniz ad:</strong> Test oluştururken yazdığınız takma ad;
+    sonuç kartında ve testi çözen kişiye gösterilmek için saklanır.</li>
+    <li><strong>Test içeriği ve sonuçlar:</strong> Oluşturduğunuz testler,
+    verdiğiniz cevaplar ve testi çözenlerin skorları.</li>
+    <li><strong>Anonim kimlik:</strong> Cihazınıza atanan, kimliğinizi açığa
+    çıkarmayan rastgele bir kimlik (Firebase Anonymous Authentication).</li>
+    <li><strong>Bildirim jetonu:</strong> Size bildirim gönderebilmek için.</li>
+    <li><strong>Reklam ve cihaz bilgileri:</strong> Reklam sağlayıcımız Google
+    AdMob, reklam kimliği ve genel cihaz bilgilerini toplayabilir.</li>
+  </ul>
+  <p>Ad, e-posta, telefon gibi <strong>kimliğinizi doğrudan belirleyen bilgileri
+  istemiyor ve toplamıyoruz.</strong></p>
+
+  <h2>2. Verileri nasıl kullanıyoruz</h2>
+  <ul>
+    <li>Testleri oluşturmak, paylaşmak ve sonuçları göstermek.</li>
+    <li>&ldquo;Testinizi biri çözdü&rdquo; gibi bildirimleri göndermek.</li>
+    <li>Uygulama içi reklamları göstermek ve deneyimi geliştirmek.</li>
+  </ul>
+
+  <h2>3. Üçüncü taraf hizmetler</h2>
+  <p>Uygulama aşağıdaki hizmetleri kullanır; her birinin kendi gizlilik
+  politikası geçerlidir:</p>
+  <div class="card">
+    <strong>Google Firebase</strong> — veri saklama, kimlik, bildirim ·
+    <a href="https://firebase.google.com/support/privacy">politika</a><br />
+    <strong>Google AdMob</strong> — reklam ·
+    <a href="https://policies.google.com/privacy">politika</a><br />
+    <strong>Expo</strong> — bildirim iletimi ·
+    <a href="https://expo.dev/privacy">politika</a>
+  </div>
+
+  <h2>4. Anonimlik</h2>
+  <p>&ldquo;Anonim&rdquo; test modunda, testi gönderen kişinin kimliği çözen
+  kişiye <strong>açıklanmaz.</strong> Anonimlik, uygulamanın temel ilkesidir.</p>
+
+  <h2>5. Veri saklama ve silme</h2>
+  <p>Verileriniz siz silene veya ilgili testler kaldırılana kadar saklanır.
+  Verilerinizin silinmesini istiyorsanız aşağıdaki e-postadan bize ulaşın;
+  talebinizi makul bir sürede yerine getiririz.</p>
+
+  <h2>6. Çocukların gizliliği</h2>
+  <p>Uygulama 13 yaşından küçük çocuklara yönelik değildir ve bilerek 13 yaş altı
+  kullanıcılardan veri toplamaz.</p>
+
+  <h2>7. Değişiklikler</h2>
+  <p>Bu politikayı zaman zaman güncelleyebiliriz. Önemli değişiklikleri bu
+  sayfada yayınlarız.</p>
+
+  <h2>8. İletişim</h2>
+  <p>Sorularınız için:
+  <a href="mailto:y.osmanmelih@gmail.com">y.osmanmelih@gmail.com</a></p>
+
+  <hr class="rule" />
+  <p class="foot">Heartprint · Bu politika Türkçe hazırlanmıştır.
+  An English version is available on request.</p>
+</div>

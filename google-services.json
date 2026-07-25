@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "727011236274",
+    "project_id": "heartprint-c15f2",
+    "storage_bucket": "heartprint-c15f2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727011236274:android:63c5283361f3fdb3062cab",
+        "android_client_info": {
+          "package_name": "app.heartprint"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvZni6eBd05CdHM_w_s7WzdMV33OOIWh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

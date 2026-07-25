@@ -1,0 +1,54 @@
+{
+  "expo": {
+    "name": "Heartprint",
+    "slug": "heartprint",
+    "scheme": "heartprint",
+    "version": "1.0.7",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0F0F1A",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "app.heartprint"
+    },
+    "android": {
+      "package": "app.heartprint",
+      "versionCode": 1005,
+      "googleServicesFile": "./google-services.json",
+      "adaptiveIcon": {
+        "backgroundColor": "#B033D9",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-sharing",
+      [
+        "expo-notifications",
+        {
+          "color": "#B033D9"
+        }
+      ],
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-4634506944728114~1790240728",
+          "iosAppId": "ca-app-pub-4634506944728114~4671554936"
+        }
+      ],
+      "expo-status-bar"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "6258ec96-39d1-4875-8a6c-ed7e28b33752"
+      }
+    },
+    "owner": "meloshemo"
+  }
+}

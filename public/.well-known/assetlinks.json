@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.heartprint",
+      "sha256_cert_fingerprints": [
+        "B1:5C:00:46:5E:E6:59:BE:B4:17:94:C5:A8:B4:CA:E9:9E:79:8B:8F:F1:0D:D0:7F:FA:EE:14:4B:0E:05:48:3E",
+        "E6:74:74:2B:47:46:45:B6:22:9A:21:E5:A1:68:0D:E0:25:D7:93:82:0A:A7:DC:99:1D:2C:25:E9:89:C6:78:10"
+      ]
+    }
+  }
+]
