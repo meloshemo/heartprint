@@ -1,8 +1,8 @@
 import { Platform } from 'react-native';
 
 // Paylaşılabilir test linklerinin tabanı.
-// Web build EAS Hosting'e yayınlı; kendi alan adı alınınca burası değişir.
-export const WEB_BASE_URL = 'https://heartprint.expo.app';
+// Web build Vercel'de barınıyor, kendi alan adı: heartprint.app.
+export const WEB_BASE_URL = 'https://heartprint.app';
 
 // Mağaza linkleri — yayına çıktıktan sonra gerçek ID'lerle güncellenmeli.
 // iOS: id kısmını App Store Connect'teki sayısal uygulama ID'siyle değiştir.
