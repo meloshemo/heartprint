@@ -111,10 +111,12 @@ export function StoryCard({
           <Text style={styles.bannerSub}>{sub}</Text>
         </View>
 
-        {/* Yüzde (kalbin ÜSTÜNDE) */}
+        {/* Yüzde (kalbin ÜSTÜNDE). Sağda görünmez ayna "%" ile blok simetrik
+            hale getirilir — yoksa soldaki "%" rakamı sola kaydırır. */}
         <View style={styles.percentRow}>
           <Text style={styles.percentSign}>%</Text>
           <Text style={styles.percentNum}>{percent}</Text>
+          <Text style={[styles.percentSign, styles.percentSignGhost]}>%</Text>
         </View>
 
         {/* Parmak izi kalbi — altın dolgu */}
@@ -190,6 +192,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginRight: 2,
     opacity: 0.9,
+  },
+  percentSignGhost: {
+    marginRight: 0,
+    marginLeft: 2,
+    opacity: 0, // sadece simetri için — görünmez
   },
   percentNum: {
     color: '#fff',

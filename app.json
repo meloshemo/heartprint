@@ -14,7 +14,7 @@
     },
     "android": {
       "package": "app.heartprint",
-      "versionCode": 1006,
+      "versionCode": 1007,
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "backgroundColor": "#B033D9",
