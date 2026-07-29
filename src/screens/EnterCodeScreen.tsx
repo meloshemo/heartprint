@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput } from 'react-native';
 import { decodeQuiz, extractCode } from '../utils/encoding';
-import { getQuiz, MAX_PLAYS } from '../backend/quizzes';
+import { getQuiz, hasSolved } from '../backend/quizzes';
 import { theme } from '../theme';
 import { Quiz } from '../types';
 import {
@@ -25,12 +25,12 @@ export function EnterCodeScreen({
 }) {
   const [code, setCode] = useState('');
   const [error, setError] = useState(false);
-  const [limitReached, setLimitReached] = useState(false);
+  const [alreadySolved, setAlreadySolved] = useState(false);
   const [busy, setBusy] = useState(false);
 
   const submit = async () => {
     setError(false);
-    setLimitReached(false);
+    setAlreadySolved(false);
     setBusy(true);
     try {
       const raw = extractCode(code);
@@ -38,10 +38,9 @@ export function EnterCodeScreen({
       if (SHORT_ID.test(raw)) {
         const quiz = await getQuiz(raw);
         if (quiz) {
-          if (quiz.playCount >= MAX_PLAYS) {
-            // Link geçerli ama hakkı dolmuş — girişte engelle, tekrar tekrar
-            // denenip çözülemesin.
-            setLimitReached(true);
+          if (await hasSolved(raw)) {
+            // Bu cihaz testi zaten çözmüş — aynı kişi tekrar tekrar çözemesin
+            setAlreadySolved(true);
             return;
           }
           onQuizLoaded(quiz, raw);
@@ -73,7 +72,7 @@ export function EnterCodeScreen({
           onChangeText={(t) => {
             setCode(t);
             setError(false);
-            setLimitReached(false);
+            setAlreadySolved(false);
           }}
           placeholder={S.enterCodePlaceholder}
           placeholderTextColor={theme.textDim}
@@ -83,7 +82,7 @@ export function EnterCodeScreen({
           autoCorrect={false}
         />
         {error && <Text style={styles.error}>{S.enterCodeError}</Text>}
-        {limitReached && (
+        {alreadySolved && (
           <Text style={styles.error}>{S.enterCodeLimitError}</Text>
         )}
         <BigButton

@@ -22,7 +22,15 @@ type Route =
   | { name: 'create'; category: Category }
   | { name: 'share'; quiz: Quiz }
   | { name: 'enterCode' }
-  | { name: 'play'; quiz: Quiz; quizId: string | null; invited?: boolean }
+  | {
+      name: 'play';
+      quiz: Quiz;
+      quizId: string | null;
+      invited?: boolean;
+      /** Kurucu kendi telefonunda oynatıyor → cihaz başına tek çözüm kuralı
+          uygulanmaz (telefonu birden çok arkadaşa uzatabilsin). */
+      samePhone?: boolean;
+    }
   | {
       name: 'result';
       quiz: Quiz;
@@ -30,13 +38,14 @@ type Route =
       quizId: string | null;
       guesserName: string | null;
       guesses: number[];
+      samePhone?: boolean;
     }
   | { name: 'myTests'; focusQuizId?: string }
-  | { name: 'linkError'; reason: 'notFound' | 'limitReached' };
+  | { name: 'linkError'; reason: 'notFound' | 'alreadySolved' };
 
 export default function App() {
   const [route, setRoute] = useState<Route>({ name: 'home' });
-  const { data: invited, notFound, limitReached } = useInitialQuiz();
+  const { data: invited, notFound, alreadySolved } = useInitialQuiz();
 
   // Reklam SDK'sını başta hazırla (web'de no-op)
   useEffect(() => {
@@ -60,10 +69,10 @@ export default function App() {
     if (notFound) setRoute({ name: 'linkError', reason: 'notFound' });
   }, [notFound]);
 
-  // Link geçerli ama hakkı dolmuş (MAX_PLAYS kez çözülmüş) → ayrı mesaj
+  // Bu cihaz testi zaten çözmüş → ayrı mesaj (bulunamadı değil)
   useEffect(() => {
-    if (limitReached) setRoute({ name: 'linkError', reason: 'limitReached' });
-  }, [limitReached]);
+    if (alreadySolved) setRoute({ name: 'linkError', reason: 'alreadySolved' });
+  }, [alreadySolved]);
 
   // Bildirime dokunulunca "Testlerim" ekranını ilgili teste odaklı aç
   useNotificationNav((quizId) => {
@@ -108,7 +117,13 @@ export default function App() {
           quiz={route.quiz}
           onPlaySamePhone={(quizId) =>
             // Aynı telefonda da link gelmiş gibi: karşılama + isim ekranı göster
-            setRoute({ name: 'play', quiz: route.quiz, quizId, invited: true })
+            setRoute({
+              name: 'play',
+              quiz: route.quiz,
+              quizId,
+              invited: true,
+              samePhone: true,
+            })
           }
           onBack={() => setRoute({ name: 'home' })}
         />
@@ -128,6 +143,7 @@ export default function App() {
           onDone={async (correctCount, guesserName, guesses) => {
             const q = route.quiz;
             const qid = route.quizId;
+            const sp = route.samePhone;
             // Sonucu göstermeden önce geçiş reklamı (ilk oyun hariç, web'de no-op)
             await maybeShowInterstitial();
             setRoute({
@@ -137,6 +153,7 @@ export default function App() {
               quizId: qid,
               guesserName,
               guesses,
+              samePhone: sp,
             });
           }}
           onBack={() => setRoute({ name: 'home' })}
@@ -149,6 +166,7 @@ export default function App() {
           quizId={route.quizId}
           guesserName={route.guesserName}
           guesses={route.guesses}
+          samePhone={route.samePhone}
           onRestart={() => setRoute({ name: 'home' })}
         />
       )}

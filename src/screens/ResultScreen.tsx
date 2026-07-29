@@ -37,6 +37,7 @@ export function ResultScreen({
   quizId = null,
   guesserName = null,
   guesses = [],
+  samePhone = false,
   onRestart,
 }: {
   quiz: Quiz;
@@ -44,6 +45,8 @@ export function ResultScreen({
   quizId?: string | null;
   guesserName?: string | null;
   guesses?: number[];
+  /** Kurucunun telefonunda oynandı → cihaz başına tek çözüm kuralı dışında. */
+  samePhone?: boolean;
   onRestart: () => void;
 }) {
   const category = getCategory(quiz.cat);
@@ -88,10 +91,10 @@ export function ResultScreen({
   useEffect(() => {
     track('test_cozuldu', { cat: quiz.cat, percent, linkli: !!quizId });
     if (!quizId) return;
-    saveResult(quizId, correctCount, total, guesserName).catch((e) =>
+    saveResult(quizId, correctCount, total, guesserName, samePhone).catch((e) =>
       console.log('Sonuç kaydedilemedi:', e)
     );
-  }, [quizId, correctCount, total, guesserName]);
+  }, [quizId, correctCount, total, guesserName, samePhone]);
 
   // Kart giriş animasyonu (hafif büyüme)
   const scaleAnim = useRef(new Animated.Value(0.85)).current;

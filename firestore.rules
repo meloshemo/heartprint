@@ -31,15 +31,26 @@ service cloud.firestore {
         allow update: if false;
       }
 
-      // Sonuçlar: herkes ekleyebilir (çözen anonim olabilir), kimse değiştiremez.
-      // Okumayı yalnızca test sahibine aç.
+      // Sonuçlar. CİHAZ BAŞINA TEK ÇÖZÜM:
+      // Link/kod ile çözümde doküman kimliği = çözenin uid'si. update kapalı
+      // olduğu için aynı cihaz aynı testi ikinci kez KAYDEDEMEZ — sunucu
+      // tarafında garanti (istemci değiştirilse bile geçerli).
+      // "Aynı telefonda oyna" akışı kimliğe zaman damgası ekler (uid_...),
+      // böylece kurucu telefonunu arkadaşına uzatabilir; her çözüm kaydolur.
+      // Her iki durumda da solverId yazanın uid'si olmak zorunda: sonuçlar
+      // daima kimliğe bağlı, sahibi olmayan adına sonuç yazılamaz.
       match /results/{resultId} {
-        // Sahte/abartılı sonuç enjeksiyonuna karşı sınır kontrolleri:
-        // yalnızca geçerli aralıkta, var olan bir teste sonuç yazılabilir.
-        // playCount < 3: bir test linki en fazla 3 kez çözülebilir (client
-        // tarafında da kontrol edilir — src/backend/quizzes.ts MAX_PLAYS —
-        // ama asıl garanti burada, sunucu tarafında).
-        allow create: if request.resource.data.percent is int
+        // GERİYE DÖNÜK UYUMLULUK: Play'deki eski sürümler saveResult'ta
+        // oturum açmıyor ve solverId göndermiyordu. Kural sadece yeni biçimi
+        // kabul etseydi o kullanıcıların sonuçları kaydedilemez, test
+        // sahiplerine bildirim gitmezdi. Eski sürümler tükenince alttaki
+        // "solverId yok" dalı kaldırılmalı (bkz. hafıza notu).
+        allow create: if (
+            (request.auth != null
+              && request.resource.data.solverId == request.auth.uid)
+            || !('solverId' in request.resource.data)
+          )
+          && request.resource.data.percent is int
           && request.resource.data.percent >= 0
           && request.resource.data.percent <= 100
           && request.resource.data.correct is int
@@ -48,18 +59,28 @@ service cloud.firestore {
           && request.resource.data.total > 0
           && request.resource.data.total <= 30
           && request.resource.data.correct <= request.resource.data.total
-          && exists(/databases/$(database)/documents/quizzes/$(quizId))
-          && get(/databases/$(database)/documents/quizzes/$(quizId)).data.playCount < 3;
+          && exists(/databases/$(database)/documents/quizzes/$(quizId));
+        // Test sahibi tüm sonuçları, çözen ise yalnızca kendi kaydını okur
+        // (istemci "bu testi zaten çözdüm mü?" kontrolünü bununla yapar).
         allow read: if request.auth != null
-          && get(/databases/$(database)/documents/quizzes/$(quizId)).data.creatorId == request.auth.uid;
+          && (resultId == request.auth.uid
+            || get(/databases/$(database)/documents/quizzes/$(quizId)).data.creatorId == request.auth.uid);
         allow update, delete: if false;
       }
     }
 
     // Huni analitiği: istemci yalnızca olay EKLEYEBİLİR, hiçbirini okuyamaz.
     // İnceleme Firebase Console / BigQuery üzerinden (admin) yapılır.
+    // GÜVENLİK: kimlik doğrulaması ZORUNLU ve olay adı bilinen listeden
+    // olmalı. Aksi hâlde internetteki herkes sınırsız doküman yazıp
+    // Firestore faturasını şişirebilirdi (maliyet saldırısı).
     match /events/{eventId} {
-      allow create: if request.resource.data.event is string;
+      allow create: if request.auth != null
+        && request.resource.data.event in [
+          'test_olusturuldu', 'test_paylasildi', 'link_acildi',
+          'test_baslatildi', 'test_cozuldu', 'sonuc_paylasildi',
+          'bildirim_acildi', 'uygulama_indir_tiklandi'
+        ];
       allow read, update, delete: if false;
     }
   }

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import * as Linking from 'expo-linking';
 import { decodeQuiz, extractCode } from './encoding';
-import { getQuiz, MAX_PLAYS } from '../backend/quizzes';
+import { getQuiz, hasSolved } from '../backend/quizzes';
+import { track } from '../backend/analytics';
 import { Quiz } from '../types';
 
 // Backend kısa ID'si: sadece büyük harf + 2-9, 5-10 karakter (quizzes.ts ALPHABET)
@@ -24,12 +25,12 @@ export function useInitialQuiz(): {
   data: InitialQuiz | null;
   pending: boolean;
   notFound: boolean;
-  limitReached: boolean;
+  alreadySolved: boolean;
 } {
   const [data, setData] = useState<InitialQuiz | null>(null);
   const [pending, setPending] = useState(true);
   const [notFound, setNotFound] = useState(false);
-  const [limitReached, setLimitReached] = useState(false);
+  const [alreadySolved, setAlreadySolved] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -45,11 +46,15 @@ export function useInitialQuiz(): {
           const quiz = await getQuiz(code);
           if (!active) return;
           if (quiz) {
-            if (quiz.playCount >= MAX_PLAYS) {
-              // Link geçerli ama hakkı dolmuş — "bulunamadı" değil, ayrı mesaj
-              setLimitReached(true);
+            // Huninin en üstü: link gerçekten açıldı (bitirilmese de sayılır)
+            track('link_acildi', { cat: quiz.cat });
+            if (await hasSolved(code)) {
+              if (!active) return;
+              // Bu cihaz bu testi zaten çözmüş — "bulunamadı" değil, ayrı mesaj
+              setAlreadySolved(true);
               return;
             }
+            if (!active) return;
             setNotFound(false);
             setData({ quiz, quizId: code });
             return;
@@ -90,5 +95,5 @@ export function useInitialQuiz(): {
     };
   }, []);
 
-  return { data, pending, notFound, limitReached };
+  return { data, pending, notFound, alreadySolved };
 }

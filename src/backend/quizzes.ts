@@ -1,5 +1,4 @@
 import {
-  addDoc,
   collection,
   deleteDoc,
   doc,
@@ -17,9 +16,6 @@ import { db, ensureAuth } from './firebase';
 import { CategoryId, Quiz } from '../types';
 
 const ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // karışabilen 0/O/1/I çıkarıldı
-
-/** Bir test linki en fazla bu kadar kez çözülebilir (spam/aşırı paylaşımı önler). */
-export const MAX_PLAYS = 3;
 
 function shortId(len = 7): string {
   let s = '';
@@ -112,14 +108,8 @@ export async function deleteQuiz(quizId: string): Promise<void> {
   await deleteDoc(doc(db, 'quizzes', quizId));
 }
 
-/**
- * Kısa ID'den testi çeker. Bulunamazsa null.
- * Dönüşe `playCount` de dahildir (MAX_PLAYS limiti kontrolü için) — Quiz
- * tipinin normal alanlarını etkilemez, sadece ek bir bilgi taşır.
- */
-export async function getQuiz(
-  id: string
-): Promise<(Quiz & { playCount: number }) | null> {
+/** Kısa ID'den testi çeker. Bulunamazsa null. */
+export async function getQuiz(id: string): Promise<Quiz | null> {
   const snap = await getDoc(doc(db, 'quizzes', id));
   if (!snap.exists()) return null;
   const d = snap.data();
@@ -136,23 +126,49 @@ export async function getQuiz(
     name: d.name,
     answers: d.answers,
     q: Array.isArray(d.q) ? d.q : undefined,
-    playCount: typeof d.playCount === 'number' ? d.playCount : 0,
   };
+}
+
+/**
+ * Bu cihaz bu testi LİNK/KOD ile daha önce çözdü mü?
+ * Sonuç dokümanının kimliği çözenin uid'si olduğu için tek okumayla anlaşılır.
+ * Ağ hatasında false döner — kullanıcıyı boşuna engellememek için.
+ */
+export async function hasSolved(quizId: string): Promise<boolean> {
+  try {
+    const uid = await ensureAuth();
+    const snap = await getDoc(doc(db, 'quizzes', quizId, 'results', uid));
+    return snap.exists();
+  } catch {
+    return false;
+  }
 }
 
 /**
  * Bir testin çözüm sonucunu kaydeder.
  * Bu yazma, Cloud Function'ı tetikler: fonksiyon playCount'u artırır ve
  * test sahibine "testini çözdü" bildirimini gönderir.
+ *
+ * CİHAZ BAŞINA TEK ÇÖZÜM: link/kod ile gelen çözümde doküman kimliği
+ * çözenin uid'sidir. Kurallarda update kapalı olduğu için aynı cihaz aynı
+ * testi ikinci kez çözüp kaydedemez (sunucu tarafında garanti).
+ *
+ * AYNI TELEFONDA OYNA istisnası: kurucu telefonu arkadaşına uzatabilsin diye
+ * bu akış sınırsızdır — kimliğe zaman damgası eklenir, her seferinde yeni
+ * doküman oluşur (bildirim de her seferinde gider).
  */
 export async function saveResult(
   quizId: string,
   correct: number,
   total: number,
-  guesserName: string | null
+  guesserName: string | null,
+  samePhone = false
 ): Promise<void> {
+  const uid = await ensureAuth();
   const percent = Math.round((correct / total) * 100);
-  await addDoc(collection(db, 'quizzes', quizId, 'results'), {
+  const resultId = samePhone ? `${uid}_${Date.now()}` : uid;
+  await setDoc(doc(db, 'quizzes', quizId, 'results', resultId), {
+    solverId: uid,
     guesserName: guesserName ?? null,
     correct,
     total,

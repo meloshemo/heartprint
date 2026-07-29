@@ -8,7 +8,7 @@ import { S } from '../i18n/strings';
 /**
  * Bir test linkiyle gelindi ama test açılamadı. İki durum:
  * - 'notFound': silinmiş, süresi geçmiş, bozuk kod ya da ağ hatası.
- * - 'limitReached': test zaten MAX_PLAYS kez çözülmüş (bkz quizzes.ts).
+ * - 'alreadySolved': bu CİHAZ testi daha önce çözmüş (bkz quizzes.ts hasSolved).
  * Kullanıcıyı çıkmaza sokmayıp yönlendirir.
  */
 export function LinkErrorScreen({
@@ -16,9 +16,9 @@ export function LinkErrorScreen({
   reason = 'notFound',
 }: {
   onHome: () => void;
-  reason?: 'notFound' | 'limitReached';
+  reason?: 'notFound' | 'alreadySolved';
 }) {
-  const isLimit = reason === 'limitReached';
+  const isSolved = reason === 'alreadySolved';
   return (
     <Screen>
       <FadeIn>
@@ -26,11 +26,11 @@ export function LinkErrorScreen({
           <Logo size={56} gradient />
           <Text style={styles.brand}>heartprint</Text>
         </View>
-        <Text style={styles.emoji}>{isLimit ? '🔒' : '🔍'}</Text>
-        <Title>{isLimit ? S.linkLimitTitle : S.linkErrorTitle}</Title>
-        <Subtitle>{isLimit ? S.linkLimitSub : S.linkErrorSub}</Subtitle>
+        <Text style={styles.emoji}>{isSolved ? '🔒' : '🔍'}</Text>
+        <Title>{isSolved ? S.linkLimitTitle : S.linkErrorTitle}</Title>
+        <Subtitle>{isSolved ? S.linkLimitSub : S.linkErrorSub}</Subtitle>
         <BigButton
-          label={isLimit ? S.linkLimitHome : S.linkErrorHome}
+          label={isSolved ? S.linkLimitHome : S.linkErrorHome}
           gradient
           onPress={onHome}
         />

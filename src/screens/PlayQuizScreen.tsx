@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { questionsForQuiz, guessText } from '../data/questions';
 import { getCategory } from '../data/categories';
+import { track } from '../backend/analytics';
 import { theme } from '../theme';
 import { Quiz } from '../types';
 import {
@@ -83,7 +84,12 @@ export function PlayQuizScreen({
           <BigButton
             label={S.startQuiz}
             gradient
-            onPress={() => setStarted(true)}
+            onPress={() => {
+              // Huninin kritik adımı: linke tıklayanların kaçı gerçekten
+              // başlıyor? Bu olay olmadan bitirme oranı hesaplanamaz.
+              track('test_baslatildi', { cat: quiz.cat });
+              setStarted(true);
+            }}
           />
         </FadeIn>
       </Screen>

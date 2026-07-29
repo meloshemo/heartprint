@@ -131,21 +131,30 @@ export function ShareScreen({
             emoji="💬"
             color="#25D366"
             disabled={!ready}
-            onPress={() => shareTextWhatsApp(message)}
+            onPress={() => {
+              track('test_paylasildi', { cat: quiz.cat, via: 'whatsapp' });
+              shareTextWhatsApp(message);
+            }}
           />
           <PlatformBtn
             label="Instagram"
             emoji="📸"
             color="#E1306C"
             disabled={!ready}
-            onPress={() => link && openInstagram(link)}
+            onPress={() => {
+              track('test_paylasildi', { cat: quiz.cat, via: 'instagram' });
+              if (link) openInstagram(link);
+            }}
           />
           <PlatformBtn
             label="TikTok"
             emoji="🎵"
             color="#000000"
             disabled={!ready}
-            onPress={() => link && openTikTok(link)}
+            onPress={() => {
+              track('test_paylasildi', { cat: quiz.cat, via: 'tiktok' });
+              if (link) openTikTok(link);
+            }}
           />
         </View>
 
