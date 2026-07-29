@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="500" viewBox="0 0 1024 500">
+  <defs>
+    <!-- Marka gradyanı: uygulama logosuyla birebir (Logo.tsx) -->
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF3E6C"/>
+      <stop offset="0.55" stop-color="#B033D9"/>
+      <stop offset="1" stop-color="#6A2BF2"/>
+    </linearGradient>
+    <!-- Aurora zemin: StoryCard.tsx'teki radial gradyanların aynısı -->
+    <radialGradient id="a1" cx="18%" cy="12%" r="62%">
+      <stop offset="0%" stop-color="#FF3E6C" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#FF3E6C" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="a2" cx="88%" cy="72%" r="66%">
+      <stop offset="0%" stop-color="#B033D9" stop-opacity="0.40"/>
+      <stop offset="100%" stop-color="#B033D9" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="a3" cx="52%" cy="98%" r="58%">
+      <stop offset="0%" stop-color="#6A2BF2" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#6A2BF2" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Zemin -->
+  <rect width="1024" height="500" fill="#0A0A16"/>
+  <rect width="1024" height="500" fill="url(#a1)"/>
+  <rect width="1024" height="500" fill="url(#a2)"/>
+  <rect width="1024" height="500" fill="url(#a3)"/>
+
+  <!-- Parmak izi kalbi — uygulamadaki logonun aynısı (dolu kalp + 3 iç hat) -->
+  <g transform="translate(208 236) scale(1.62)">
+    <path fill="url(#brand)"
+      d="M 0 -35 C 30 -75, 90 -55, 90 -10 C 90 30, 40 55, 0 85 C -40 55, -90 30, -90 -10 C -90 -55, -30 -75, 0 -35 Z"/>
+    <g transform="scale(0.72)">
+      <path fill="none" stroke="#FFFFFF" stroke-opacity="0.60" stroke-width="2.25" stroke-linejoin="round"
+        d="M 0 -35 C 30 -75, 90 -55, 90 -10 C 90 30, 40 55, 0 85 C -40 55, -90 30, -90 -10 C -90 -55, -30 -75, 0 -35 Z"/>
+    </g>
+    <g transform="scale(0.5)">
+      <path fill="none" stroke="#FFFFFF" stroke-opacity="0.60" stroke-width="3.24" stroke-linejoin="round"
+        d="M 0 -35 C 30 -75, 90 -55, 90 -10 C 90 30, 40 55, 0 85 C -40 55, -90 30, -90 -10 C -90 -55, -30 -75, 0 -35 Z"/>
+    </g>
+    <g transform="scale(0.28)">
+      <path fill="none" stroke="#FFFFFF" stroke-opacity="0.60" stroke-width="5.80" stroke-linejoin="round"
+        d="M 0 -35 C 30 -75, 90 -55, 90 -10 C 90 30, 40 55, 0 85 C -40 55, -90 30, -90 -10 C -90 -55, -30 -75, 0 -35 Z"/>
+    </g>
+  </g>
+
+  <!-- Marka adı + slogan -->
+  <text x="392" y="240" font-family="Arial Black, Arial, Helvetica, sans-serif" font-weight="900"
+        font-size="96" letter-spacing="-4" fill="#FFFFFF">heartprint</text>
+  <text x="396" y="298" font-family="Arial, Helvetica, sans-serif" font-weight="bold"
+        font-size="32" fill="#FFFFFF" fill-opacity="0.72">Seni ger&#xE7;ekten tan&#x131;yorlar m&#x131;?</text>
+
+  <!-- Altın vurgu: skor mekaniğini ima eden ince çizgi -->
+  <rect x="396" y="328" width="132" height="6" rx="3" fill="#FFCE4F"/>
+</svg>
