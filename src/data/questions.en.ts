@@ -95,6 +95,16 @@ export const SHARED_EN: Question[] = [
   { id: 86, text: 'A promise to myself I never keep?', textGuess: "A promise {name} never keeps to themselves?", options: ['Sleep early', 'Work out', 'Spend less', 'Put the phone down'] },
   { id: 87, text: 'With superpowers, would I be good or bad?', textGuess: 'With powers, would {name} be good or bad?', options: ['A hero', 'A villain', 'In between', 'Would sell the powers'] },
   { id: 88, text: 'Waiter says "enjoy" — what do I say?', textGuess: 'When the waiter says "enjoy," {name} says?', options: ['"You too" (by mistake)', '"Thank you"', 'Just nods', "Doesn't hear"] },
+  // --- HARD questions: even someone close only gets these if they truly know you.
+  // Options are deliberately EQUALLY plausible so guessing stays near 25%.
+  { id: 89, text: 'As a kid, what was I most reluctant to do?', textGuess: 'As a kid, what did {name} avoid most?', options: ['Talking on the phone', 'Reading out loud in class', 'Asking a stranger something', 'Sleeping alone'] },
+  { id: 90, text: 'The thing that really annoys me that nobody knows?', textGuess: "What really annoys {name} that nobody knows?", options: ['Loud chewing', 'Being interrupted', 'People being late', 'A wet sink left behind'] },
+  { id: 91, text: 'Which compliment actually makes me happy?', textGuess: 'Which compliment truly lands with {name}?', options: ['"You\'re so funny"', '"You\'re so smart"', '"You\'re so kind"', '"You look great"'] },
+  { id: 92, text: 'The odd thing I do most when alone?', textGuess: 'What does {name} do most when alone?', options: ['Talks to themselves', 'Has imaginary arguments', 'Dances', 'Sings out loud'] },
+  { id: 93, text: 'What did I want to be as a kid?', textGuess: 'What did {name} want to be as a kid?', options: ['A teacher', 'A doctor', 'A singer / actor', 'A police officer / soldier'] },
+  { id: 94, text: 'When did I last cry?', textGuess: 'When did {name} last cry?', options: ['This week', 'This month', 'Months ago', "Can't even remember"] },
+  { id: 95, text: 'What do I never ask anyone about?', textGuess: 'What does {name} never ask anyone about?', options: ['Money', 'Relationships', 'Health', 'Future plans'] },
+  { id: 96, text: 'The last thing on my mind before sleep?', textGuess: "What's the last thing on {name}'s mind before sleep?", options: ['Tomorrow\'s to-do list', 'Something they said today', 'Someone they love', 'Nothing, out instantly'] },
 ];
 
 export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
@@ -129,6 +139,11 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 128, text: "One thing they can't do even when mad at me?", textGuess: "What can't {name} do even when angry?", options: ['Text without emojis', 'Skip "goodnight"', 'Truly stay mad', 'Not care'] },
     { id: 129, text: 'Do I do surprises, or love a plan?', textGuess: 'Does {name} do surprises or love plans?', options: ['Surprise monster', 'Everything planned', 'Ruins the surprise', 'Surprises themselves'] },
     { id: 130, text: 'Who apologizes first in our relationship?', textGuess: 'Who says sorry first with {name}?', options: ['Always me', 'Always them', 'Whoever\'s wrong', 'No one, it passes'] },
+    // --- HARD
+    { id: 131, text: 'After a fight, what do I really want to hear?', textGuess: 'After a fight, what does {name} really want to hear?', options: ['"You\'re right"', '"I understand you"', '"I\'m sorry"', '"I love you"'] },
+    { id: 132, text: 'My biggest unspoken fear in the relationship?', textGuess: "{name}'s unspoken fear in the relationship?", options: ['Becoming ordinary', 'Not being loved enough', 'Being cheated on', 'Ending up alone'] },
+    { id: 133, text: 'Which small gesture melts me?', textGuess: 'Which small gesture melts {name}?', options: ['Playing with their hair', 'A morning text', 'Remembering a small thing', 'Just listening'] },
+    { id: 134, text: 'How do I most want to be loved?', textGuess: 'How does {name} most want to be loved?', options: ['Just woken up', 'All dressed up', 'While working', 'While laughing'] },
   ],
   anne: [
     { id: 201, text: 'What do I hide most from my mom?', textGuess: 'What does {name} hide most from their mom?', options: ['How much they spend', 'Their dating life', 'Grades / work', 'Where they go'] },
@@ -161,6 +176,11 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 228, text: 'If mom threw out a thing of mine?', textGuess: "If {name}'s mom tossed their stuff?", options: ['Chaos erupts', '"Good, glad you did"', "Doesn't care", 'Secretly takes it back'] },
     { id: 229, text: 'When I get sick, what does mom do?', textGuess: 'When {name} gets sick, mom?', options: ['Soup + lemon', 'Panic-calls a doctor', '"Get well" from afar', 'Brings every medicine'] },
     { id: 230, text: 'What happens shopping with mom?', textGuess: "What happens when {name} shops with mom?", options: ['Takes hours', 'Everything\'s too pricey', 'Buys me stuff too', '"Just looking" (buys)'] },
+    // --- HARD
+    { id: 231, text: "What can't I tell my mom?", textGuess: "What can't {name} tell their mom?", options: ['That they are tired', 'That they miss her', 'A mistake they made', 'What they really want'] },
+    { id: 232, text: 'The line from mom still in my head?', textGuess: "Which line from mom stuck with {name}?", options: ['"You can do it"', '"Be careful"', '"I\'m always here"', '"One day you\'ll understand"'] },
+    { id: 233, text: 'As a kid, what did I want most from mom?', textGuess: 'As a kid, what did {name} want most from mom?', options: ['To be listened to', 'A hug', 'Permission', 'Praise'] },
+    { id: 234, text: 'What would I miss most about mom?', textGuess: 'What would {name} miss most about mom?', options: ['Her voice', 'Her cooking', 'Her worrying', 'Her touch'] },
   ],
   baba: [
     { id: 301, text: 'What do I enjoy most with my dad?', textGuess: 'What does {name} enjoy most with their dad?', options: ['Watching the game', 'Car / a drive', 'Talking', 'Eating'] },
@@ -193,6 +213,11 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 328, text: 'How is our shared silence with dad?', textGuess: "How's {name}'s silence with dad?", options: ['Cozy, peaceful', 'Awkward', 'Fine if a match is on', 'TV fills it'] },
     { id: 329, text: 'How can you tell dad is angry?', textGuess: "How do you tell {name}'s dad is angry?", options: ['Goes quiet', 'Frowns', 'Snaps the newspaper open', 'Mom steps in'] },
     { id: 330, text: "Dad's most-used sentence?", textGuess: "{name}'s dad's most-used line?", options: ['"Back in my day..."', '"Turn off the lights"', '"How much was it?"', '"Go to bed"'] },
+    // --- HARD
+    { id: 331, text: 'What do I most want to hear from dad?', textGuess: 'What does {name} most want to hear from dad?', options: ['"I\'m proud of you"', '"I love you"', '"You\'re right"', '"How are you, really?"'] },
+    { id: 332, text: 'My clearest childhood memory of dad?', textGuess: "{name}'s clearest childhood memory of dad?", options: ['Being carried on his shoulders', 'A car ride', 'An argument', 'A gift'] },
+    { id: 333, text: 'Which trait of his do I fear inheriting?', textGuess: "Which of dad's traits does {name} fear inheriting?", options: ['His temper', 'His silence', 'His stubbornness', 'None, they want to be like him'] },
+    { id: 334, text: 'If I saw dad cry, what would I do?', textGuess: 'If {name} saw dad cry, what would they do?', options: ['Freeze', 'Hug him', 'Leave the room', 'Never seen it'] },
   ],
   bff: [
     { id: 401, text: 'Drunk at 3am, who do I call?', textGuess: 'Drunk at 3am, who does {name} call?', options: ['Their best friend', 'Their ex', 'Their mom', 'No one, just texts'] },
@@ -225,6 +250,11 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 428, text: 'How long can my bestie keep my secret?', textGuess: 'How long can the bestie keep {name}\'s secret?', options: ['To the grave', 'One day', 'Spills instantly', 'I don\'t tell them'] },
     { id: 429, text: 'Do we talk with just a look?', textGuess: 'Do {name} and the bestie talk with a look?', options: ['No words needed', 'Sometimes', 'Never gets it', 'Reads it wrong'] },
     { id: 430, text: 'If my bestie ditched me somewhere?', textGuess: 'If the bestie ditched {name}?', options: ['Held over them forever', 'Understands', 'Plots revenge', 'They\'d never ditch me'] },
+    // --- HARD
+    { id: 431, text: 'What do I think my bestie doesn\'t know?', textGuess: "What does {name} think the bestie doesn't know?", options: ['That they envy them', 'That they look up to them', 'How much they love them', 'A secret'] },
+    { id: 432, text: 'The topic we never talk about?', textGuess: 'What do {name} and the bestie never discuss?', options: ['Money', 'Relationships', 'Family', 'Nothing, they discuss it all'] },
+    { id: 433, text: 'What would my life be without my bestie?', textGuess: "What would {name}'s life be without the bestie?", options: ['Far more boring', 'Calmer', 'Pretty much the same', "They don't want to think about it"] },
+    { id: 434, text: 'When did I last thank my bestie?', textGuess: 'When did {name} last thank the bestie?', options: ['Recently', 'Months ago', 'Never', 'All the time'] },
   ],
   kardes: [
     { id: 701, text: 'Who grabs the last slice at home?', textGuess: 'Who grabs the last slice, {name} or their sibling?', options: ['Me', 'My sibling', 'Whoever sees it first', 'We share (lie)'] },
@@ -257,6 +287,11 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 728, text: 'Who do I dump the chores on?', textGuess: 'Who does {name} dump chores on?', options: ['My sibling', 'They dump on me', 'We both flee', 'Mom does it'] },
     { id: 729, text: 'What can we never share?', textGuess: 'What can {name} and the sibling never share?', options: ['A charger cable', 'The last slice', 'The remote', 'Mom\'s love'] },
     { id: 730, text: 'Does my sibling come to me in trouble?', textGuess: 'Does {name}\'s sibling come to them in trouble?', options: ['Always', 'Pride won\'t let them', 'Only if they need money', 'I go to them'] },
+    // --- HARD
+    { id: 731, text: 'My unspoken feeling about my sibling?', textGuess: "{name}'s unspoken feeling about their sibling?", options: ['Pride', 'Jealousy', 'Worry', 'Longing'] },
+    { id: 732, text: 'What did I do for them and never mention?', textGuess: 'What did {name} do for their sibling and never mention?', options: ['Defended them', 'Took the blame', 'Gave them money', 'Kept their secret'] },
+    { id: 733, text: "The sentence I can't say to my sibling?", textGuess: "What can't {name} say to their sibling?", options: ['"I\'m proud of you"', '"I\'m sorry"', '"I miss you"', '"I need you"'] },
+    { id: 734, text: 'As a kid, what did I envy about them?', textGuess: 'As a kid, what did {name} envy about their sibling?', options: ['The attention', 'Their stuff', 'Their freedom', 'Nothing at all'] },
   ],
   eski: [
     { id: 501, text: 'What was "our song" like?', textGuess: "What was {name}'s \"our song\" like?", options: ['A slow ballad', 'Foreign pop', 'Rap', 'Rock / acoustic'] },
@@ -289,6 +324,11 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 528, text: 'Do I compare someone new to them?', textGuess: 'Does {name} compare someone new to them?', options: ['Can\'t help it', 'Never', 'Sometimes', 'Long forgotten'] },
     { id: 529, text: 'Do I wonder about their new partner?', textGuess: 'Does {name} wonder about their new partner?', options: ['Secretly stalks', 'Doesn\'t care', '"Who is this?"', 'Already knows'] },
     { id: 530, text: 'One word left from that relationship?', textGuess: 'One word left for {name} from it?', options: ['Longing', 'Mistake', 'Experience', 'Glad it\'s over'] },
+    // --- HARD
+    { id: 531, text: 'The biggest lesson from that relationship?', textGuess: 'What did {name} learn from that relationship?', options: ['Not to lose themselves', 'To speak up sooner', 'Not to wait around', 'To forgive'] },
+    { id: 532, text: 'The first thing I deleted after the breakup?', textGuess: 'What did {name} delete first after the breakup?', options: ['The photos', 'The messages', 'The songs', 'Nothing at all'] },
+    { id: 533, text: 'One sentence I would say to them now?', textGuess: 'What would {name} say to them now?', options: ['"Glad you existed"', '"You really hurt me"', '"Hope you\'re happy"', '"Nothing to say"'] },
+    { id: 534, text: 'What did I actually miss the most?', textGuess: 'What did {name} actually miss the most?', options: ['The conversations', 'The routine', 'The hugs', 'Who they were back then'] },
   ],
   anonim: [
     { id: 601, text: 'One thing that sums me up?', textGuess: 'One thing that sums up {name}?', options: ['Their energy', 'Their mind', 'Their heart', 'Their humor'] },
@@ -317,5 +357,10 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 624, text: 'Am I more night or day?', textGuess: 'Is {name} more night or day?', options: ['Night (deep)', 'Day (lively)', 'Sunset', 'Both exhausting'] },
     { id: 625, text: 'Do I trust people easily?', textGuess: 'Does {name} trust people easily?', options: ['Open to all', 'Closed to all', 'Tests them first', 'One burn and it\'s over'] },
     { id: 626, text: 'If I were an object?', textGuess: 'What object would {name} be?', options: ['A mirror', 'A candle', 'A compass', 'An old book'] },
+    // --- HARD
+    { id: 627, text: 'What do I think nobody notices?', textGuess: 'What does {name} think nobody notices?', options: ['How tired they are', 'How much they overthink', 'How hurt they got', 'How hard they try'] },
+    { id: 628, text: 'What do I hide from people most?', textGuess: 'What does {name} hide from people most?', options: ['Their worries', 'Their dreams', 'Their past', 'Their loneliness'] },
+    { id: 629, text: 'What would surprise you if you truly knew me?', textGuess: 'What would surprise you about the real {name}?', options: ['Very fragile', 'Very stubborn', 'Very lonely', 'Very ambitious'] },
+    { id: 630, text: 'What do I want everyone to know one day?', textGuess: 'What does {name} want everyone to know one day?', options: ['How hard they tried', 'Their real thoughts', 'A secret', 'Nothing at all'] },
   ],
 };
