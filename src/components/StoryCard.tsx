@@ -134,8 +134,14 @@ export function StoryCard({
 
         {/* Verdict sticker */}
         <View style={styles.sticker}>
-          <View style={styles.badge}>
-            <Text style={styles.badgeEmoji}>{result.emoji}</Text>
+          {/* Rozet: left:0/right:0 ile tam genişliğe yayılan bir sarmalayıcı +
+              alignItems:center. left:'50%' KULLANILMAZ — Yoga yüzdeyi iç
+              genişliğe göre çözüp konumu dış kenardan ölçtüğü için rozet
+              paddingHorizontal kadar (16pt) sola kayıyordu. */}
+          <View style={styles.badgeWrap} pointerEvents="none">
+            <View style={styles.badge}>
+              <Text style={styles.badgeEmoji}>{result.emoji}</Text>
+            </View>
           </View>
           <Text style={[styles.verdict, { fontSize: tFont }]} numberOfLines={2}>
             {result.title}
@@ -229,11 +235,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     alignItems: 'center',
   },
-  badge: {
+  badgeWrap: {
     position: 'absolute',
     top: -26,
-    left: '50%',
-    marginLeft: -26, // tam yatay ortalama (genişliğin yarısı)
+    left: 0,
+    right: 0,
+    alignItems: 'center', // yüzdesiz, şaşmaz yatay ortalama
+  },
+  badge: {
     width: 52,
     height: 52,
     borderRadius: 26,
