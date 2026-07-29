@@ -2,6 +2,7 @@ import { Linking, Platform, Share } from 'react-native';
 import * as Sharing from 'expo-sharing';
 import * as Clipboard from 'expo-clipboard';
 import { S } from '../i18n/strings';
+import { WEB_BASE_URL } from '../config';
 
 async function canOpen(url: string): Promise<boolean> {
   try {
@@ -79,18 +80,21 @@ export async function shareImage(uri: string, text?: string): Promise<void> {
   }
 }
 
-// file:// URI'yi content:// URI'ye çevirir (intent için gerekli). API sürümüne
-// göre yeni ya da legacy modülden bulur.
+// file:// URI'yi content:// URI'ye çevirir (intent için gerekli).
+// ÖNEMLİ: SDK 57'de "expo-file-system" (yeni API) içindeki getContentUriAsync
+// kasıtlı olarak HER ZAMAN hata fırlatan bir uyumluluk stub'ı (gerçek native
+// çağrıyı yapmıyor) — bu yüzden gerçek implementasyonu taşıyan
+// "expo-file-system/legacy" ÖNCE denenir. Yeni modül sadece son çare yedek.
 async function toContentUri(fileUri: string): Promise<string> {
   let fn: ((u: string) => Promise<string>) | undefined;
   try {
-    fn = require('expo-file-system').getContentUriAsync;
+    fn = require('expo-file-system/legacy').getContentUriAsync;
   } catch {
     // yok say
   }
   if (!fn) {
     try {
-      fn = require('expo-file-system/legacy').getContentUriAsync;
+      fn = require('expo-file-system').getContentUriAsync;
     } catch {
       // yok say
     }
@@ -101,8 +105,11 @@ async function toContentUri(fileUri: string): Promise<string> {
 
 /**
  * Sonuç kartı görselini DOĞRUDAN Instagram Story'ye gönderir (Android).
+ * content_url ile Story'ye tıklanabilir bir "Link" etiketi eklenir (izleyen
+ * kişi dokununca heartprint.app'e gider — Android'de mağazaya, iOS'ta web'e
+ * yönlenir, bkz config.ts storeUrl()).
  * Instagram yoksa ya da hata olursa sistem paylaşım sayfasına düşer
- * (orada da Instagram/TikTok görsel ile çıkar).
+ * (orada da Instagram/TikTok görsel ile çıkar; metinde link zaten var).
  */
 export async function shareToInstagramStory(
   imageUri: string,
@@ -117,11 +124,15 @@ export async function shareToInstagramStory(
         type: 'image/*',
         flags: 1, // FLAG_GRANT_READ_URI_PERMISSION
         packageName: 'com.instagram.android',
-        extra: { source_application: 'app.heartprint' },
+        extra: {
+          source_application: 'app.heartprint',
+          content_url: WEB_BASE_URL,
+        },
       });
       return;
-    } catch {
+    } catch (e) {
       // Instagram yok / intent başarısız → paylaşım sayfası
+      console.log('Instagram Story intent başarısız, paylaşım sayfasına düşülüyor:', e);
     }
   }
   await shareImage(imageUri, text);

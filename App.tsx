@@ -32,11 +32,11 @@ type Route =
       guesses: number[];
     }
   | { name: 'myTests'; focusQuizId?: string }
-  | { name: 'linkError' };
+  | { name: 'linkError'; reason: 'notFound' | 'limitReached' };
 
 export default function App() {
   const [route, setRoute] = useState<Route>({ name: 'home' });
-  const { data: invited, notFound } = useInitialQuiz();
+  const { data: invited, notFound, limitReached } = useInitialQuiz();
 
   // Reklam SDK'sını başta hazırla (web'de no-op)
   useEffect(() => {
@@ -57,8 +57,13 @@ export default function App() {
 
   // Link vardı ama test yüklenemedi → dostça hata ekranı
   useEffect(() => {
-    if (notFound) setRoute({ name: 'linkError' });
+    if (notFound) setRoute({ name: 'linkError', reason: 'notFound' });
   }, [notFound]);
+
+  // Link geçerli ama hakkı dolmuş (MAX_PLAYS kez çözülmüş) → ayrı mesaj
+  useEffect(() => {
+    if (limitReached) setRoute({ name: 'linkError', reason: 'limitReached' });
+  }, [limitReached]);
 
   // Bildirime dokunulunca "Testlerim" ekranını ilgili teste odaklı aç
   useNotificationNav((quizId) => {
@@ -154,7 +159,10 @@ export default function App() {
         />
       )}
       {route.name === 'linkError' && (
-        <LinkErrorScreen onHome={() => setRoute({ name: 'home' })} />
+        <LinkErrorScreen
+          reason={route.reason}
+          onHome={() => setRoute({ name: 'home' })}
+        />
       )}
     </View>
     </ErrorBoundary>

@@ -102,10 +102,15 @@ const tr = {
   enterCodePlaceholder: 'Link ya da kodu buraya yapıştır',
   enterCodeBtn: 'Teste Git',
   enterCodeError: 'Test bulunamadı. Kodu kontrol et.',
+  enterCodeLimitError: 'Bu testin çözülme hakkı doldu (en fazla 3 kişi çözebilir).',
   // Link error
   linkErrorTitle: 'Test bulunamadı',
   linkErrorSub: 'Bu link geçersiz ya da test silinmiş olabilir.',
   linkErrorHome: 'Ana Sayfaya Dön',
+  // Link limit doldu (bir test en fazla MAX_PLAYS kez çözülebilir)
+  linkLimitTitle: 'Bu testin hakkı doldu',
+  linkLimitSub: 'Bu test zaten 3 kişi tarafından çözüldü. Kendi testini oluşturabilirsin.',
+  linkLimitHome: 'Kendi Testini Oluştur',
   // Error boundary
   crashTitle: 'Bir şeyler ters gitti',
   crashSub: 'Beklenmedik bir hata oldu. Tekrar deneyelim.',
@@ -202,8 +207,12 @@ const en: typeof tr = {
   enterCodePlaceholder: 'Paste the link or code here',
   enterCodeBtn: 'Go to the test',
   enterCodeError: 'Test not found. Check the code.',
+  enterCodeLimitError: 'This test has already been solved 3 times, the limit.',
   linkErrorTitle: 'Test not found',
   linkErrorSub: 'This link may be invalid or the test was deleted.',
+  linkLimitTitle: "This test's limit is reached",
+  linkLimitSub: 'This test has already been solved by 3 people. Create your own test instead.',
+  linkLimitHome: 'Create Your Test',
   linkErrorHome: 'Back to Home',
   crashTitle: 'Something went wrong',
   crashSub: 'An unexpected error happened. Let\'s try again.',

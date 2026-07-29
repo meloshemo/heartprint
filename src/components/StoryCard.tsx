@@ -11,6 +11,11 @@ import Svg, {
 import { CategoryId, FunnyResult } from '../types';
 import { GRAD } from './Avatar';
 import { S } from '../i18n/strings';
+import { Logo } from './Logo';
+import { WEB_BASE_URL } from '../config';
+
+// Paylaşılan kartta gösterilecek marka adresi ("https://" olmadan, sade).
+const BRAND_DOMAIN = WEB_BASE_URL.replace(/^https?:\/\//, '');
 
 const GOLD = '#FFCE4F';
 const BG = '#0A0A16';
@@ -142,6 +147,13 @@ export function StoryCard({
 
         {/* CTA — sade tek satır kanca (URL pili ve "YOUR TURN?" kaldırıldı) */}
         <Text style={styles.hook}>{S.cardHook2}</Text>
+
+        {/* Marka damgası: kartı gören herkes hangi uygulama olduğunu ve nereden
+            bulacağını anlasın (ekran görüntüsü / repost olsa bile kalıcı). */}
+        <View style={styles.brandRow}>
+          <Logo size={16} color="#FFFFFF" />
+          <Text style={styles.brandText}>{BRAND_DOMAIN}</Text>
+        </View>
       </View>
     </View>
   );
@@ -249,5 +261,18 @@ const styles = StyleSheet.create({
     fontSize: 19,
     fontWeight: '800',
     textAlign: 'center',
+  },
+  brandRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    marginTop: 10,
+    opacity: 0.6,
+  },
+  brandText: {
+    color: '#fff',
+    fontSize: 13,
+    fontWeight: '700',
+    letterSpacing: 0.3,
   },
 });

@@ -36,6 +36,9 @@ service cloud.firestore {
       match /results/{resultId} {
         // Sahte/abartılı sonuç enjeksiyonuna karşı sınır kontrolleri:
         // yalnızca geçerli aralıkta, var olan bir teste sonuç yazılabilir.
+        // playCount < 3: bir test linki en fazla 3 kez çözülebilir (client
+        // tarafında da kontrol edilir — src/backend/quizzes.ts MAX_PLAYS —
+        // ama asıl garanti burada, sunucu tarafında).
         allow create: if request.resource.data.percent is int
           && request.resource.data.percent >= 0
           && request.resource.data.percent <= 100
@@ -45,7 +48,8 @@ service cloud.firestore {
           && request.resource.data.total > 0
           && request.resource.data.total <= 30
           && request.resource.data.correct <= request.resource.data.total
-          && exists(/databases/$(database)/documents/quizzes/$(quizId));
+          && exists(/databases/$(database)/documents/quizzes/$(quizId))
+          && get(/databases/$(database)/documents/quizzes/$(quizId)).data.playCount < 3;
         allow read: if request.auth != null
           && get(/databases/$(database)/documents/quizzes/$(quizId)).data.creatorId == request.auth.uid;
         allow update, delete: if false;

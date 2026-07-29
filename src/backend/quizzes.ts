@@ -18,6 +18,9 @@ import { CategoryId, Quiz } from '../types';
 
 const ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // karışabilen 0/O/1/I çıkarıldı
 
+/** Bir test linki en fazla bu kadar kez çözülebilir (spam/aşırı paylaşımı önler). */
+export const MAX_PLAYS = 3;
+
 function shortId(len = 7): string {
   let s = '';
   for (let i = 0; i < len; i++) {
@@ -109,8 +112,14 @@ export async function deleteQuiz(quizId: string): Promise<void> {
   await deleteDoc(doc(db, 'quizzes', quizId));
 }
 
-/** Kısa ID'den testi çeker. Bulunamazsa null. */
-export async function getQuiz(id: string): Promise<Quiz | null> {
+/**
+ * Kısa ID'den testi çeker. Bulunamazsa null.
+ * Dönüşe `playCount` de dahildir (MAX_PLAYS limiti kontrolü için) — Quiz
+ * tipinin normal alanlarını etkilemez, sadece ek bir bilgi taşır.
+ */
+export async function getQuiz(
+  id: string
+): Promise<(Quiz & { playCount: number }) | null> {
   const snap = await getDoc(doc(db, 'quizzes', id));
   if (!snap.exists()) return null;
   const d = snap.data();
@@ -127,6 +136,7 @@ export async function getQuiz(id: string): Promise<Quiz | null> {
     name: d.name,
     answers: d.answers,
     q: Array.isArray(d.q) ? d.q : undefined,
+    playCount: typeof d.playCount === 'number' ? d.playCount : 0,
   };
 }
 

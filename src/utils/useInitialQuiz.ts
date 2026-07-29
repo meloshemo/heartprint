@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as Linking from 'expo-linking';
 import { decodeQuiz, extractCode } from './encoding';
-import { getQuiz } from '../backend/quizzes';
+import { getQuiz, MAX_PLAYS } from '../backend/quizzes';
 import { Quiz } from '../types';
 
 // Backend kısa ID'si: sadece büyük harf + 2-9, 5-10 karakter (quizzes.ts ALPHABET)
@@ -24,10 +24,12 @@ export function useInitialQuiz(): {
   data: InitialQuiz | null;
   pending: boolean;
   notFound: boolean;
+  limitReached: boolean;
 } {
   const [data, setData] = useState<InitialQuiz | null>(null);
   const [pending, setPending] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const [limitReached, setLimitReached] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -43,6 +45,11 @@ export function useInitialQuiz(): {
           const quiz = await getQuiz(code);
           if (!active) return;
           if (quiz) {
+            if (quiz.playCount >= MAX_PLAYS) {
+              // Link geçerli ama hakkı dolmuş — "bulunamadı" değil, ayrı mesaj
+              setLimitReached(true);
+              return;
+            }
             setNotFound(false);
             setData({ quiz, quizId: code });
             return;
@@ -83,5 +90,5 @@ export function useInitialQuiz(): {
     };
   }, []);
 
-  return { data, pending, notFound };
+  return { data, pending, notFound, limitReached };
 }

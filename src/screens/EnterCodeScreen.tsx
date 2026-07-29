@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput } from 'react-native';
 import { decodeQuiz, extractCode } from '../utils/encoding';
-import { getQuiz } from '../backend/quizzes';
+import { getQuiz, MAX_PLAYS } from '../backend/quizzes';
 import { theme } from '../theme';
 import { Quiz } from '../types';
 import {
@@ -25,10 +25,12 @@ export function EnterCodeScreen({
 }) {
   const [code, setCode] = useState('');
   const [error, setError] = useState(false);
+  const [limitReached, setLimitReached] = useState(false);
   const [busy, setBusy] = useState(false);
 
   const submit = async () => {
     setError(false);
+    setLimitReached(false);
     setBusy(true);
     try {
       const raw = extractCode(code);
@@ -36,6 +38,12 @@ export function EnterCodeScreen({
       if (SHORT_ID.test(raw)) {
         const quiz = await getQuiz(raw);
         if (quiz) {
+          if (quiz.playCount >= MAX_PLAYS) {
+            // Link geçerli ama hakkı dolmuş — girişte engelle, tekrar tekrar
+            // denenip çözülemesin.
+            setLimitReached(true);
+            return;
+          }
           onQuizLoaded(quiz, raw);
           return;
         }
@@ -65,6 +73,7 @@ export function EnterCodeScreen({
           onChangeText={(t) => {
             setCode(t);
             setError(false);
+            setLimitReached(false);
           }}
           placeholder={S.enterCodePlaceholder}
           placeholderTextColor={theme.textDim}
@@ -74,6 +83,9 @@ export function EnterCodeScreen({
           autoCorrect={false}
         />
         {error && <Text style={styles.error}>{S.enterCodeError}</Text>}
+        {limitReached && (
+          <Text style={styles.error}>{S.enterCodeLimitError}</Text>
+        )}
         <BigButton
           label={busy ? S.preparing : S.enterCodeBtn}
           gradient
