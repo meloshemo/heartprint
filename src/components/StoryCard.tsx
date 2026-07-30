@@ -11,8 +11,12 @@ import Svg, {
 import { CategoryId, FunnyResult } from '../types';
 import { GRAD } from './Avatar';
 import { S } from '../i18n/strings';
+import { LANG } from '../i18n/locale';
 import { Logo } from './Logo';
 import { WEB_BASE_URL } from '../config';
+
+/** Türkçe'de "%100", İngilizce'de "100%" — işaretin yeri dile göre değişir. */
+const pctBefore = LANG === 'tr';
 
 // Paylaşılan kartta gösterilecek marka adresi ("https://" olmadan, sade).
 const BRAND_DOMAIN = WEB_BASE_URL.replace(/^https?:\/\//, '');
@@ -116,12 +120,14 @@ export function StoryCard({
           <Text style={styles.bannerSub}>{sub}</Text>
         </View>
 
-        {/* Yüzde (kalbin ÜSTÜNDE). Sağda görünmez ayna "%" ile blok simetrik
-            hale getirilir — yoksa soldaki "%" rakamı sola kaydırır. */}
+        {/* Yüzde (kalbin ÜSTÜNDE).
+            DİL: Türkçe'de işaret sayıdan ÖNCE (%100), İngilizce'de SONRA (100%).
+            Kullanılmayan taraf görünmez ayna olarak durur; böylece blok
+            simetrik kalır ve rakam gerçekten ortalanır. */}
         <View style={styles.percentRow}>
-          <Text style={styles.percentSign}>%</Text>
+          <Text style={[styles.percentSign, styles.pctLeft, !pctBefore && styles.pctGhost]}>%</Text>
           <Text style={styles.percentNum}>{percent}</Text>
-          <Text style={[styles.percentSign, styles.percentSignGhost]}>%</Text>
+          <Text style={[styles.percentSign, styles.pctRight, pctBefore && styles.pctGhost]}>%</Text>
         </View>
 
         {/* Parmak izi kalbi — altın dolgu */}
@@ -208,14 +214,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '900',
     marginTop: 10,
-    marginRight: 2,
     opacity: 0.9,
   },
-  percentSignGhost: {
-    marginRight: 0,
-    marginLeft: 2,
-    opacity: 0, // sadece simetri için — görünmez
-  },
+  pctLeft: { marginRight: 2 },
+  pctRight: { marginLeft: 2 },
+  pctGhost: { opacity: 0 }, // sadece simetri için — yer kaplar, görünmez
   percentNum: {
     color: '#fff',
     fontSize: 82,
