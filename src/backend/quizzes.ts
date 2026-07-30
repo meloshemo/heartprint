@@ -31,6 +31,8 @@ export interface QuizResult {
   correct: number;
   total: number;
   percent: number;
+  /** Çözenin işaretlediği şıklar — "hangi soruda yanıldı" ekranı için. */
+  guesses: number[];
   createdAt: number | null; // ms epoch
 }
 
@@ -39,6 +41,10 @@ export interface MyQuiz {
   cat: CategoryId;
   name: string;
   playCount: number;
+  /** Testi oluşturanın doğru cevapları — yanlışları karşılaştırmak için. */
+  answers: number[];
+  /** Teste seçilen soru id'leri (eski testlerde yok). */
+  q?: number[];
   createdAt: number | null;
 }
 
@@ -162,7 +168,8 @@ export async function saveResult(
   correct: number,
   total: number,
   guesserName: string | null,
-  samePhone = false
+  samePhone = false,
+  guesses: number[] = []
 ): Promise<void> {
   const uid = await ensureAuth();
   const percent = Math.round((correct / total) * 100);
@@ -173,6 +180,8 @@ export async function saveResult(
     correct,
     total,
     percent,
+    // Test sahibi "hangi soruda yanıldı" ekranını görebilsin diye saklanır.
+    guesses,
     createdAt: serverTimestamp(),
   });
 }
@@ -202,6 +211,8 @@ export async function getMyQuizzes(): Promise<MyQuiz[]> {
       cat: d.cat as CategoryId,
       name: d.name,
       playCount: d.playCount ?? 0,
+      answers: Array.isArray(d.answers) ? d.answers : [],
+      q: Array.isArray(d.q) ? d.q : undefined,
       createdAt: tsToMs(d.createdAt),
     };
   });
@@ -232,6 +243,7 @@ export function listenResults(
           correct: d.correct ?? 0,
           total: d.total ?? 0,
           percent: d.percent ?? 0,
+          guesses: Array.isArray(d.guesses) ? d.guesses : [],
           createdAt: tsToMs(d.createdAt),
         };
       })

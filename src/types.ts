@@ -24,6 +24,13 @@ export interface Question {
   /** Tahmin edenin gördüğü metin; {name} gönderenin adıyla değiştirilir. */
   textGuess: string;
   options: [string, string, string, string];
+  /**
+   * Kültüre özel soru: YALNIZCA bu dildeki cihazlarda test oluştururken
+   * SEÇİLİR. Ama soru her iki dilde de tanımlıdır ve id ile her cihazda
+   * ÇÖZÜLEBİLİR — aksi halde soru düşer, cevap dizisi kayar ve puanlama
+   * sessizce bozulurdu (bkz. PlayQuizScreen: questions[step] ↔ answers[step]).
+   */
+  only?: 'tr' | 'en';
 }
 
 /** Testi oluşturan kişinin paketi — kısa ID veya base64 kod olarak paylaşılır. */

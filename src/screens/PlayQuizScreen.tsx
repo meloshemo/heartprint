@@ -51,8 +51,10 @@ export function PlayQuizScreen({
   const question = questions[step];
   const isAnon = quiz.cat === 'anonim';
   const who = isAnon ? S.mysteryOne : quiz.name;
-  // Anonim testte çözenin adını sormuyoruz (bildirim de isimsiz gider)
-  const finalGuesser = isAnon ? null : guesserName.trim() || null;
+  // İSİM ZORUNLU: anonim testte GİZLİ OLAN test SAHİBİDİR, çözen değil.
+  // Sahibi "kim çözdü" görebilsin diye ad her durumda istenir.
+  const finalGuesser = guesserName.trim() || null;
+  const nameOk = guesserName.trim().length >= 2;
 
   if (!started) {
     return (
@@ -71,19 +73,18 @@ export function PlayQuizScreen({
           <Subtitle>
             {isAnon ? S.playIntroAnonSub(total) : S.playIntroSub(total)}
           </Subtitle>
-          {!isAnon && (
-            <TextInput
-              value={guesserName}
-              onChangeText={setGuesserName}
-              placeholder={S.guesserNamePlaceholder}
-              placeholderTextColor={theme.textDim}
-              style={styles.nameInput}
-              maxLength={20}
-            />
-          )}
+          <TextInput
+            value={guesserName}
+            onChangeText={setGuesserName}
+            placeholder={S.guesserNamePlaceholder}
+            placeholderTextColor={theme.textDim}
+            style={styles.nameInput}
+            maxLength={20}
+          />
           <BigButton
             label={S.startQuiz}
             gradient
+            disabled={!nameOk}
             onPress={() => {
               // Huninin kritik adımı: linke tıklayanların kaçı gerçekten
               // başlıyor? Bu olay olmadan bitirme oranı hesaplanamaz.

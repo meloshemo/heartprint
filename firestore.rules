@@ -59,6 +59,11 @@ service cloud.firestore {
           && request.resource.data.total > 0
           && request.resource.data.total <= 30
           && request.resource.data.correct <= request.resource.data.total
+          // guesses: çözenin işaretledikleri ("hangi soruda yanıldı" ekranı).
+          // Eski sürümler göndermiyor, o yüzden isteğe bağlı.
+          && (!('guesses' in request.resource.data)
+            || (request.resource.data.guesses is list
+              && request.resource.data.guesses.size() <= 30))
           && exists(/databases/$(database)/documents/quizzes/$(quizId));
         // Test sahibi tüm sonuçları, çözen ise yalnızca kendi kaydını okur
         // (istemci "bu testi zaten çözdüm mü?" kontrolünü bununla yapar).

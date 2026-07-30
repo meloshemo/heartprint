@@ -11,6 +11,7 @@ import ViewShot, { ViewShotRef } from 'react-native-view-shot';
 import { StoryCard } from '../components/StoryCard';
 import { LoopCard } from '../components/LoopCard';
 import { S } from '../i18n/strings';
+import { BrandIcon, Brand } from '../components/BrandIcon';
 import { getFunnyResult } from '../data/results';
 import { getCategory } from '../data/categories';
 import { questionsForQuiz, guessText } from '../data/questions';
@@ -91,10 +92,10 @@ export function ResultScreen({
   useEffect(() => {
     track('test_cozuldu', { cat: quiz.cat, percent, linkli: !!quizId });
     if (!quizId) return;
-    saveResult(quizId, correctCount, total, guesserName, samePhone).catch((e) =>
-      console.log('Sonuç kaydedilemedi:', e)
+    saveResult(quizId, correctCount, total, guesserName, samePhone, guesses).catch(
+      (e) => console.log('Sonuç kaydedilemedi:', e)
     );
-  }, [quizId, correctCount, total, guesserName, samePhone]);
+  }, [quizId, correctCount, total, guesserName, samePhone, guesses]);
 
   // Kart giriş animasyonu (hafif büyüme)
   const scaleAnim = useRef(new Animated.Value(0.85)).current;
@@ -223,19 +224,19 @@ export function ResultScreen({
         <View style={styles.platformRow}>
           <PlatformButton
             label="WhatsApp"
-            emoji="💬"
+            brand="whatsapp"
             color="#25D366"
             onPress={onWhatsApp}
           />
           <PlatformButton
             label="Instagram"
-            emoji="📸"
+            brand="instagram"
             color="#E1306C"
             onPress={onInstagram}
           />
           <PlatformButton
             label="TikTok"
-            emoji="🎵"
+            brand="tiktok"
             color="#000000"
             onPress={onTikTok}
           />
@@ -290,12 +291,12 @@ export function ResultScreen({
 
 function PlatformButton({
   label,
-  emoji,
+  brand,
   color,
   onPress,
 }: {
   label: string;
-  emoji: string;
+  brand: Brand;
   color: string;
   onPress: () => void;
 }) {
@@ -307,7 +308,7 @@ function PlatformButton({
         { borderColor: color, opacity: pressed ? 0.7 : 1 },
       ]}
     >
-      <Text style={styles.platformEmoji}>{emoji}</Text>
+      <BrandIcon brand={brand} size={24} />
       <Text style={styles.platformLabel}>{label}</Text>
     </Pressable>
   );
@@ -340,7 +341,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: theme.card,
   },
-  platformEmoji: { fontSize: 22 },
   platformLabel: {
     color: theme.text,
     fontSize: 12,

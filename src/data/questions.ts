@@ -111,6 +111,13 @@ const SHARED_TR: Question[] = [
   { id: 94, text: 'En son ne zaman ağladım?', textGuess: '{name} en son ne zaman ağladı?', options: ['Bu hafta', 'Bu ay', 'Aylar önce', 'Hatırlamıyor bile'] },
   { id: 95, text: 'Hangi konuda kimseye danışmam?', textGuess: '{name} hangi konuda kimseye danışmaz?', options: ['Para', 'İlişkiler', 'Sağlık', 'Gelecek planları'] },
   { id: 96, text: 'Gece uyumadan önce aklımdan geçen son şey?', textGuess: '{name} uyumadan önce en son ne düşünür?', options: ['Yarın yapacakları', 'Bugün söylediği bir şey', 'Sevdiği biri', 'Hiçbir şey, anında uyur'] },
+  // --- KÜLTÜRE ÖZEL (yalnızca kendi dilinde seçilir, ama her dilde çözülebilir)
+  { id: 97, only: 'tr', text: 'Nazara inanır mıyım?', textGuess: '{name} nazara inanır mı?', options: ['Kesinlikle inanır', 'İnanmam ama nazarlık takarım', 'Şaka gibi gelir', 'Hiç düşünmedim'] },
+  { id: 98, only: 'tr', text: 'Kapı çalınca ilk ne yaparım?', textGuess: '{name} kapı çalınca ilk ne yapar?', options: ['Çay koyar', 'Ortalığı toplar', 'Panikler', 'Açmıyormuş gibi yapar'] },
+  { id: 99, only: 'tr', text: 'Kahvaltıda olmazsa olmazım?', textGuess: "{name}'in kahvaltıda olmazsa olmazı?", options: ['Çay', 'Peynir-zeytin', 'Simit', 'Kahvaltı yapmaz'] },
+  { id: 900, only: 'en', text: 'Sabah kahvem nasıl olur?', textGuess: '{name} kahvesini nasıl içer?', options: ['Sade', 'Sütlü/latte', 'Buzlu (kışın bile)', 'Kahve içmez'] },
+  { id: 901, only: 'en', text: 'Biri "nasılsın?" deyince ne derim?', textGuess: '{name} "nasılsın?"a ne der?', options: ['"İyiyim, sen?" (otomatik)', 'Gerçekten anlatır', 'Sadece "selam"', 'Kime göre değişir'] },
+  { id: 902, only: 'en', text: 'Burcumu önemser miyim?', textGuess: '{name} burcunu önemser mi?', options: ['Kendininkini de seninkini de bilir', 'Sadece kendininkini', 'Saçmalık bulur', 'Burcunu bilmiyor bile'] },
 ];
 
 // --- Kategoriye özel havuzlar ---
@@ -151,6 +158,11 @@ const SPECIFIC_TR: Record<CategoryId, Question[]> = {
     { id: 132, text: 'İlişkide en çok korktuğum ama söylemediğim şey?', textGuess: '{name}\'in ilişkide söylemediği korkusu?', options: ['Sıradanlaşmak', 'Yeterince sevilmemek', 'Aldatılmak', 'Yalnız kalmak'] },
     { id: 133, text: 'Yapılan hangi küçük şey kalbimi eritir?', textGuess: '{name}\'in kalbini hangi küçük şey eritir?', options: ['Saçını okşamak', 'Sabah mesajı', 'Sevdiği şeyi hatırlamak', 'Sadece dinlemek'] },
     { id: 134, text: 'Beni en çok hangi hâlimle sevmesini isterim?', textGuess: '{name} hangi hâliyle sevilmek ister?', options: ['Yeni uyanmış hâliyle', 'Süslenmişken', 'Çalışırken', 'Gülerken'] },
+    // --- KÜLTÜRE ÖZEL
+    { id: 135, only: 'tr', text: 'Sevgilimi aileme ne zaman tanıştırırım?', textGuess: '{name} sevgilisini ailesiyle ne zaman tanıştırır?', options: ['İlk aylarda', 'Ciddileşince', 'Evlilik konuşulunca', 'Mümkünse hiç'] },
+    { id: 136, only: 'tr', text: 'Ondan bahsederken ne derim?', textGuess: '{name} sevgilisinden bahsederken ne der?', options: ['"Sevgilim"', 'Adıyla', 'Duruma göre değişir', 'Hiç bahsetmez'] },
+    { id: 137, only: 'en', text: '"Seni seviyorum"u her gün söyler miyiz?', textGuess: '{name} her gün "seni seviyorum" der mi?', options: ['Her gün', 'Sadece anlamlı anlarda', 'Nadiren yüksek sesle', 'Yazışmada daha çok'] },
+    { id: 138, only: 'en', text: 'Nasıl flört ederim?', textGuess: '{name} nasıl flört eder?', options: ['İltifat ederek', 'Takılarak', 'Aşırı ilgi göstererek', 'Berbat şekilde'] },
   ],
   anne: [
     { id: 201, text: 'Annemden en çok gizlediğim şey?', textGuess: "{name}'in annesinden en çok gizlediği?", options: ['Harcadığı para', 'İlişkileri', 'Notları / işi', 'Nereye gittiği'] },
@@ -188,6 +200,11 @@ const SPECIFIC_TR: Record<CategoryId, Question[]> = {
     { id: 232, text: 'Annemin söylediği, hâlâ aklımda olan cümle?', textGuess: '{name}\'in aklında annesinin hangi cümlesi kaldı?', options: ['"Sen yaparsın"', '"Dikkatli ol"', '"Ben hep buradayım"', '"Bir gün anlarsın"'] },
     { id: 233, text: 'Çocukken annemden en çok ne beklerdim?', textGuess: '{name} çocukken annesinden en çok ne beklerdi?', options: ['Onu dinlemesini', 'Sarılmasını', 'İzin vermesini', 'Övmesini'] },
     { id: 234, text: 'Annem olmasa en çok neyi özlerdim?', textGuess: '{name} annesinin en çok neyini özlerdi?', options: ['Sesini', 'Yemeğini', 'Merak etmesini', 'Dokunuşunu'] },
+    // --- KÜLTÜRE ÖZEL
+    { id: 235, only: 'tr', text: 'Annem misafire ne ikram eder?', textGuess: "{name}'in annesi misafire ne ikram eder?", options: ['Çay ve kurabiye', 'Kahve', 'Meyve tabağı', 'Koca bir sofra'] },
+    { id: 236, only: 'tr', text: 'Annem beni komşuya nasıl anlatır?', textGuess: "{name}'i annesi komşuya nasıl anlatır?", options: ['Övgüyle', 'Şikayetle', 'Abartarak', 'Hiç bahsetmez'] },
+    { id: 237, only: 'en', text: 'Annem emoji kullanır mı?', textGuess: "{name}'in annesi emoji kullanır mı?", options: ['Aşırı çok', 'Sadece kalp', 'Hiç', 'Hep yanlışını'] },
+    { id: 238, only: 'en', text: 'Annem kararlarıma ne tepki verir?', textGuess: "{name}'in annesi kararlarına nasıl tepki verir?", options: ['Tamamen destekler', 'Endişelenir ama susar', 'Yüzüne söyler', 'Herkese anlatır'] },
   ],
   baba: [
     { id: 301, text: 'Babamla en çok ne yapmaktan hoşlanırım?', textGuess: '{name} babasıyla en çok ne yapmaktan hoşlanır?', options: ['Maç izlemek', 'Araba / gezi', 'Sohbet etmek', 'Yemek yemek'] },
@@ -225,6 +242,11 @@ const SPECIFIC_TR: Record<CategoryId, Question[]> = {
     { id: 332, text: 'Babamla ilgili en net çocukluk anım?', textGuess: '{name}\'in babasıyla en net çocukluk anısı?', options: ['Omzunda taşıması', 'Bir araba yolculuğu', 'Bir tartışma', 'Bir hediye'] },
     { id: 333, text: 'Babama benzemekten çekindiğim yanım?', textGuess: '{name} babasının hangi yanına benzemekten çekinir?', options: ['Öfkesi', 'Suskunluğu', 'İnadı', 'Hiçbiri, benzemek ister'] },
     { id: 334, text: 'Babamı ağlarken görsem ne yapardım?', textGuess: '{name} babasını ağlarken görse ne yapardı?', options: ['Donup kalırdı', 'Sarılırdı', 'Odadan çıkardı', 'Hiç görmedi'] },
+    // --- KÜLTÜRE ÖZEL
+    { id: 335, only: 'tr', text: 'Babam çayını nasıl içer?', textGuess: "{name}'in babası çayını nasıl içer?", options: ['Demli, tavşan kanı', 'Açık', 'Bol şekerli', 'Çay değil kahve'] },
+    { id: 336, only: 'tr', text: 'Babam akraba isimlerini karıştırır mı?', textGuess: "{name}'in babası akraba isimlerini karıştırır mı?", options: ['Hepsini karıştırır', 'Asla', 'Bazen', 'Zaten pek tanımaz'] },
+    { id: 337, only: 'en', text: 'Babam mangal/ızgara konusunda nasıl?', textGuess: "{name}'in babası mangalda nasıldır?", options: ['Ustadır', 'Her şeyi yakar', 'Hiç yaklaşmaz', 'Pişirmekten çok konuşur'] },
+    { id: 338, only: 'en', text: 'Babam nasıl öğüt verir?', textGuess: "{name}'in babası nasıl öğüt verir?", options: ['Uzun hikâyelerle', 'Tek cümleyle', 'Hiç vermez', 'Link/yazı gönderir'] },
   ],
   bff: [
     { id: 401, text: 'Gece 3\'te sarhoşken kimi ararım?', textGuess: '{name} gece 3\'te kimi arar?', options: ['En yakın arkadaşını', 'Eski sevgilisini', 'Annesini', 'Kimseyi, mesaj atar'] },
@@ -262,6 +284,11 @@ const SPECIFIC_TR: Record<CategoryId, Question[]> = {
     { id: 432, text: 'Kankamla aramızda konuşulmayan konu?', textGuess: '{name} ile kankası neyi hiç konuşmaz?', options: ['Para', 'İlişkiler', 'Aile', 'Yok, her şeyi konuşurlar'] },
     { id: 433, text: 'Kankam olmasa hayatım nasıl olurdu?', textGuess: '{name}\'in hayatı kankası olmasa nasıl olurdu?', options: ['Çok daha sıkıcı', 'Daha sakin', 'Pek değişmezdi', 'Düşünmek bile istemiyor'] },
     { id: 434, text: 'Kankama en son ne zaman "teşekkürler" dedim?', textGuess: '{name} kankasına en son ne zaman teşekkür etti?', options: ['Geçenlerde', 'Aylar önce', 'Hiç demedi', 'Sürekli der'] },
+    // --- KÜLTÜRE ÖZEL
+    { id: 435, only: 'tr', text: 'Kankamla en çok nerede buluşuruz?', textGuess: '{name} kankasıyla en çok nerede buluşur?', options: ['Kafede', 'Evde', 'Yürüyüşte', 'Sadece telefonda'] },
+    { id: 436, only: 'tr', text: 'Kankamla ortak muhabbet konumuz?', textGuess: '{name} ile kankasının ortak konusu?', options: ['Ortak arkadaşlar', 'İş/okul', 'İlişkiler', 'Saçmalıklar'] },
+    { id: 437, only: 'en', text: 'Grup sohbetimiz nasıl?', textGuess: '{name}\'in arkadaş grubu sohbeti nasıl?', options: ['Kaos, 200 mesaj', 'Sadece caps', 'Aylardır ölü', 'Sadece ikimiz'] },
+    { id: 438, only: 'en', text: 'Birlikte uzun yolculuğa çıksak ne olur?', textGuess: '{name} ile kankası uzun yolculuğa çıksa?', options: ['Efsane olur', 'Bir kavga, sonra tamam', 'Bir daha asla', 'Zaten çıktık'] },
   ],
   kardes: [
     { id: 701, text: 'Evde son dilimi kim kapar?', textGuess: '{name} ile kardeşinden son dilimi kim kapar?', options: ['Ben', 'Kardeşim', 'Kim önce görürse', 'Bölüşürüz (yalan)'] },
@@ -299,6 +326,11 @@ const SPECIFIC_TR: Record<CategoryId, Question[]> = {
     { id: 732, text: 'Kardeşim için yapıp hiç övünmediğim şey?', textGuess: '{name} kardeşi için ne yaptı ama hiç söylemedi?', options: ['Onu savundu', 'Suçunu üstlendi', 'Para verdi', 'Sırrını tuttu'] },
     { id: 733, text: 'Kardeşime söyleyemediğim cümle?', textGuess: '{name} kardeşine hangi cümleyi söyleyemiyor?', options: ['"Seninle gurur duyuyorum"', '"Özür dilerim"', '"Seni özlüyorum"', '"Sana ihtiyacım var"'] },
     { id: 734, text: 'Çocukken kardeşimin neyini kıskanırdım?', textGuess: '{name} çocukken kardeşinin neyini kıskanırdı?', options: ['İlgiyi', 'Eşyalarını', 'Özgürlüğünü', 'Hiçbir şeyini'] },
+    // --- KÜLTÜRE ÖZEL
+    { id: 735, only: 'tr', text: 'Bayram harçlığını kim daha çok toplardı?', textGuess: '{name} ile kardeşinden kim daha çok bayram harçlığı toplardı?', options: ['Ben', 'Kardeşim', 'Eşit', 'Artık almıyoruz'] },
+    { id: 736, only: 'tr', text: 'Büyüklerimiz kimi daha çok sever?', textGuess: '{name}\'in ailesinin büyükleri kimi daha çok sever?', options: ['Beni', 'Kardeşimi', 'Eşit severler', 'İkimizi de idare ederler'] },
+    { id: 737, only: 'en', text: 'Hangimiz "sorunlu çocuk"tu?', textGuess: '{name} ile kardeşinden hangisi "sorunlu çocuk"tu?', options: ['Ben', 'Kardeşim', 'İkimiz de', 'Hiçbirimiz, melektik'] },
+    { id: 738, only: 'en', text: 'Hâlâ ön koltuk kavgası yapar mıyız?', textGuess: '{name} ile kardeşi hâlâ ön koltuk kavgası yapar mı?', options: ['Her seferinde', 'Büyüdük artık', 'Şakadan', 'Ayrı arabalarla gidiyoruz'] },
   ],
   eski: [
     { id: 501, text: 'İlişkimizde "bizim şarkımız" hangi türdendi?', textGuess: '{name} ile şarkınız hangi türdendi?', options: ['Türkçe slow', 'Yabancı pop', 'Rap', 'Rock / akustik'] },
@@ -336,6 +368,11 @@ const SPECIFIC_TR: Record<CategoryId, Question[]> = {
     { id: 532, text: 'Ayrılıktan sonra ilk sildiğim şey?', textGuess: '{name} ayrılıktan sonra ilk neyi sildi?', options: ['Fotoğrafları', 'Mesajları', 'Şarkıları', 'Hiçbirini'] },
     { id: 533, text: 'Şu an ona söylemek istediğim tek cümle?', textGuess: '{name} şu an ona ne söylemek isterdi?', options: ['"İyi ki vardın"', '"Beni çok kırdın"', '"Umarım mutlusundur"', '"Söyleyecek bir şeyim yok"'] },
     { id: 534, text: 'O ilişkide aslında en çok neyi özledim?', textGuess: '{name} o ilişkide en çok neyi özledi?', options: ['Sohbetleri', 'Rutini', 'Sarılmayı', 'O zamanki kendini'] },
+    // --- KÜLTÜRE ÖZEL
+    { id: 535, only: 'tr', text: 'Ailem onu sevmiş miydi?', textGuess: "{name}'in ailesi onu sevmiş miydi?", options: ['Çok severlerdi', 'Hiç ısınamadılar', 'Hiç tanışmadılar', 'Hâlâ soruyorlar'] },
+    { id: 536, only: 'tr', text: 'Ortak arkadaşlar ne dedi?', textGuess: '{name} ayrılınca ortak arkadaşlar ne dedi?', options: ['"İyi ki bitti"', '"Yazık oldu"', 'Taraf tutmadılar', 'Hiç konuşulmadı'] },
+    { id: 537, only: 'en', text: 'Takipten çıktım mı, sessize mi aldım?', textGuess: '{name} onu takipten çıkardı mı?', options: ['Anında çıktım', 'Sessize aldım, izliyorum', 'Engelledim', 'Hâlâ takip ediyorum'] },
+    { id: 538, only: 'en', text: 'Gece 2\'de ona yazar mıyım?', textGuess: '{name} gece 2\'de ona yazar mı?', options: ['Bir daha asla', 'Zaten yazdım', 'Aklımdan geçti', 'O bana yazıyor'] },
   ],
   anonim: [
     { id: 601, text: 'Beni en iyi anlatan tek şey?', textGuess: "{name}'i en iyi anlatan tek şey?", options: ['Enerjisi', 'Zekâsı', 'Kalbi', 'Mizahı'] },
@@ -369,20 +406,41 @@ const SPECIFIC_TR: Record<CategoryId, Question[]> = {
     { id: 628, text: 'İnsanlardan en çok neyi saklarım?', textGuess: '{name} insanlardan en çok neyi saklar?', options: ['Kaygılarını', 'Hayallerini', 'Geçmişini', 'Yalnızlığını'] },
     { id: 629, text: 'Beni gerçekten tanısan şaşıracağın yanım?', textGuess: '{name}\'i tanısan neye şaşırırdın?', options: ['Çok kırılgan', 'Çok inatçı', 'Çok yalnız', 'Çok hırslı'] },
     { id: 630, text: 'Bir gün herkesin öğrenmesini istediğim şey?', textGuess: '{name} bir gün herkesin neyi öğrenmesini ister?', options: ['Ne kadar uğraştığını', 'Gerçek düşüncelerini', 'Bir sırrını', 'Hiçbir şey'] },
+    // --- KÜLTÜRE ÖZEL
+    { id: 631, only: 'tr', text: 'Bana söylemek isteyip söyleyemediğin şey?', textGuess: '{name}\'e söylemek isteyip söyleyemediğin şey?', options: ['Bir iltifat', 'Bir şikayet', 'Bir itiraf', 'Hiçbir şey'] },
+    { id: 632, only: 'tr', text: 'Beni nereden tanıyorsun?', textGuess: '{name}\'i nereden tanıyorsun?', options: ['Okul/iş', 'Arkadaş çevresi', 'İnternet', 'Aile'] },
+    { id: 633, only: 'en', text: 'Karşılaşsak beni tanır mıydın?', textGuess: 'Karşılaşsanız {name}\'i tanır mıydın?', options: ['Anında', 'Belki', 'Hiç sanmam', 'Hiç karşılaşmadık'] },
+    { id: 634, only: 'en', text: 'Yüzüme asla söyleyemeyeceğin şey?', textGuess: '{name}\'in yüzüne asla söyleyemeyeceğin şey?', options: ['Bir iltifat', 'Bir şikayet', 'Bir sır', 'Yok, hepsini söylerim'] },
   ],
 };
 
 // Cihaz diline göre aktif havuz (Türkçe cihaz → TR, aksi halde EN).
-const SHARED: Question[] = LANG === 'tr' ? SHARED_TR : SHARED_EN;
-const SPECIFIC: Record<CategoryId, Question[]> =
+// Cihaz dilindeki TÜM sorular (kültüre özel olanlar dahil).
+const SHARED_RAW: Question[] = LANG === 'tr' ? SHARED_TR : SHARED_EN;
+const SPECIFIC_RAW: Record<CategoryId, Question[]> =
   LANG === 'tr' ? SPECIFIC_TR : SPECIFIC_EN;
 
-// Tüm sorular tek haritada (id → Question) — id ile yeniden kurmak için.
+// id → Question haritası HAM listeden kurulur: kültüre özel bir soru başka
+// dilde oluşturulmuş bir teste girmiş olabilir; o testi bu cihazda çözerken
+// soru bulunamazsa liste kısalır, cevap dizisi kayar ve puanlama bozulur.
+// Bu yüzden ALL asla filtrelenmez.
 const ALL: Map<number, Question> = new Map();
-for (const q of SHARED) ALL.set(q.id, q);
-for (const cat of Object.keys(SPECIFIC) as CategoryId[]) {
-  for (const q of SPECIFIC[cat]) ALL.set(q.id, q);
+for (const q of SHARED_RAW) ALL.set(q.id, q);
+for (const cat of Object.keys(SPECIFIC_RAW) as CategoryId[]) {
+  for (const q of SPECIFIC_RAW[cat]) ALL.set(q.id, q);
 }
+
+// SEÇİM havuzları filtrelidir: kültüre özel sorular yalnızca kendi dilinde
+// yeni testlere girer (Türkçe cihaz Türk kültürüne, İngilizce cihaz batı
+// kültürüne özgü soruları seçer).
+const fitsLang = (q: Question) => !q.only || q.only === LANG;
+const SHARED: Question[] = SHARED_RAW.filter(fitsLang);
+const SPECIFIC: Record<CategoryId, Question[]> = Object.fromEntries(
+  (Object.keys(SPECIFIC_RAW) as CategoryId[]).map((cat) => [
+    cat,
+    SPECIFIC_RAW[cat].filter(fitsLang),
+  ])
+) as Record<CategoryId, Question[]>;
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];

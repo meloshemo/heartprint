@@ -31,6 +31,7 @@ import {
   Title,
 } from '../components/ui';
 import { S } from '../i18n/strings';
+import { BrandIcon, Brand } from '../components/BrandIcon';
 
 export function ShareScreen({
   quiz,
@@ -128,7 +129,7 @@ export function ShareScreen({
         <View style={styles.platformRow}>
           <PlatformBtn
             label="WhatsApp"
-            emoji="💬"
+            brand="whatsapp"
             color="#25D366"
             disabled={!ready}
             onPress={() => {
@@ -138,7 +139,7 @@ export function ShareScreen({
           />
           <PlatformBtn
             label="Instagram"
-            emoji="📸"
+            brand="instagram"
             color="#E1306C"
             disabled={!ready}
             onPress={() => {
@@ -148,7 +149,7 @@ export function ShareScreen({
           />
           <PlatformBtn
             label="TikTok"
-            emoji="🎵"
+            brand="tiktok"
             color="#000000"
             disabled={!ready}
             onPress={() => {
@@ -178,13 +179,13 @@ export function ShareScreen({
 
 function PlatformBtn({
   label,
-  emoji,
+  brand,
   color,
   disabled,
   onPress,
 }: {
   label: string;
-  emoji: string;
+  brand: Brand;
   color: string;
   disabled?: boolean;
   onPress: () => void;
@@ -198,7 +199,7 @@ function PlatformBtn({
         { borderColor: color, opacity: disabled ? 0.4 : pressed ? 0.7 : 1 },
       ]}
     >
-      <Text style={styles.platformEmoji}>{emoji}</Text>
+      <BrandIcon brand={brand} size={24} />
       <Text style={styles.platformLabel}>{label}</Text>
     </Pressable>
   );
@@ -218,7 +219,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: theme.card,
   },
-  platformEmoji: { fontSize: 22 },
   platformLabel: {
     color: theme.text,
     fontSize: 12,

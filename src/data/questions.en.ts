@@ -105,6 +105,13 @@ export const SHARED_EN: Question[] = [
   { id: 94, text: 'When did I last cry?', textGuess: 'When did {name} last cry?', options: ['This week', 'This month', 'Months ago', "Can't even remember"] },
   { id: 95, text: 'What do I never ask anyone about?', textGuess: 'What does {name} never ask anyone about?', options: ['Money', 'Relationships', 'Health', 'Future plans'] },
   { id: 96, text: 'The last thing on my mind before sleep?', textGuess: "What's the last thing on {name}'s mind before sleep?", options: ['Tomorrow\'s to-do list', 'Something they said today', 'Someone they love', 'Nothing, out instantly'] },
+  // --- CULTURE-SPECIFIC (picked only in its own language, solvable in both)
+  { id: 97, only: 'tr', text: 'Do I believe in the evil eye?', textGuess: 'Does {name} believe in the evil eye?', options: ['Absolutely', "Don't believe it but wear the charm", 'Finds it funny', 'Never thought about it'] },
+  { id: 98, only: 'tr', text: 'Someone knocks — what do I do first?', textGuess: 'When someone knocks, what does {name} do first?', options: ['Puts the kettle on', 'Tidies up fast', 'Panics', 'Pretends nobody is home'] },
+  { id: 99, only: 'tr', text: 'My breakfast must-have?', textGuess: "{name}'s breakfast must-have?", options: ['Tea', 'Cheese and olives', 'Fresh bread', "Doesn't do breakfast"] },
+  { id: 900, only: 'en', text: 'My go-to coffee order?', textGuess: "{name}'s go-to coffee order?", options: ['Black coffee', 'Latte', 'Iced coffee (year-round)', "Doesn't drink coffee"] },
+  { id: 901, only: 'en', text: 'Someone asks "how are you?" — what do I say?', textGuess: 'What does {name} say to "how are you?"', options: ['"Good, you?" on auto-pilot', 'Actually tells them', 'Just "hey"', 'Depends who is asking'] },
+  { id: 902, only: 'en', text: 'Do I care about my star sign?', textGuess: 'Does {name} care about star signs?', options: ['Knows mine and yours', 'Knows only their own', 'Thinks it is nonsense', 'No idea what it is'] },
 ];
 
 export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
@@ -144,6 +151,11 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 132, text: 'My biggest unspoken fear in the relationship?', textGuess: "{name}'s unspoken fear in the relationship?", options: ['Becoming ordinary', 'Not being loved enough', 'Being cheated on', 'Ending up alone'] },
     { id: 133, text: 'Which small gesture melts me?', textGuess: 'Which small gesture melts {name}?', options: ['Playing with their hair', 'A morning text', 'Remembering a small thing', 'Just listening'] },
     { id: 134, text: 'How do I most want to be loved?', textGuess: 'How does {name} most want to be loved?', options: ['Just woken up', 'All dressed up', 'While working', 'While laughing'] },
+    // --- CULTURE-SPECIFIC
+    { id: 135, only: 'tr', text: 'When do I introduce my partner to my family?', textGuess: 'When does {name} introduce a partner to family?', options: ['In the first months', 'Once it gets serious', 'Only when marriage comes up', 'Ideally never'] },
+    { id: 136, only: 'tr', text: 'How do I refer to them?', textGuess: 'How does {name} refer to their partner?', options: ['"My partner"', 'By their name', 'Depends on the company', 'Never mentions them'] },
+    { id: 137, only: 'en', text: 'Do we say "I love you" every day?', textGuess: 'Does {name} say "I love you" daily?', options: ['Every single day', 'Only when it counts', 'Rarely out loud', 'More over text'] },
+    { id: 138, only: 'en', text: 'How do I flirt?', textGuess: 'How does {name} flirt?', options: ['With compliments', 'By teasing', 'Extra attention', 'Badly, honestly'] },
   ],
   anne: [
     { id: 201, text: 'What do I hide most from my mom?', textGuess: 'What does {name} hide most from their mom?', options: ['How much they spend', 'Their dating life', 'Grades / work', 'Where they go'] },
@@ -181,6 +193,11 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 232, text: 'The line from mom still in my head?', textGuess: "Which line from mom stuck with {name}?", options: ['"You can do it"', '"Be careful"', '"I\'m always here"', '"One day you\'ll understand"'] },
     { id: 233, text: 'As a kid, what did I want most from mom?', textGuess: 'As a kid, what did {name} want most from mom?', options: ['To be listened to', 'A hug', 'Permission', 'Praise'] },
     { id: 234, text: 'What would I miss most about mom?', textGuess: 'What would {name} miss most about mom?', options: ['Her voice', 'Her cooking', 'Her worrying', 'Her touch'] },
+    // --- CULTURE-SPECIFIC
+    { id: 235, only: 'tr', text: 'What does mom serve guests?', textGuess: "What does {name}'s mom serve guests?", options: ['Tea and cookies', 'Coffee', 'A fruit plate', 'An entire feast'] },
+    { id: 236, only: 'tr', text: 'How does mom describe me to the neighbors?', textGuess: "How does {name}'s mom describe them to neighbors?", options: ['With praise', 'With complaints', 'Wildly exaggerated', 'Never mentions them'] },
+    { id: 237, only: 'en', text: 'Does mom text with emojis?', textGuess: "Does {name}'s mom text with emojis?", options: ['Way too many', 'Just a heart', 'None at all', 'Always the wrong ones'] },
+    { id: 238, only: 'en', text: "Mom's reaction to my life choices?", textGuess: "How does {name}'s mom react to their choices?", options: ['Fully supportive', 'Worried but quiet', 'Says it straight', 'Tells everyone else'] },
   ],
   baba: [
     { id: 301, text: 'What do I enjoy most with my dad?', textGuess: 'What does {name} enjoy most with their dad?', options: ['Watching the game', 'Car / a drive', 'Talking', 'Eating'] },
@@ -218,6 +235,11 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 332, text: 'My clearest childhood memory of dad?', textGuess: "{name}'s clearest childhood memory of dad?", options: ['Being carried on his shoulders', 'A car ride', 'An argument', 'A gift'] },
     { id: 333, text: 'Which trait of his do I fear inheriting?', textGuess: "Which of dad's traits does {name} fear inheriting?", options: ['His temper', 'His silence', 'His stubbornness', 'None, they want to be like him'] },
     { id: 334, text: 'If I saw dad cry, what would I do?', textGuess: 'If {name} saw dad cry, what would they do?', options: ['Freeze', 'Hug him', 'Leave the room', 'Never seen it'] },
+    // --- CULTURE-SPECIFIC
+    { id: 335, only: 'tr', text: 'How does dad take his tea?', textGuess: "How does {name}'s dad take his tea?", options: ['Strong and dark', 'Weak', 'Very sweet', 'Coffee, not tea'] },
+    { id: 336, only: 'tr', text: 'Does dad mix up relatives\' names?', textGuess: "Does {name}'s dad mix up relatives' names?", options: ['Mixes up all of them', 'Never', 'Sometimes', 'Barely knows them anyway'] },
+    { id: 337, only: 'en', text: "Dad's grilling skills?", textGuess: "{name}'s dad at the grill?", options: ['Master of the grill', 'Burns everything', 'Never goes near it', 'Talks more than he cooks'] },
+    { id: 338, only: 'en', text: "Dad's advice style?", textGuess: "{name}'s dad's advice style?", options: ['Long stories', 'One-liners', 'Gives none', 'Sends links and articles'] },
   ],
   bff: [
     { id: 401, text: 'Drunk at 3am, who do I call?', textGuess: 'Drunk at 3am, who does {name} call?', options: ['Their best friend', 'Their ex', 'Their mom', 'No one, just texts'] },
@@ -255,6 +277,11 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 432, text: 'The topic we never talk about?', textGuess: 'What do {name} and the bestie never discuss?', options: ['Money', 'Relationships', 'Family', 'Nothing, they discuss it all'] },
     { id: 433, text: 'What would my life be without my bestie?', textGuess: "What would {name}'s life be without the bestie?", options: ['Far more boring', 'Calmer', 'Pretty much the same', "They don't want to think about it"] },
     { id: 434, text: 'When did I last thank my bestie?', textGuess: 'When did {name} last thank the bestie?', options: ['Recently', 'Months ago', 'Never', 'All the time'] },
+    // --- CULTURE-SPECIFIC
+    { id: 435, only: 'tr', text: 'Where do my bestie and I usually meet?', textGuess: 'Where do {name} and the bestie usually meet?', options: ['At a cafe', 'At home', 'On a walk', 'Only on the phone'] },
+    { id: 436, only: 'tr', text: 'What do we always end up talking about?', textGuess: 'What do {name} and the bestie always talk about?', options: ['Mutual friends', 'Work or school', 'Relationships', 'Total nonsense'] },
+    { id: 437, only: 'en', text: 'What is our group chat like?', textGuess: "What is {name}'s friend group chat like?", options: ['Chaos, 200 messages', 'Memes only', 'Dead for months', 'Just the two of us'] },
+    { id: 438, only: 'en', text: 'Would we survive a road trip together?', textGuess: 'Would {name} and the bestie survive a road trip?', options: ['Best trip ever', 'One fight, then fine', 'Never again', 'We already did it'] },
   ],
   kardes: [
     { id: 701, text: 'Who grabs the last slice at home?', textGuess: 'Who grabs the last slice, {name} or their sibling?', options: ['Me', 'My sibling', 'Whoever sees it first', 'We share (lie)'] },
@@ -292,6 +319,11 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 732, text: 'What did I do for them and never mention?', textGuess: 'What did {name} do for their sibling and never mention?', options: ['Defended them', 'Took the blame', 'Gave them money', 'Kept their secret'] },
     { id: 733, text: "The sentence I can't say to my sibling?", textGuess: "What can't {name} say to their sibling?", options: ['"I\'m proud of you"', '"I\'m sorry"', '"I miss you"', '"I need you"'] },
     { id: 734, text: 'As a kid, what did I envy about them?', textGuess: 'As a kid, what did {name} envy about their sibling?', options: ['The attention', 'Their stuff', 'Their freedom', 'Nothing at all'] },
+    // --- CULTURE-SPECIFIC
+    { id: 735, only: 'tr', text: 'Who collected more holiday money as kids?', textGuess: 'Who collected more holiday money, {name} or the sibling?', options: ['Me', 'My sibling', 'Equal', 'We stopped getting it'] },
+    { id: 736, only: 'tr', text: 'Who do the grandparents favor?', textGuess: 'Who do the grandparents favor, {name} or the sibling?', options: ['Me', 'My sibling', 'They love us equally', 'They tolerate us both'] },
+    { id: 737, only: 'en', text: 'Who was the "problem child"?', textGuess: 'Who was the "problem child", {name} or the sibling?', options: ['Me', 'My sibling', 'Both of us', 'Neither, we were angels'] },
+    { id: 738, only: 'en', text: 'Do we still fight over the front seat?', textGuess: 'Do {name} and the sibling still fight over the front seat?', options: ['Every single time', 'We grew out of it', 'Only jokingly', 'We drive separately now'] },
   ],
   eski: [
     { id: 501, text: 'What was "our song" like?', textGuess: "What was {name}'s \"our song\" like?", options: ['A slow ballad', 'Foreign pop', 'Rap', 'Rock / acoustic'] },
@@ -329,6 +361,11 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 532, text: 'The first thing I deleted after the breakup?', textGuess: 'What did {name} delete first after the breakup?', options: ['The photos', 'The messages', 'The songs', 'Nothing at all'] },
     { id: 533, text: 'One sentence I would say to them now?', textGuess: 'What would {name} say to them now?', options: ['"Glad you existed"', '"You really hurt me"', '"Hope you\'re happy"', '"Nothing to say"'] },
     { id: 534, text: 'What did I actually miss the most?', textGuess: 'What did {name} actually miss the most?', options: ['The conversations', 'The routine', 'The hugs', 'Who they were back then'] },
+    // --- CULTURE-SPECIFIC
+    { id: 535, only: 'tr', text: 'Did my family like them?', textGuess: "Did {name}'s family like them?", options: ['Loved them', 'Never warmed up', 'Never met them', 'Still asking about them'] },
+    { id: 536, only: 'tr', text: 'What did our mutual friends say?', textGuess: 'What did the mutual friends say about {name}?', options: ['"Good riddance"', '"Such a shame"', 'Stayed neutral', 'Nobody talked about it'] },
+    { id: 537, only: 'en', text: 'Did I unfollow or just mute?', textGuess: 'Did {name} unfollow or just mute them?', options: ['Unfollowed instantly', 'Muted, still watching', 'Blocked', 'Still following'] },
+    { id: 538, only: 'en', text: 'Would I text them at 2am?', textGuess: 'Would {name} text them at 2am?', options: ['Never again', 'Already did', 'Thought about it', 'They text me'] },
   ],
   anonim: [
     { id: 601, text: 'One thing that sums me up?', textGuess: 'One thing that sums up {name}?', options: ['Their energy', 'Their mind', 'Their heart', 'Their humor'] },
@@ -362,5 +399,10 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 628, text: 'What do I hide from people most?', textGuess: 'What does {name} hide from people most?', options: ['Their worries', 'Their dreams', 'Their past', 'Their loneliness'] },
     { id: 629, text: 'What would surprise you if you truly knew me?', textGuess: 'What would surprise you about the real {name}?', options: ['Very fragile', 'Very stubborn', 'Very lonely', 'Very ambitious'] },
     { id: 630, text: 'What do I want everyone to know one day?', textGuess: 'What does {name} want everyone to know one day?', options: ['How hard they tried', 'Their real thoughts', 'A secret', 'Nothing at all'] },
+    // --- CULTURE-SPECIFIC
+    { id: 631, only: 'tr', text: 'Something you wanted to tell me but never did?', textGuess: 'Something you wanted to tell {name} but never did?', options: ['A compliment', 'A complaint', 'A confession', 'Nothing'] },
+    { id: 632, only: 'tr', text: 'How do you know me?', textGuess: 'How do you know {name}?', options: ['School or work', 'Mutual friends', 'The internet', 'Family'] },
+    { id: 633, only: 'en', text: 'If we met, would you recognize me?', textGuess: 'If you met {name}, would you recognize them?', options: ['Instantly', 'Maybe', 'No chance', 'We have never met'] },
+    { id: 634, only: 'en', text: 'What would you never say to my face?', textGuess: 'What would you never say to {name}\'s face?', options: ['A compliment', 'A complaint', 'A secret', 'Nothing, I say it all'] },
   ],
 };
