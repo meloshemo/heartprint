@@ -30,6 +30,26 @@ export const AD_UNITS = {
   },
 } as const;
 
+/**
+ * WEB REKLAMI (Google AdSense).
+ * AdMob yalnızca uygulama içindir; web tarafının karşılığı AdSense'tir.
+ *
+ * KURULUM: adsense.google.com'da heartprint.app için site eklenip ONAYLANDIKTAN
+ * sonra buradaki iki değer doldurulur. Boş kaldığı sürece web'de hiçbir reklam
+ * kodu çalışmaz (WebAdSlot hiçbir şey basmaz) — yani yanlışlıkla boş/bozuk
+ * reklam alanı görünmez.
+ *   client: "ca-pub-..." (yayıncı kimliği)
+ *   slots.result: sonuç ekranındaki birimin reklam birimi kimliği
+ * AYRICA: onay sonrası public/ads.txt dosyasına AdSense satırı eklenmeli
+ * (app-ads.txt uygulamalar için, ads.txt site için — ikisi ayrı).
+ */
+export const ADSENSE = {
+  client: '',
+  slots: {
+    result: '',
+  },
+} as const;
+
 export type MobileOS = 'ios' | 'android' | 'other';
 
 /** Çalışılan cihazın mobil işletim sistemini tespit eder (web'de userAgent'tan). */

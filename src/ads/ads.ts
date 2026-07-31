@@ -3,6 +3,7 @@ import mobileAds, {
   AdEventType,
   AdsConsent,
   InterstitialAd,
+  MaxAdContentRating,
   RewardedAd,
   RewardedAdEventType,
   TestIds,
@@ -12,9 +13,9 @@ import { AD_UNITS } from '../config';
 let initialized = false;
 
 /**
- * AdMob SDK'yı başlatır. Önce GDPR/UMP iznini toplar (AB kullanıcıları için
- * AdMob zorunlu tutar). İzin akışı başarısız olsa bile reklamlar başlatılır —
- * kullanıcı deneyimi bloklanmaz.
+ * AdMob SDK'sını başlatır. Sırayla: GDPR/UMP izni → içerik filtresi → init →
+ * reklamların ÖN YÜKLEMESİ. İzin akışı başarısız olsa bile reklamlar
+ * başlatılır — kullanıcı deneyimi bloklanmaz.
  */
 export async function initAds(): Promise<void> {
   if (initialized) return;
@@ -26,10 +27,26 @@ export async function initAds(): Promise<void> {
     console.log('Reklam izni (UMP) hatası:', e);
   }
   try {
+    // İÇERİK FİLTRESİ: sonuç kartları herkese açık paylaşılıyor ve uygulamayı
+    // genç kullanıcılar da oynuyor. PG üstü içerik (alkol, kumar, cinsel
+    // içerik, silah) istenmiyor → Google bu seviyenin ÜSTÜNDEKİ reklamları
+    // hiç göndermez. Filtre daraldıkça envanter de daralır; PG bilinçli denge.
+    // tagForChildDirectedTreatment KASITLI OLARAK AYARLANMIYOR: uygulama
+    // çocuklara yönelik değil, yanlış beyan hesap kapanmasına yol açar.
+    await mobileAds().setRequestConfiguration({
+      maxAdContentRating: MaxAdContentRating.PG,
+    });
+  } catch (e) {
+    console.log('Reklam içerik filtresi ayarlanamadı:', e);
+  }
+  try {
     await mobileAds().initialize();
   } catch (e) {
     console.log('AdMob init hatası:', e);
   }
+  // Reklamları şimdiden yükle: gösterim anında ağ beklemesi olmasın.
+  preloadInterstitial();
+  preloadRewarded();
 }
 
 function unitId(kind: 'interstitial' | 'rewarded'): string {
@@ -41,63 +58,210 @@ function unitId(kind: 'interstitial' | 'rewarded'): string {
   return real;
 }
 
-// Sıklık sınırı: ilk oyunda reklam yok, sonra her 2 oyunda bir
-let playsSinceAd = 0;
+/*
+ * ÖN YÜKLEME
+ * ----------
+ * Eskiden reklam tam gösterileceği anda oluşturulup load() ediliyordu; bu da
+ * sonuç ekranına geçerken 1-8 saniyelik boş bekleme demekti. Artık reklam
+ * ihtiyaçtan ÖNCE hazırda bekletilir, gösterim anında yalnızca show() çağrılır
+ * → geçiş anında açılır. Gösterilen örnek tükenir, yerine yenisi yüklenir.
+ */
 
-export async function maybeShowInterstitial(): Promise<void> {
-  playsSinceAd += 1;
-  if (playsSinceAd < 2) return;
-  playsSinceAd = 0;
-  await showInterstitial();
+type Slot<T> = {
+  ad: T | null;
+  ready: boolean;
+  loading: boolean;
+  fails: number;
+  retry: ReturnType<typeof setTimeout> | null;
+};
+
+const inter: Slot<InterstitialAd> = {
+  ad: null,
+  ready: false,
+  loading: false,
+  fails: 0,
+  retry: null,
+};
+const rew: Slot<RewardedAd> = {
+  ad: null,
+  ready: false,
+  loading: false,
+  fails: 0,
+  retry: null,
+};
+
+/**
+ * Başarısız yüklemeden sonraki bekleme: 4s, 8s, 16s, 32s… en fazla 2 dakika.
+ * Bu OLMADAN tek bir başarısız istek reklamı kalıcı olarak öldürüyordu —
+ * yeni AdMob birimleri ve "sınırlı reklam sunumu" kısıtı yüzünden ilk
+ * isteklerin patlaması olağan; sürekli yeniden denemek şart.
+ */
+function backoffMs(fails: number): number {
+  return Math.min(4000 * 2 ** (fails - 1), 120000);
 }
 
-function showInterstitial(): Promise<void> {
+function scheduleRetry(slot: Slot<unknown>, load: () => void): void {
+  if (slot.retry) return;
+  const wait = backoffMs(slot.fails);
+  slot.retry = setTimeout(() => {
+    slot.retry = null;
+    load();
+  }, wait);
+}
+
+function preloadInterstitial(): void {
+  if (inter.loading || inter.ready) return;
+  inter.loading = true;
+  try {
+    const ad = InterstitialAd.createForAdRequest(unitId('interstitial'));
+    inter.ad = ad;
+    ad.addAdEventListener(AdEventType.LOADED, () => {
+      inter.ready = true;
+      inter.loading = false;
+      inter.fails = 0;
+    });
+    ad.addAdEventListener(AdEventType.ERROR, (e) => {
+      inter.ad = null;
+      inter.ready = false;
+      inter.loading = false;
+      inter.fails += 1;
+      console.log('Geçiş reklamı yüklenemedi (deneme ' + inter.fails + '):', e);
+      scheduleRetry(inter, preloadInterstitial);
+    });
+    ad.load();
+  } catch (e) {
+    inter.loading = false;
+    inter.fails += 1;
+    scheduleRetry(inter, preloadInterstitial);
+  }
+}
+
+function preloadRewarded(): void {
+  if (rew.loading || rew.ready) return;
+  rew.loading = true;
+  try {
+    const ad = RewardedAd.createForAdRequest(unitId('rewarded'));
+    rew.ad = ad;
+    ad.addAdEventListener(RewardedAdEventType.LOADED, () => {
+      rew.ready = true;
+      rew.loading = false;
+      rew.fails = 0;
+    });
+    ad.addAdEventListener(AdEventType.ERROR, (e) => {
+      rew.ad = null;
+      rew.ready = false;
+      rew.loading = false;
+      rew.fails += 1;
+      console.log('Ödüllü reklam yüklenemedi (deneme ' + rew.fails + '):', e);
+      scheduleRetry(rew, preloadRewarded);
+    });
+    ad.load();
+  } catch (e) {
+    rew.loading = false;
+    rew.fails += 1;
+    scheduleRetry(rew, preloadRewarded);
+  }
+}
+
+/**
+ * Test bitiminde, sonuç ekranından hemen önce geçiş reklamı gösterir.
+ *
+ * SIKLIK: her test bitiminde (ürün kararı, 2026-07-31). Önceden ilk oyun
+ * muaftı ve sonrasında 2 oyunda bire düşüyordu. Sonucu görmek kullanıcının
+ * en çok istediği an olduğu için reklamın taşıdığı en değerli nokta burası.
+ *
+ * HAZIR DEĞİLSE BEKLEMEZ, atlar: kullanıcıyı sonuç ekranından alıkoymak
+ * reklamın kazandırdığından fazlasını götürüyordu.
+ */
+export async function maybeShowInterstitial(): Promise<void> {
+  if (!inter.ready || !inter.ad) {
+    preloadInterstitial(); // bir dahakine hazır olsun
+    return;
+  }
+  await showPreloadedInterstitial();
+}
+
+function showPreloadedInterstitial(): Promise<void> {
   return new Promise((resolve) => {
+    const ad = inter.ad;
+    if (!ad) return resolve();
     let done = false;
     const finish = () => {
-      if (!done) {
-        done = true;
-        resolve();
-      }
+      if (done) return;
+      done = true;
+      // Örnek tükendi → yenisini hazırla
+      inter.ad = null;
+      inter.ready = false;
+      preloadInterstitial();
+      resolve();
     };
     try {
-      const ad = InterstitialAd.createForAdRequest(unitId('interstitial'));
-      ad.addAdEventListener(AdEventType.LOADED, () => {
-        ad.show().catch(finish);
-      });
       ad.addAdEventListener(AdEventType.CLOSED, finish);
       ad.addAdEventListener(AdEventType.ERROR, finish);
-      ad.load();
-      setTimeout(finish, 8000); // reklam yüklenmezse akışı bloklamayı önle
+      ad.show().catch(finish);
+      // Reklam kapanış olayı hiç gelmezse akış kilitlenmesin
+      setTimeout(finish, 60000);
     } catch {
       finish();
     }
   });
 }
 
-/** Ödüllü reklam gösterir; ödül kazanıldıysa true döner. */
+/**
+ * Ödüllü reklam gösterir; ödül kazanıldıysa true döner.
+ * Ön yüklenmişse ANINDA açılır. Değilse yüklenmesini kısa süre bekler
+ * (kullanıcı bu reklamı bilerek istedi), ama süresiz bekletmez.
+ */
 export function showRewarded(): Promise<boolean> {
+  if (rew.ready && rew.ad) return showPreloadedRewarded();
+  // Bekleyen backoff varsa iptal et: kullanıcı reklamı ŞU AN istedi.
+  if (rew.retry) {
+    clearTimeout(rew.retry);
+    rew.retry = null;
+  }
+  preloadRewarded();
   return new Promise((resolve) => {
+    const started = Date.now();
+    const tick = () => {
+      if (rew.ready && rew.ad) {
+        showPreloadedRewarded().then(resolve);
+      } else if (Date.now() - started > 12000) {
+        // Reklam gelmedi (yeni birim / sınırlı sunum / ağ). Kullanıcıyı
+        // cezalandırmanın anlamı yok: gösterilecek reklam yoksa gelir de
+        // yok, ama özelliği kilitli bırakmak kullanıcıyı kaybettirir.
+        // Bu yüzden ödül VERİLİR.
+        console.log('Ödüllü reklam gelmedi, ödül yine de veriliyor.');
+        resolve(true);
+      } else {
+        setTimeout(tick, 250);
+      }
+    };
+    tick();
+  });
+}
+
+function showPreloadedRewarded(): Promise<boolean> {
+  return new Promise((resolve) => {
+    const ad = rew.ad;
+    if (!ad) return resolve(false);
     let earned = false;
     let done = false;
     const finish = () => {
-      if (!done) {
-        done = true;
-        resolve(earned);
-      }
+      if (done) return;
+      done = true;
+      rew.ad = null;
+      rew.ready = false;
+      preloadRewarded();
+      resolve(earned);
     };
     try {
-      const ad = RewardedAd.createForAdRequest(unitId('rewarded'));
-      ad.addAdEventListener(RewardedAdEventType.LOADED, () => {
-        ad.show().catch(finish);
-      });
       ad.addAdEventListener(RewardedAdEventType.EARNED_REWARD, () => {
         earned = true;
       });
       ad.addAdEventListener(AdEventType.CLOSED, finish);
       ad.addAdEventListener(AdEventType.ERROR, finish);
-      ad.load();
-      setTimeout(finish, 10000);
+      ad.show().catch(finish);
+      setTimeout(finish, 120000);
     } catch {
       finish();
     }

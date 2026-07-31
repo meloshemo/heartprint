@@ -58,7 +58,7 @@ const tr = {
   // Loop card
   loopTitle: 'Şimdi sıra sende 🔥',
   loopSub: (target: string) =>
-    `Sen de bir test yap, gönder — bakalım ${target} seni ne kadar tanıyacak?`,
+    `Sen de bir test yap, gönder. Bakalım ${target} seni ne kadar tanıyacak?`,
   loopBtn: 'Kendi Testimi Yap →',
   loopTargetThey: 'onlar',
   // Download CTA
@@ -169,7 +169,7 @@ const en: typeof tr = {
   fromTest: (who) => `${who}'s test`,
   loopTitle: 'Now it\'s your turn 🔥',
   loopSub: (target) =>
-    `Make your own test and send it — see how well ${target} would score on you.`,
+    `Make your own test and send it. See how well ${target} would score on you.`,
   loopBtn: 'Make My Test →',
   loopTargetThey: 'they',
   dlTitle: "Don't miss the results 🔔",

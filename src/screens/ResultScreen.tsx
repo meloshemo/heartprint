@@ -24,6 +24,7 @@ import { DownloadCTA } from '../components/DownloadCTA';
 import { saveResult } from '../backend/quizzes';
 import { track } from '../backend/analytics';
 import { showRewarded } from '../ads/ads';
+import { WebAdSlot } from '../ads/WebAdSlot';
 import {
   openInstagram,
   openTikTok,
@@ -283,6 +284,11 @@ export function ResultScreen({
           color={theme.card}
           onPress={onRestart}
         />
+        {/* Web reklamı (AdSense) — native'de null. Sayfanın EN ALTINA,
+            düğmelerden sonra konuldu: reklamın düğmelere komşu olması yanlışlıkla
+            tıklamaya yol açar ve AdSense politikası bunu ihlal sayar. */}
+        <View style={{ height: 20 }} />
+        <WebAdSlot slot="result" />
       </ScrollView>
       <Confetti />
     </Screen>

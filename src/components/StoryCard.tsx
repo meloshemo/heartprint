@@ -13,13 +13,15 @@ import { GRAD } from './Avatar';
 import { S } from '../i18n/strings';
 import { LANG } from '../i18n/locale';
 import { Logo } from './Logo';
-import { WEB_BASE_URL } from '../config';
 
 /** Türkçe'de "%100", İngilizce'de "100%" — işaretin yeri dile göre değişir. */
 const pctBefore = LANG === 'tr';
 
-// Paylaşılan kartta gösterilecek marka adresi ("https://" olmadan, sade).
-const BRAND_DOMAIN = WEB_BASE_URL.replace(/^https?:\/\//, '');
+// Paylaşılan kartın alt damgası. Alan adı ("heartprint.app") yerine düz
+// KELİME MARKASI: kart bir reklam bandı değil, imza gibi dursun. Geniş harf
+// aralıklı büyük harf + altın kalp, moda/spor markalarının kilit düzeni.
+// Linki zaten paylaşım metni taşıyor; kartın işi akılda kalmak.
+const BRAND_NAME = 'HEARTPRINT';
 
 const GOLD = '#FFCE4F';
 const BG = '#0A0A16';
@@ -163,8 +165,8 @@ export function StoryCard({
         {/* Marka damgası: kartı gören herkes hangi uygulama olduğunu ve nereden
             bulacağını anlasın (ekran görüntüsü / repost olsa bile kalıcı). */}
         <View style={styles.brandRow}>
-          <Logo size={16} color="#FFFFFF" />
-          <Text style={styles.brandText}>{BRAND_DOMAIN}</Text>
+          <Logo size={18} color={GOLD} />
+          <Text style={styles.brandText}>{BRAND_NAME}</Text>
         </View>
       </View>
     </View>
@@ -277,14 +279,15 @@ const styles = StyleSheet.create({
   brandRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
+    gap: 8,
     marginTop: 10,
-    opacity: 0.6,
   },
   brandText: {
     color: '#fff',
-    fontSize: 13,
-    fontWeight: '700',
-    letterSpacing: 0.3,
+    fontSize: 12,
+    fontWeight: '900',
+    // Geniş harf aralığı damgayı "yazı" olmaktan çıkarıp logoya çeviriyor.
+    letterSpacing: 4.5,
+    opacity: 0.92,
   },
 });

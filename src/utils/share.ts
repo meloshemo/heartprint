@@ -4,9 +4,19 @@ import * as Clipboard from 'expo-clipboard';
 import { S } from '../i18n/strings';
 import { WEB_BASE_URL } from '../config';
 
-async function canOpen(url: string): Promise<boolean> {
+/**
+ * Bir uygulamayı şemasıyla doğrudan açmayı dener; açılamazsa false döner.
+ *
+ * HIZ NOTU: eskiden önce canOpenURL sorulup sonra openURL çağrılıyordu — bu,
+ * her dokunuşta iki ayrı native köprü turu demekti ve butona basınca gözle
+ * görülür bir takılma yaratıyordu. Tek adımda deneyip hatayı yakalamak hem
+ * daha hızlı hem de daha doğru (canOpenURL, AndroidManifest'teki <queries>
+ * listesine bağlıdır; openURL gerçekte ne olduğunu söyler).
+ */
+async function tryOpen(url: string): Promise<boolean> {
   try {
-    return await Linking.canOpenURL(url);
+    await Linking.openURL(url);
+    return true;
   } catch {
     return false;
   }
@@ -21,11 +31,9 @@ export async function shareTextWhatsApp(text: string): Promise<void> {
     window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
     return;
   }
-  const appUrl = 'whatsapp://send?text=' + encodeURIComponent(text);
-  if (await canOpen(appUrl)) {
-    await Linking.openURL(appUrl);
-  } else {
-    await Linking.openURL('https://wa.me/?text=' + encodeURIComponent(text));
+  const encoded = encodeURIComponent(text);
+  if (!(await tryOpen('whatsapp://send?text=' + encoded))) {
+    await Linking.openURL('https://wa.me/?text=' + encoded);
   }
 }
 
@@ -149,10 +157,7 @@ export async function openInstagram(text: string): Promise<'opened' | 'copied' |
     window.open('https://instagram.com', '_blank');
     return 'web';
   }
-  if (await canOpen('instagram://app')) {
-    await Linking.openURL('instagram://app');
-    return 'copied';
-  }
+  if (await tryOpen('instagram://app')) return 'copied';
   await Linking.openURL('https://instagram.com');
   return 'web';
 }
@@ -165,10 +170,7 @@ export async function openTikTok(text: string): Promise<'opened' | 'copied' | 'w
     return 'web';
   }
   for (const scheme of ['snssdk1233://', 'tiktok://', 'musically://']) {
-    if (await canOpen(scheme)) {
-      await Linking.openURL(scheme);
-      return 'copied';
-    }
+    if (await tryOpen(scheme)) return 'copied';
   }
   await Linking.openURL('https://www.tiktok.com');
   return 'web';
