@@ -118,6 +118,12 @@ export const SHARED_EN: Question[] = [
   { id: 906, text: 'Do I like my birthday being celebrated?', textGuess: 'Does {name} like their birthday celebrated?', options: ['Makes it a whole event', 'Tells nobody', 'Close people only', 'Sulks if forgotten'] },
   { id: 907, text: "If I don't like the food?", textGuess: "If {name} doesn't like the food?", options: ['Says it out loud', 'Eats it, hides it', 'Leaves it, says nothing', 'Never goes back there'] },
   { id: 908, text: 'Do I leave things unfinished?', textGuess: 'Does {name} finish what they start?', options: ['Cannot stop until done', 'Quits halfway', 'Hard to start, then finishes', 'Never even starts'] },
+  { id: 909, text: 'If I were a kitchen appliance?', textGuess: 'Which kitchen appliance is {name}?', options: ['Kettle, always boiling', 'Fridge, always full and never thanked', 'Vacuum, loud but gets it done', 'Iron, do not touch'] },
+  { id: 910, text: 'If my life were a TV show, the genre?', textGuess: 'If {name} were a TV show, the genre?', options: ['Sitcom with a laugh track', 'Documentary, slow and calm', 'Thriller, a crisis per episode', 'Reality show, nonstop drama'] },
+  { id: 911, text: 'In a group project I am the one who?', textGuess: 'In a group project, {name} is the one who?', options: ['Does the entire thing alone', 'Presents it', 'Only gets their name on it', 'Has ideas, does nothing'] },
+  { id: 912, text: 'Zombie apocalypse starts. First move?', textGuess: 'Zombie apocalypse: what does {name} do?', options: ['Makes a plan, takes charge', 'Runs to the store', 'Locks the door and hides', 'Gone in ten minutes'] },
+  { id: 913, text: 'If I were a food?', textGuess: 'Which food is {name}?', options: ['Chicken soup, everyone likes it', 'Extra hot sauce, hard to get right', 'Sushi, love it or hate it', 'A bagel, everywhere and reliable'] },
+  { id: 914, text: 'If someone grabbed my phone, worst thing?', textGuess: 'If someone grabbed {name} phone, worst thing?', options: ['Call history', 'Deep in the camera roll', 'The notes app', 'Watch history'] },
 ];
 
 export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
@@ -166,6 +172,10 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 140, text: 'What hurts me most in a relationship?', textGuess: 'What hurts {name} most in a relationship?', options: ['Being ignored', 'Broken promises', 'Being compared', 'Not being taken seriously'] },
     { id: 141, text: 'When my partner gets sick?', textGuess: 'When their partner gets sick, {name}?', options: ['Sits by their side', 'Texts nonstop', 'Drags them to a doctor', 'Leaves them to rest'] },
     { id: 142, text: 'How you can tell I am jealous?', textGuess: 'How can you tell {name} is jealous?', options: ['Starts asking questions', 'Goes quiet', 'Turns it into a joke', 'You never can'] },
+    { id: 143, text: 'If my partner picked an animal for me?', textGuess: 'Which animal would their partner pick for {name}?', options: ['Cat, shows up when it suits them', 'Dog, always right there', 'Hedgehog, back off', 'Panda, eats and sleeps'] },
+    { id: 144, text: 'My role in the relationship?', textGuess: 'What is {name} role in the relationship?', options: ['The one holding it together', 'The one who is always hungry', 'The planner', 'The lovable handful'] },
+    { id: 145, text: 'Our fights as a movie scene?', textGuess: 'What movie scene are their fights?', options: ['A long silent stare', 'A slammed door', 'An apology in the rain', 'Comedy, over in five minutes'] },
+    { id: 146, text: 'If my partner picked one emoji for me?', textGuess: 'Which emoji would their partner pick for {name}?', options: ['🥹', '😤', '🤡', '🧸'] },
   ],
   anne: [
     { id: 201, text: 'What do I hide most from my mom?', textGuess: 'What does {name} hide most from their mom?', options: ['How much they spend', 'Their dating life', 'Grades / work', 'Where they go'] },
@@ -212,6 +222,10 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 240, text: 'How does mom show she is upset?', textGuess: "How does {name}'s mom show she is upset?", options: ['Uses their full name', 'Goes silent', 'Gives a long speech', 'You can tell from dinner'] },
     { id: 241, text: 'Do I tell mom my problems?', textGuess: 'Does {name} tell their mom their problems?', options: ['Tells her everything', 'Only the good news', 'After it is over', 'Never, to spare her'] },
     { id: 242, text: 'What does mom do behind my back?', textGuess: "What does {name}'s mom do behind their back?", options: ['Tidies their room', 'Asks their friends', 'Follows their socials', 'Sends food'] },
+    { id: 243, text: 'If mom picked an animal for me?', textGuess: 'Which animal would their mom pick for {name}?', options: ['A bear cub', 'A cat, always asleep', 'An ant, never stops working', 'A parrot, never stops talking'] },
+    { id: 244, text: 'How old am I in my mom eyes?', textGuess: 'How old is {name} in their mom eyes?', options: ['Seven', 'Fifteen', 'My real age, still a kid', 'Older than her, she asks me for advice'] },
+    { id: 245, text: 'First thing mom says describing me?', textGuess: 'First thing their mom says about {name}?', options: ['Such a hard worker', 'Never listens to anyone', 'Always hungry', 'Sleeps all day'] },
+    { id: 246, text: 'If mom had one superpower?', textGuess: 'What superpower would their mom have?', options: ['Always knowing where I am', 'Spotting my lies instantly', 'Sending food from anywhere', 'Cleaning my room with a look'] },
   ],
   baba: [
     { id: 301, text: 'What do I enjoy most with my dad?', textGuess: 'What does {name} enjoy most with their dad?', options: ['Watching the game', 'Car / a drive', 'Talking', 'Eating'] },
@@ -258,6 +272,10 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 340, text: 'How does dad show he is proud?', textGuess: "How does {name}'s dad show he is proud?", options: ['Tells other people', 'Says it to their face', 'A pat on the back, no words', 'He never shows it'] },
     { id: 341, text: 'What happens when I ask dad for something?', textGuess: 'When {name} asks their dad for something?', options: ['Does it right away', 'Complains, then does it', 'Sends them to mom', 'Says "we will see", forgets'] },
     { id: 342, text: 'When did dad and I last really talk?', textGuess: 'When did {name} and their dad last really talk?', options: ['Recently', 'Months ago', 'Only when something went wrong', 'We never really talk'] },
+    { id: 343, text: 'If dad picked a car for me?', textGuess: 'Which car would their dad pick for {name}?', options: ['A sports car that burns fuel', 'Solid but an old model', 'Permanently in the shop', 'Not even licensed yet'] },
+    { id: 344, text: 'If dad had one superpower?', textGuess: 'What superpower would their dad have?', options: ['Fixing anything', 'Ignoring all traffic', 'Turning off lights from a distance', 'Falling asleep the second he sits'] },
+    { id: 345, text: 'If dad were an animal?', textGuess: 'Which animal would their dad be?', options: ['A bear, calm but do not poke', 'An owl, says little knows a lot', 'A lion, the voice is enough', 'A tortoise, in no rush ever'] },
+    { id: 346, text: 'What is my dad profile picture?', textGuess: 'What is their dad profile picture?', options: ['A landscape', 'His kid or grandkid', 'An extreme close-up selfie', 'Empty, never set one'] },
   ],
   bff: [
     { id: 401, text: 'Drunk at 3am, who do I call?', textGuess: 'Drunk at 3am, who does {name} call?', options: ['Their best friend', 'Their ex', 'Their mom', 'No one, just texts'] },
@@ -304,6 +322,10 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 440, text: 'How long can we go without talking?', textGuess: 'How long can {name} and their bestie go without talking?', options: ['One day is too long', 'A week is normal', 'Months, and nothing changes', 'We talk every day'] },
     { id: 441, text: 'If my best friend asks me for money?', textGuess: 'If their bestie asks for money, {name}?', options: ['Hands it over, no questions', 'Asks what happened', 'Finds it even when broke', 'Says they cannot'] },
     { id: 442, text: 'On my worst day, my best friend?', textGuess: "On {name}'s worst day, their bestie?", options: ['Shows up at the door', 'Tries to make them laugh', 'Just listens, says nothing', 'Knows, but never asks'] },
+    { id: 443, text: 'If my best friend picked one emoji for me?', textGuess: 'Which emoji would their bestie pick for {name}?', options: ['💀', '😌', '🤠', '🫠'] },
+    { id: 444, text: 'If we pulled off a heist, our roles?', textGuess: 'If they pulled off a heist, the roles?', options: ['I plan, they do it', 'They plan, I do it', 'We both get caught', 'We quit during planning'] },
+    { id: 445, text: 'Us two on a game show?', textGuess: 'The two of them on a game show?', options: ['Out in round one', 'Disqualified for arguing', 'Somehow reach the final', 'Never make it on air'] },
+    { id: 446, text: 'If my best friend picked a drink for me?', textGuess: 'Which drink would their bestie pick for {name}?', options: ['Black coffee, harsh but it helps', 'An energy drink, out of control', 'Chamomile tea, calms you down', 'Soda, sugary chaos'] },
   ],
   kardes: [
     { id: 701, text: 'Who grabs the last slice at home?', textGuess: 'Who grabs the last slice, {name} or their sibling?', options: ['Me', 'My sibling', 'Whoever sees it first', 'We share (lie)'] },
@@ -350,6 +372,10 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 740, text: "What of my sibling's do I use most?", textGuess: "What of their sibling's does {name} use most?", options: ['Their clothes', 'Their charger', 'Their money', 'Nothing at all'] },
     { id: 741, text: 'When my sibling succeeds, I feel?', textGuess: 'When their sibling succeeds, {name} feels?', options: ['Proud', 'Secretly jealous', 'Makes a joke of it', 'Not much'] },
     { id: 742, text: 'Growing up changed us how?', textGuess: 'How did growing up change {name} and their sibling?', options: ['We got closer', 'We drifted apart', 'Nothing changed', 'Only see each other at holidays'] },
+    { id: 743, text: 'If my sibling picked an animal for me?', textGuess: 'Which animal would their sibling pick for {name}?', options: ['A monkey', 'A tortoise', 'An eagle', 'A cat'] },
+    { id: 744, text: 'First thing we would fight over in a will?', textGuess: 'First thing they would fight over in a will?', options: ['The room', 'The car', 'Grandma ring', 'No fight, we would split it'] },
+    { id: 745, text: 'Our childhood as a cartoon?', textGuess: 'Their childhood as a cartoon?', options: ['Tom and Jerry', 'The Simpsons', 'Something calm and wholesome', 'Cannot be described, only watched'] },
+    { id: 746, text: 'Stranded on an island with my sibling?', textGuess: 'Stranded on an island with their sibling?', options: ['We split the work', 'We argue until we starve', 'They work, I nap', 'I find a separate island day one'] },
   ],
   eski: [
     { id: 501, text: 'What was "our song" like?', textGuess: "What was {name}'s \"our song\" like?", options: ['A slow ballad', 'Foreign pop', 'Rap', 'Rock / acoustic'] },
@@ -396,6 +422,10 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 540, text: 'My first reaction to hearing their name?', textGuess: "{name}'s first reaction to hearing their name?", options: ['Changes the subject', 'Acts totally normal', 'Asks for details', 'Says something bitter'] },
     { id: 541, text: 'What would I most want to forget?', textGuess: 'What would {name} most want to forget?', options: ['The last fight', 'Something they said', 'How it ended', 'Nothing at all'] },
     { id: 542, text: 'Where are our photos now?', textGuess: 'What did {name} do with their photos?', options: ['Deleted', 'Archived', 'Still up', 'Kept, never looked at'] },
+    { id: 543, text: 'That relationship as a season?', textGuess: 'That relationship as a season?', options: ['Summer, short and hot', 'Winter, long and cold', 'Spring, there was hope', 'Autumn, it faded out'] },
+    { id: 544, text: 'If it were a movie, the ending?', textGuess: 'If it were a movie, the ending?', options: ['Nobody finds anybody', 'Separate ways, both happy', 'There is a sequel', 'It was a short film anyway'] },
+    { id: 545, text: 'If it were a class, my grade?', textGuess: 'If it were a class, what grade would {name} get?', options: ['An A, learned a lot', 'A C, half finished', 'An F, learned nothing', 'Had to retake it'] },
+    { id: 546, text: 'What did our friends think we were?', textGuess: 'What did their friends think they were?', options: ['The perfect couple', 'A bomb waiting to go off', 'A total mismatch', 'Nobody really cared'] },
   ],
   anonim: [
     { id: 601, text: 'One thing that sums me up?', textGuess: 'One thing that sums up {name}?', options: ['Their energy', 'Their mind', 'Their heart', 'Their humor'] },
@@ -438,5 +468,9 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 636, text: 'If I had to speak in front of a crowd?', textGuess: 'If {name} had to speak in front of a crowd?', options: ['Happily', 'Would rather die', 'Fine if prepared', 'Keeps it short, gets off'] },
     { id: 637, text: 'What do people think when they first see me?', textGuess: 'What do people think when they first see {name}?', options: ['Quiet type', 'Stuck up', 'Warm and easy', 'They cannot tell'] },
     { id: 638, text: 'How would you know I am angry at you?', textGuess: 'How would you know {name} is angry at you?', options: ['Goes completely silent', 'Gets weirdly polite', 'It is all over their face', 'You would never know'] },
+    { id: 639, text: 'Pick one emoji for me?', textGuess: 'Which emoji would you pick for {name}?', options: ['🙂', '😐', '🔥', '🌚'] },
+    { id: 640, text: 'Where do I sit in a cinema?', textGuess: 'Where does {name} sit in a cinema?', options: ['Dead center', 'Very back row', 'Very front row', 'Wherever is free'] },
+    { id: 641, text: 'If my life were a book, a chapter title?', textGuess: 'If {name} were a book, a chapter title?', options: ['Me again, seriously', 'Almost there', 'Nobody knows', 'Still going'] },
+    { id: 642, text: 'If I were a recipe?', textGuess: 'What recipe would {name} be?', options: ['Long ingredient list, hard to make', 'Simple but delicious', 'Never turns out right', 'The classic everyone knows'] },
   ],
 };
