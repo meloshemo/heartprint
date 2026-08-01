@@ -100,7 +100,7 @@ export const SHARED_EN: Question[] = [
   { id: 89, text: 'As a kid, what was I most reluctant to do?', textGuess: 'As a kid, what did {name} avoid most?', options: ['Talking on the phone', 'Reading out loud in class', 'Asking a stranger something', 'Sleeping alone'] },
   { id: 90, text: 'The thing that really annoys me that nobody knows?', textGuess: "What really annoys {name} that nobody knows?", options: ['Loud chewing', 'Being interrupted', 'People being late', 'A wet sink left behind'] },
   { id: 91, text: 'Which compliment actually makes me happy?', textGuess: 'Which compliment truly lands with {name}?', options: ['"You\'re so funny"', '"You\'re so smart"', '"You\'re so kind"', '"You look great"'] },
-  { id: 92, text: 'The odd thing I do most when alone?', textGuess: 'What does {name} do most when alone?', options: ['Talks to themselves', 'Has imaginary arguments', 'Dances', 'Sings out loud'] },
+  { id: 92, text: 'The odd thing I do most when alone?', textGuess: 'What does {name} do most when alone?', options: ['Talks to themselves', 'Has imaginary arguments', 'Scrolls for hours', 'Just stares into space'] },
   { id: 93, text: 'What did I want to be as a kid?', textGuess: 'What did {name} want to be as a kid?', options: ['A teacher', 'A doctor', 'A singer / actor', 'A police officer / soldier'] },
   { id: 94, text: 'When did I last cry?', textGuess: 'When did {name} last cry?', options: ['This week', 'This month', 'Months ago', "Can't even remember"] },
   { id: 95, text: 'What do I never ask anyone about?', textGuess: 'What does {name} never ask anyone about?', options: ['Money', 'Relationships', 'Health', 'Future plans'] },
@@ -112,6 +112,12 @@ export const SHARED_EN: Question[] = [
   { id: 900, only: 'en', text: 'My go-to coffee order?', textGuess: "{name}'s go-to coffee order?", options: ['Black coffee', 'Latte', 'Iced coffee (year-round)', "Doesn't drink coffee"] },
   { id: 901, only: 'en', text: 'Someone asks "how are you?", what do I say?', textGuess: 'What does {name} say to "how are you?"', options: ['"Good, you?" on auto-pilot', 'Actually tells them', 'Just "hey"', 'Depends who is asking'] },
   { id: 902, only: 'en', text: 'Do I care about my star sign?', textGuess: 'Does {name} care about star signs?', options: ['Knows mine and yours', 'Knows only their own', 'Thinks it is nonsense', 'No idea what it is'] },
+  { id: 903, text: 'If someone asks me for money?', textGuess: 'If someone asks {name} for money?', options: ['Gives it, never asks back', 'Gives it but keeps track', 'Says they are broke', 'Depends on the amount'] },
+  { id: 904, text: 'I spot someone I know on the street?', textGuess: 'When {name} spots someone they know?', options: ['Runs over for a hug', 'Pretends not to see', 'Waves from far away', 'Changes direction'] },
+  { id: 905, text: 'Saying "no" to someone is?', textGuess: 'For {name}, saying "no" is?', options: ['Impossible, always yes', 'Easy, says it plainly', 'Makes up an excuse', 'Just goes quiet'] },
+  { id: 906, text: 'Do I like my birthday being celebrated?', textGuess: 'Does {name} like their birthday celebrated?', options: ['Makes it a whole event', 'Tells nobody', 'Close people only', 'Sulks if forgotten'] },
+  { id: 907, text: "If I don't like the food?", textGuess: "If {name} doesn't like the food?", options: ['Says it out loud', 'Eats it, hides it', 'Leaves it, says nothing', 'Never goes back there'] },
+  { id: 908, text: 'Do I leave things unfinished?', textGuess: 'Does {name} finish what they start?', options: ['Cannot stop until done', 'Quits halfway', 'Hard to start, then finishes', 'Never even starts'] },
 ];
 
 export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
@@ -156,6 +162,10 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 136, only: 'tr', text: 'How do I refer to them?', textGuess: 'How does {name} refer to their partner?', options: ['"My partner"', 'By their name', 'Depends on the company', 'Never mentions them'] },
     { id: 137, only: 'en', text: 'Do we say "I love you" every day?', textGuess: 'Does {name} say "I love you" daily?', options: ['Every single day', 'Only when it counts', 'Rarely out loud', 'More over text'] },
     { id: 138, only: 'en', text: 'How do I flirt?', textGuess: 'How does {name} flirt?', options: ['With compliments', 'By teasing', 'Extra attention', 'Badly, honestly'] },
+    { id: 139, text: 'Who starts the serious talks?', textGuess: 'Who starts the serious talks, {name} or their partner?', options: ['Me', 'Them', 'Nobody, it blows over', 'It comes out mid-argument'] },
+    { id: 140, text: 'What hurts me most in a relationship?', textGuess: 'What hurts {name} most in a relationship?', options: ['Being ignored', 'Broken promises', 'Being compared', 'Not being taken seriously'] },
+    { id: 141, text: 'When my partner gets sick?', textGuess: 'When their partner gets sick, {name}?', options: ['Sits by their side', 'Texts nonstop', 'Drags them to a doctor', 'Leaves them to rest'] },
+    { id: 142, text: 'How you can tell I am jealous?', textGuess: 'How can you tell {name} is jealous?', options: ['Starts asking questions', 'Goes quiet', 'Turns it into a joke', 'You never can'] },
   ],
   anne: [
     { id: 201, text: 'What do I hide most from my mom?', textGuess: 'What does {name} hide most from their mom?', options: ['How much they spend', 'Their dating life', 'Grades / work', 'Where they go'] },
@@ -198,6 +208,10 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 236, only: 'tr', text: 'How does mom describe me to the neighbors?', textGuess: "How does {name}'s mom describe them to neighbors?", options: ['With praise', 'With complaints', 'Wildly exaggerated', 'Never mentions them'] },
     { id: 237, only: 'en', text: 'Does mom text with emojis?', textGuess: "Does {name}'s mom text with emojis?", options: ['Way too many', 'Just a heart', 'None at all', 'Always the wrong ones'] },
     { id: 238, only: 'en', text: "Mom's reaction to my life choices?", textGuess: "How does {name}'s mom react to their choices?", options: ['Fully supportive', 'Worried but quiet', 'Says it straight', 'Tells everyone else'] },
+    { id: 239, text: 'When did I last call my mom?', textGuess: 'When did {name} last call their mom?', options: ['Today', 'This week', 'She called, not me', 'No memory of it'] },
+    { id: 240, text: 'How does mom show she is upset?', textGuess: "How does {name}'s mom show she is upset?", options: ['Uses their full name', 'Goes silent', 'Gives a long speech', 'You can tell from dinner'] },
+    { id: 241, text: 'Do I tell mom my problems?', textGuess: 'Does {name} tell their mom their problems?', options: ['Tells her everything', 'Only the good news', 'After it is over', 'Never, to spare her'] },
+    { id: 242, text: 'What does mom do behind my back?', textGuess: "What does {name}'s mom do behind their back?", options: ['Tidies their room', 'Asks their friends', 'Follows their socials', 'Sends food'] },
   ],
   baba: [
     { id: 301, text: 'What do I enjoy most with my dad?', textGuess: 'What does {name} enjoy most with their dad?', options: ['Watching the game', 'Car / a drive', 'Talking', 'Eating'] },
@@ -240,6 +254,10 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 336, only: 'tr', text: 'Does dad mix up relatives\' names?', textGuess: "Does {name}'s dad mix up relatives' names?", options: ['Mixes up all of them', 'Never', 'Sometimes', 'Barely knows them anyway'] },
     { id: 337, only: 'en', text: "Dad's grilling skills?", textGuess: "{name}'s dad at the grill?", options: ['Master of the grill', 'Burns everything', 'Never goes near it', 'Talks more than he cooks'] },
     { id: 338, only: 'en', text: "Dad's advice style?", textGuess: "{name}'s dad's advice style?", options: ['Long stories', 'One-liners', 'Gives none', 'Sends links and articles'] },
+    { id: 339, text: 'How long are my calls with dad?', textGuess: "How long are {name}'s calls with their dad?", options: ['One minute, "here is your mom"', 'Five or ten minutes', 'Half an hour', 'We only text'] },
+    { id: 340, text: 'How does dad show he is proud?', textGuess: "How does {name}'s dad show he is proud?", options: ['Tells other people', 'Says it to their face', 'A pat on the back, no words', 'He never shows it'] },
+    { id: 341, text: 'What happens when I ask dad for something?', textGuess: 'When {name} asks their dad for something?', options: ['Does it right away', 'Complains, then does it', 'Sends them to mom', 'Says "we will see", forgets'] },
+    { id: 342, text: 'When did dad and I last really talk?', textGuess: 'When did {name} and their dad last really talk?', options: ['Recently', 'Months ago', 'Only when something went wrong', 'We never really talk'] },
   ],
   bff: [
     { id: 401, text: 'Drunk at 3am, who do I call?', textGuess: 'Drunk at 3am, who does {name} call?', options: ['Their best friend', 'Their ex', 'Their mom', 'No one, just texts'] },
@@ -282,6 +300,10 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 436, only: 'tr', text: 'What do we always end up talking about?', textGuess: 'What do {name} and the bestie always talk about?', options: ['Mutual friends', 'Work or school', 'Relationships', 'Total nonsense'] },
     { id: 437, only: 'en', text: 'What is our group chat like?', textGuess: "What is {name}'s friend group chat like?", options: ['Chaos, 200 messages', 'Memes only', 'Dead for months', 'Just the two of us'] },
     { id: 438, only: 'en', text: 'Would we survive a road trip together?', textGuess: 'Would {name} and the bestie survive a road trip?', options: ['Best trip ever', 'One fight, then fine', 'Never again', 'We already did it'] },
+    { id: 439, text: 'If my best friend makes a bad call?', textGuess: 'If their best friend makes a bad call, {name}?', options: ['Says it to their face', 'Backs them, then says "told you"', 'Watches quietly', 'Argues until they drop it'] },
+    { id: 440, text: 'How long can we go without talking?', textGuess: 'How long can {name} and their bestie go without talking?', options: ['One day is too long', 'A week is normal', 'Months, and nothing changes', 'We talk every day'] },
+    { id: 441, text: 'If my best friend asks me for money?', textGuess: 'If their bestie asks for money, {name}?', options: ['Hands it over, no questions', 'Asks what happened', 'Finds it even when broke', 'Says they cannot'] },
+    { id: 442, text: 'On my worst day, my best friend?', textGuess: "On {name}'s worst day, their bestie?", options: ['Shows up at the door', 'Tries to make them laugh', 'Just listens, says nothing', 'Knows, but never asks'] },
   ],
   kardes: [
     { id: 701, text: 'Who grabs the last slice at home?', textGuess: 'Who grabs the last slice, {name} or their sibling?', options: ['Me', 'My sibling', 'Whoever sees it first', 'We share (lie)'] },
@@ -324,6 +346,10 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 736, only: 'tr', text: 'Who do the grandparents favor?', textGuess: 'Who do the grandparents favor, {name} or the sibling?', options: ['Me', 'My sibling', 'They love us equally', 'They tolerate us both'] },
     { id: 737, only: 'en', text: 'Who was the "problem child"?', textGuess: 'Who was the "problem child", {name} or the sibling?', options: ['Me', 'My sibling', 'Both of us', 'Neither, we were angels'] },
     { id: 738, only: 'en', text: 'Do we still fight over the front seat?', textGuess: 'Do {name} and the sibling still fight over the front seat?', options: ['Every single time', 'We grew out of it', 'Only jokingly', 'We drive separately now'] },
+    { id: 739, text: 'Do we team up against a family decision?', textGuess: 'Do {name} and their sibling team up against family decisions?', options: ['Instantly, every time', 'Everyone saves themselves', 'I defend them', 'They defend me'] },
+    { id: 740, text: "What of my sibling's do I use most?", textGuess: "What of their sibling's does {name} use most?", options: ['Their clothes', 'Their charger', 'Their money', 'Nothing at all'] },
+    { id: 741, text: 'When my sibling succeeds, I feel?', textGuess: 'When their sibling succeeds, {name} feels?', options: ['Proud', 'Secretly jealous', 'Makes a joke of it', 'Not much'] },
+    { id: 742, text: 'Growing up changed us how?', textGuess: 'How did growing up change {name} and their sibling?', options: ['We got closer', 'We drifted apart', 'Nothing changed', 'Only see each other at holidays'] },
   ],
   eski: [
     { id: 501, text: 'What was "our song" like?', textGuess: "What was {name}'s \"our song\" like?", options: ['A slow ballad', 'Foreign pop', 'Rap', 'Rock / acoustic'] },
@@ -366,6 +392,10 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 536, only: 'tr', text: 'What did our mutual friends say?', textGuess: 'What did the mutual friends say about {name}?', options: ['"Good riddance"', '"Such a shame"', 'Stayed neutral', 'Nobody talked about it'] },
     { id: 537, only: 'en', text: 'Did I unfollow or just mute?', textGuess: 'Did {name} unfollow or just mute them?', options: ['Unfollowed instantly', 'Muted, still watching', 'Blocked', 'Still following'] },
     { id: 538, only: 'en', text: 'Would I text them at 2am?', textGuess: 'Would {name} text them at 2am?', options: ['Never again', 'Already did', 'Thought about it', 'They text me'] },
+    { id: 539, text: 'What changed in me after that?', textGuess: 'What changed in {name} after that relationship?', options: ['More guarded now', 'More open now', 'Nothing at all', 'Making the same mistakes'] },
+    { id: 540, text: 'My first reaction to hearing their name?', textGuess: "{name}'s first reaction to hearing their name?", options: ['Changes the subject', 'Acts totally normal', 'Asks for details', 'Says something bitter'] },
+    { id: 541, text: 'What would I most want to forget?', textGuess: 'What would {name} most want to forget?', options: ['The last fight', 'Something they said', 'How it ended', 'Nothing at all'] },
+    { id: 542, text: 'Where are our photos now?', textGuess: 'What did {name} do with their photos?', options: ['Deleted', 'Archived', 'Still up', 'Kept, never looked at'] },
   ],
   anonim: [
     { id: 601, text: 'One thing that sums me up?', textGuess: 'One thing that sums up {name}?', options: ['Their energy', 'Their mind', 'Their heart', 'Their humor'] },
@@ -404,5 +434,9 @@ export const SPECIFIC_EN: Record<CategoryId, Question[]> = {
     { id: 632, only: 'tr', text: 'How do you know me?', textGuess: 'How do you know {name}?', options: ['School or work', 'Mutual friends', 'The internet', 'Family'] },
     { id: 633, only: 'en', text: 'If we met, would you recognize me?', textGuess: 'If you met {name}, would you recognize them?', options: ['Instantly', 'Maybe', 'No chance', 'We have never met'] },
     { id: 634, only: 'en', text: 'What would you never say to my face?', textGuess: 'What would you never say to {name}\'s face?', options: ['A compliment', 'A complaint', 'A secret', 'Nothing, I say it all'] },
+    { id: 635, text: 'If I told you a secret?', textGuess: 'If {name} told you a secret?', options: ['Takes it to the grave', 'Tells exactly one person', 'Forgets it entirely', 'Uses it against you one day'] },
+    { id: 636, text: 'If I had to speak in front of a crowd?', textGuess: 'If {name} had to speak in front of a crowd?', options: ['Happily', 'Would rather die', 'Fine if prepared', 'Keeps it short, gets off'] },
+    { id: 637, text: 'What do people think when they first see me?', textGuess: 'What do people think when they first see {name}?', options: ['Quiet type', 'Stuck up', 'Warm and easy', 'They cannot tell'] },
+    { id: 638, text: 'How would you know I am angry at you?', textGuess: 'How would you know {name} is angry at you?', options: ['Goes completely silent', 'Gets weirdly polite', 'It is all over their face', 'You would never know'] },
   ],
 };

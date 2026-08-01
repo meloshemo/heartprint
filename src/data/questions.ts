@@ -106,7 +106,7 @@ const SHARED_TR: Question[] = [
   { id: 89, text: 'Çocukken en çok neyi yapmaktan çekinirdim?', textGuess: '{name} çocukken en çok neyden çekinirdi?', options: ['Telefonla konuşmak', 'Sınıfta okumak', 'Yabancıya soru sormak', 'Yalnız uyumak'] },
   { id: 90, text: 'Kimsenin bilmediği, beni asıl sinir eden şey?', textGuess: '{name}\'i asıl sinir eden, kimsenin bilmediği şey?', options: ['Sesli çiğnemek', 'Sözünün kesilmesi', 'Geç kalınması', 'Islak bırakılan lavabo'] },
   { id: 91, text: 'Hangi övgü beni gerçekten mutlu eder?', textGuess: '{name} hangi övgüye gerçekten sevinir?', options: ['"Çok komiksin"', '"Çok akıllısın"', '"Çok iyi kalplisin"', '"Çok iyi görünüyorsun"'] },
-  { id: 92, text: 'Yalnızken en sık yaptığım tuhaf şey?', textGuess: '{name} yalnızken en sık ne yapar?', options: ['Kendi kendine konuşur', 'Hayali tartışma yapar', 'Dans eder', 'Yüksek sesle şarkı söyler'] },
+  { id: 92, text: 'Yalnızken en sık yaptığım tuhaf şey?', textGuess: '{name} yalnızken en sık ne yapar?', options: ['Kendi kendine konuşur', 'Hayali tartışma yapar', 'Telefonu saatlerce kaydırır', 'Boş boş dalar gider'] },
   { id: 93, text: 'Çocukken hayalimdeki meslek neydi?', textGuess: '{name} çocukken ne olmak isterdi?', options: ['Öğretmen', 'Doktor', 'Şarkıcı / oyuncu', 'Polis / asker'] },
   { id: 94, text: 'En son ne zaman ağladım?', textGuess: '{name} en son ne zaman ağladı?', options: ['Bu hafta', 'Bu ay', 'Aylar önce', 'Hatırlamıyor bile'] },
   { id: 95, text: 'Hangi konuda kimseye danışmam?', textGuess: '{name} hangi konuda kimseye danışmaz?', options: ['Para', 'İlişkiler', 'Sağlık', 'Gelecek planları'] },
@@ -118,6 +118,12 @@ const SHARED_TR: Question[] = [
   { id: 900, only: 'en', text: 'Sabah kahvem nasıl olur?', textGuess: '{name} kahvesini nasıl içer?', options: ['Sade', 'Sütlü/latte', 'Buzlu (kışın bile)', 'Kahve içmez'] },
   { id: 901, only: 'en', text: 'Biri "nasılsın?" deyince ne derim?', textGuess: '{name} "nasılsın?"a ne der?', options: ['"İyiyim, sen?" (otomatik)', 'Gerçekten anlatır', 'Sadece "selam"', 'Kime göre değişir'] },
   { id: 902, only: 'en', text: 'Burcumu önemser miyim?', textGuess: '{name} burcunu önemser mi?', options: ['Kendininkini de seninkini de bilir', 'Sadece kendininkini', 'Saçmalık bulur', 'Burcunu bilmiyor bile'] },
+  { id: 903, text: 'Biri benden borç istese ne yaparım?', textGuess: "Biri {name}'den borç istese ne yapar?", options: ['Verir, geri de istemez', 'Verir ama takip eder', 'Yok der', 'Miktara göre değişir'] },
+  { id: 904, text: 'Yolda tanıdık görünce ne yaparım?', textGuess: '{name} yolda tanıdık görünce ne yapar?', options: ['Koşup sarılır', 'Görmemiş gibi yapar', 'Uzaktan el sallar', 'Yolunu değiştirir'] },
+  { id: 905, text: 'Birine "hayır" demek benim için nasıl?', textGuess: '{name} için "hayır" demek nasıl?', options: ['Çok zor, hep evet der', 'Rahatça der', 'Bahane uydurur', 'Cevap vermez, kaybolur'] },
+  { id: 906, text: 'Doğum günümü kutlatmayı sever miyim?', textGuess: '{name} doğum gününü kutlatmayı sever mi?', options: ['Bayram gibi kutlar', 'Kimseye söylemez', 'Sadece yakınlarıyla', 'Unutulursa alınır'] },
+  { id: 907, text: 'Yemeği beğenmezsem ne yaparım?', textGuess: '{name} yemeği beğenmezse ne yapar?', options: ['Söyler', 'Yer, belli etmez', 'Bırakır ama susar', 'Bir daha oraya gitmez'] },
+  { id: 908, text: 'Bir işi yarım bırakır mıyım?', textGuess: '{name} başladığı işi bitirir mi?', options: ['Bitirmeden duramaz', 'Yarısında bırakır', 'Başlaması zor, başlayınca biter', 'Zaten hiç başlamaz'] },
 ];
 
 // --- Kategoriye özel havuzlar ---
@@ -163,6 +169,10 @@ const SPECIFIC_TR: Record<CategoryId, Question[]> = {
     { id: 136, only: 'tr', text: 'Ondan bahsederken ne derim?', textGuess: '{name} sevgilisinden bahsederken ne der?', options: ['"Sevgilim"', 'Adıyla', 'Duruma göre değişir', 'Hiç bahsetmez'] },
     { id: 137, only: 'en', text: '"Seni seviyorum"u her gün söyler miyiz?', textGuess: '{name} her gün "seni seviyorum" der mi?', options: ['Her gün', 'Sadece anlamlı anlarda', 'Nadiren yüksek sesle', 'Yazışmada daha çok'] },
     { id: 138, only: 'en', text: 'Nasıl flört ederim?', textGuess: '{name} nasıl flört eder?', options: ['İltifat ederek', 'Takılarak', 'Aşırı ilgi göstererek', 'Berbat şekilde'] },
+    { id: 139, text: 'İlişkideki ciddi konuşmayı kim başlatır?', textGuess: '{name} ile sevgilisinden ciddi konuşmayı kim başlatır?', options: ['Ben', 'O', 'Kimse, konu kapanır', 'Kavganın ortasında çıkar'] },
+    { id: 140, text: 'Beni en çok hangi davranış üzer?', textGuess: '{name} en çok hangi davranışa üzülür?', options: ['Görmezden gelinmek', 'Sözün tutulmaması', 'Kıyaslanmak', 'Ciddiye alınmamak'] },
+    { id: 141, text: 'Sevgilim hastalanınca ne yaparım?', textGuess: 'Sevgilisi hastalanınca {name} ne yapar?', options: ['Başında bekler', 'Sürekli mesaj atar', 'Zorla doktora götürür', 'Rahat bıraksın diye uzak durur'] },
+    { id: 142, text: 'Kıskandığım nasıl belli olur?', textGuess: '{name} kıskandığını nasıl belli eder?', options: ['Soru sorar', 'Sessizleşir', 'Şakaya vurur', 'Hiç belli etmez'] },
   ],
   anne: [
     { id: 201, text: 'Annemden en çok gizlediğim şey?', textGuess: "{name}'in annesinden en çok gizlediği?", options: ['Harcadığı para', 'İlişkileri', 'Notları / işi', 'Nereye gittiği'] },
@@ -205,6 +215,10 @@ const SPECIFIC_TR: Record<CategoryId, Question[]> = {
     { id: 236, only: 'tr', text: 'Annem beni komşuya nasıl anlatır?', textGuess: "{name}'i annesi komşuya nasıl anlatır?", options: ['Övgüyle', 'Şikayetle', 'Abartarak', 'Hiç bahsetmez'] },
     { id: 237, only: 'en', text: 'Annem emoji kullanır mı?', textGuess: "{name}'in annesi emoji kullanır mı?", options: ['Aşırı çok', 'Sadece kalp', 'Hiç', 'Hep yanlışını'] },
     { id: 238, only: 'en', text: 'Annem kararlarıma ne tepki verir?', textGuess: "{name}'in annesi kararlarına nasıl tepki verir?", options: ['Tamamen destekler', 'Endişelenir ama susar', 'Yüzüne söyler', 'Herkese anlatır'] },
+    { id: 239, text: 'Annemi en son ne zaman aradım?', textGuess: '{name} annesini en son ne zaman aradı?', options: ['Bugün', 'Bu hafta', 'O aradı, ben aramadım', 'Hatırlamıyor'] },
+    { id: 240, text: 'Annem bana kızdığını nasıl belli eder?', textGuess: "{name}'in annesi kızdığını nasıl belli eder?", options: ['Adını tam söyler', 'Susar', 'Uzun uzun anlatır', 'Yemekten belli olur'] },
+    { id: 241, text: 'Anneme derdimi anlatır mıyım?', textGuess: '{name} derdini annesine anlatır mı?', options: ['Her şeyi anlatır', 'Sadece iyi haberleri', 'Sonradan, iş bitince', 'Üzülmesin diye hiç'] },
+    { id: 242, text: 'Annem benden habersiz ne yapar?', textGuess: "{name}'in annesi ondan habersiz ne yapar?", options: ['Odasını toplar', 'Arkadaşlarına sorar', 'Sosyal medyasını takip eder', 'Yemek yollar'] },
   ],
   baba: [
     { id: 301, text: 'Babamla en çok ne yapmaktan hoşlanırım?', textGuess: '{name} babasıyla en çok ne yapmaktan hoşlanır?', options: ['Maç izlemek', 'Araba / gezi', 'Sohbet etmek', 'Yemek yemek'] },
@@ -247,6 +261,10 @@ const SPECIFIC_TR: Record<CategoryId, Question[]> = {
     { id: 336, only: 'tr', text: 'Babam akraba isimlerini karıştırır mı?', textGuess: "{name}'in babası akraba isimlerini karıştırır mı?", options: ['Hepsini karıştırır', 'Asla', 'Bazen', 'Zaten pek tanımaz'] },
     { id: 337, only: 'en', text: 'Babam mangal/ızgara konusunda nasıl?', textGuess: "{name}'in babası mangalda nasıldır?", options: ['Ustadır', 'Her şeyi yakar', 'Hiç yaklaşmaz', 'Pişirmekten çok konuşur'] },
     { id: 338, only: 'en', text: 'Babam nasıl öğüt verir?', textGuess: "{name}'in babası nasıl öğüt verir?", options: ['Uzun hikâyelerle', 'Tek cümleyle', 'Hiç vermez', 'Link/yazı gönderir'] },
+    { id: 339, text: 'Babamla telefonda kaç dakika konuşurum?', textGuess: '{name} babasıyla telefonda ne kadar konuşur?', options: ['1 dakika, "annene veriyorum"', '5-10 dakika', 'Yarım saat', 'Konuşmayız, mesajlaşırız'] },
+    { id: 340, text: 'Babam gurur duyduğunu nasıl belli eder?', textGuess: "{name}'in babası gurur duyduğunu nasıl belli eder?", options: ['Başkalarına anlatır', 'Yüzüne söyler', 'Omuz atar, susar', 'Hiç belli etmez'] },
+    { id: 341, text: 'Babamdan bir şey isteyince ne olur?', textGuess: '{name} babasından bir şey isteyince ne olur?', options: ['Hemen yapar', 'Söylenir, sonra yapar', 'Anneme yönlendirir', '"Bakarız" der, unutur'] },
+    { id: 342, text: 'Babamla en son ne zaman uzun konuştuk?', textGuess: '{name} babasıyla en son ne zaman uzun konuştu?', options: ['Geçenlerde', 'Aylar önce', 'Bir sorun çıkınca', 'Hiç uzun konuşmayız'] },
   ],
   bff: [
     { id: 401, text: 'Gece 3\'te sarhoşken kimi ararım?', textGuess: '{name} gece 3\'te kimi arar?', options: ['En yakın arkadaşını', 'Eski sevgilisini', 'Annesini', 'Kimseyi, mesaj atar'] },
@@ -289,6 +307,10 @@ const SPECIFIC_TR: Record<CategoryId, Question[]> = {
     { id: 436, only: 'tr', text: 'Kankamla ortak muhabbet konumuz?', textGuess: '{name} ile kankasının ortak konusu?', options: ['Ortak arkadaşlar', 'İş/okul', 'İlişkiler', 'Saçmalıklar'] },
     { id: 437, only: 'en', text: 'Grup sohbetimiz nasıl?', textGuess: '{name}\'in arkadaş grubu sohbeti nasıl?', options: ['Kaos, 200 mesaj', 'Sadece caps', 'Aylardır ölü', 'Sadece ikimiz'] },
     { id: 438, only: 'en', text: 'Birlikte uzun yolculuğa çıksak ne olur?', textGuess: '{name} ile kankası uzun yolculuğa çıksa?', options: ['Efsane olur', 'Bir kavga, sonra tamam', 'Bir daha asla', 'Zaten çıktık'] },
+    { id: 439, text: 'Kankam kötü bir karar alsa ne yaparım?', textGuess: 'Kankası kötü bir karar alsa {name} ne yapar?', options: ['Yüzüne söyler', 'Destekler, sonra "demiştim" der', 'Sessizce izler', 'Vazgeçirene kadar uğraşır'] },
+    { id: 440, text: 'Kaç gün konuşmasak aramız bozulmaz?', textGuess: '{name} ile kankası kaç gün konuşmasa aralarına bir şey olmaz?', options: ['Bir gün bile fazla', 'Bir hafta normal', 'Aylarca sürer, hiç bozulmaz', 'Zaten her gün konuşuruz'] },
+    { id: 441, text: 'Kankam benden para istese?', textGuess: 'Kankası para istese {name} ne yapar?', options: ['Sormadan verir', '"Ne oldu" diye sorar', 'Yoksa bulur verir', 'Veremem der'] },
+    { id: 442, text: 'Kötü günümde kankam ne yapar?', textGuess: '{name} kötüyken kankası ne yapar?', options: ['Kapıya gelir', 'Güldürmeye çalışır', 'Susar, sadece dinler', 'Anlar ama hiç sormaz'] },
   ],
   kardes: [
     { id: 701, text: 'Evde son dilimi kim kapar?', textGuess: '{name} ile kardeşinden son dilimi kim kapar?', options: ['Ben', 'Kardeşim', 'Kim önce görürse', 'Bölüşürüz (yalan)'] },
@@ -331,6 +353,10 @@ const SPECIFIC_TR: Record<CategoryId, Question[]> = {
     { id: 736, only: 'tr', text: 'Büyüklerimiz kimi daha çok sever?', textGuess: '{name}\'in ailesinin büyükleri kimi daha çok sever?', options: ['Beni', 'Kardeşimi', 'Eşit severler', 'İkimizi de idare ederler'] },
     { id: 737, only: 'en', text: 'Hangimiz "sorunlu çocuk"tu?', textGuess: '{name} ile kardeşinden hangisi "sorunlu çocuk"tu?', options: ['Ben', 'Kardeşim', 'İkimiz de', 'Hiçbirimiz, melektik'] },
     { id: 738, only: 'en', text: 'Hâlâ ön koltuk kavgası yapar mıyız?', textGuess: '{name} ile kardeşi hâlâ ön koltuk kavgası yapar mı?', options: ['Her seferinde', 'Büyüdük artık', 'Şakadan', 'Ayrı arabalarla gidiyoruz'] },
+    { id: 739, text: 'Ailenin bir kararına karşı birleşir miyiz?', textGuess: '{name} ile kardeşi aile kararına karşı birleşir mi?', options: ['Anında birleşiriz', 'Herkes kendini kurtarır', 'Ben savunurum', 'O savunur'] },
+    { id: 740, text: 'Kardeşimin en çok neyini kullanırım?', textGuess: '{name} kardeşinin en çok neyini kullanır?', options: ['Kıyafetini', 'Şarj aletini', 'Parasını', 'Hiçbir şeyini'] },
+    { id: 741, text: 'Kardeşim bir şey başarınca ne hissederim?', textGuess: 'Kardeşi bir şey başarınca {name} ne hisseder?', options: ['Gurur duyar', 'İçten içe kıskanır', 'Şakaya vurur', 'Pek umursamaz'] },
+    { id: 742, text: 'Büyüyünce kardeşimle aramız ne oldu?', textGuess: '{name} ile kardeşinin arası büyüyünce ne oldu?', options: ['Daha da yakınlaştık', 'Uzaklaştık', 'Aynı kaldı', 'Sadece bayramlarda görüşürüz'] },
   ],
   eski: [
     { id: 501, text: 'İlişkimizde "bizim şarkımız" hangi türdendi?', textGuess: '{name} ile şarkınız hangi türdendi?', options: ['Türkçe slow', 'Yabancı pop', 'Rap', 'Rock / akustik'] },
@@ -373,6 +399,10 @@ const SPECIFIC_TR: Record<CategoryId, Question[]> = {
     { id: 536, only: 'tr', text: 'Ortak arkadaşlar ne dedi?', textGuess: '{name} ayrılınca ortak arkadaşlar ne dedi?', options: ['"İyi ki bitti"', '"Yazık oldu"', 'Taraf tutmadılar', 'Hiç konuşulmadı'] },
     { id: 537, only: 'en', text: 'Takipten çıktım mı, sessize mi aldım?', textGuess: '{name} onu takipten çıkardı mı?', options: ['Anında çıktım', 'Sessize aldım, izliyorum', 'Engelledim', 'Hâlâ takip ediyorum'] },
     { id: 538, only: 'en', text: 'Gece 2\'de ona yazar mıyım?', textGuess: '{name} gece 2\'de ona yazar mı?', options: ['Bir daha asla', 'Zaten yazdım', 'Aklımdan geçti', 'O bana yazıyor'] },
+    { id: 539, text: 'O ilişkiden sonra bende ne değişti?', textGuess: "O ilişkiden sonra {name}'de ne değişti?", options: ['Daha temkinli oldu', 'Daha açık oldu', 'Hiçbir şey', 'Aynı hataları yapıyor'] },
+    { id: 540, text: 'Adını duyunca ilk tepkim?', textGuess: '{name} onun adını duyunca ilk ne yapar?', options: ['Konuyu değiştirir', 'Normal davranır', 'Detay sorar', 'Kötü bir şey söyler'] },
+    { id: 541, text: 'En çok neyi unutmak isterdim?', textGuess: '{name} o ilişkiden en çok neyi unutmak ister?', options: ['Son kavgayı', 'Söylediği bir sözü', 'Nasıl bittiğini', 'Hiçbir şeyi'] },
+    { id: 542, text: 'Ortak fotoğraflarımız şu an nerede?', textGuess: '{name} ortak fotoğrafları ne yaptı?', options: ['Sildi', 'Arşive attı', 'Hâlâ duruyor', 'Bakmıyor ama silmedi'] },
   ],
   anonim: [
     { id: 601, text: 'Beni en iyi anlatan tek şey?', textGuess: "{name}'i en iyi anlatan tek şey?", options: ['Enerjisi', 'Zekâsı', 'Kalbi', 'Mizahı'] },
@@ -411,6 +441,10 @@ const SPECIFIC_TR: Record<CategoryId, Question[]> = {
     { id: 632, only: 'tr', text: 'Beni nereden tanıyorsun?', textGuess: '{name}\'i nereden tanıyorsun?', options: ['Okul/iş', 'Arkadaş çevresi', 'İnternet', 'Aile'] },
     { id: 633, only: 'en', text: 'Karşılaşsak beni tanır mıydın?', textGuess: 'Karşılaşsanız {name}\'i tanır mıydın?', options: ['Anında', 'Belki', 'Hiç sanmam', 'Hiç karşılaşmadık'] },
     { id: 634, only: 'en', text: 'Yüzüme asla söyleyemeyeceğin şey?', textGuess: '{name}\'in yüzüne asla söyleyemeyeceğin şey?', options: ['Bir iltifat', 'Bir şikayet', 'Bir sır', 'Yok, hepsini söylerim'] },
+    { id: 635, text: 'Sana bir sır versem ne yapardın?', textGuess: '{name} bir sır verse ne yaparsın?', options: ['Mezara götürür', 'Tek kişiye söyler', 'Unutur gider', 'Gün gelir yüzüne vurur'] },
+    { id: 636, text: 'Kalabalıkta konuşmam istense?', textGuess: "{name}'den kalabalıkta konuşması istense?", options: ['Seve seve yapar', 'Ölmeyi tercih eder', 'Hazırlıklıysa yapar', 'Kısa keser, iner'] },
+    { id: 637, text: 'Beni ilk kez gören ne sanır?', textGuess: "{name}'i ilk kez gören ne sanır?", options: ['Sessiz biri', 'Kibirli biri', 'Cana yakın biri', 'Ne düşüneceğini bilemez'] },
+    { id: 638, text: 'Sana kızdığımı nasıl anlarsın?', textGuess: '{name} sana kızdığını nasıl belli eder?', options: ['Hiç konuşmaz', 'Aşırı kibar olur', 'Yüzünden okunur', 'Hiç anlayamazsın'] },
   ],
 };
 
@@ -473,7 +507,13 @@ function pickRotated(pool: Question[], need: number, used: Set<number>): Questio
  */
 export function pickQuestions(cat: CategoryId, count = 12): Question[] {
   const used = (recentByCat[cat] ??= new Set<number>());
-  const half = Math.min(Math.ceil(count / 2), SPECIFIC[cat].length);
+  // KARIŞIM ORANI DA RASTGELE: sorular zaten karıştırılıyordu ama her testte
+  // tam olarak yarı yarıya (6 kategoriye özel + 6 evrensel) geliyordu; bu,
+  // farklı testlerin aynı kalıpta hissettirmesine yol açıyordu. Artık
+  // kategoriye özel soru sayısı testten teste 5-8 arasında değişiyor.
+  const minSpec = Math.min(5, SPECIFIC[cat].length);
+  const maxSpec = Math.min(8, SPECIFIC[cat].length, count);
+  const half = minSpec + Math.floor(Math.random() * (maxSpec - minSpec + 1));
 
   const chosen = pickRotated(SPECIFIC[cat], half, used);
   const rest = count - chosen.length;
