@@ -3,7 +3,7 @@
     "name": "Heartprint",
     "slug": "heartprint",
     "scheme": "heartprint",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -14,7 +14,7 @@
     },
     "android": {
       "package": "app.heartprint",
-      "versionCode": 2005,
+      "versionCode": 2006,
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "backgroundColor": "#B033D9",

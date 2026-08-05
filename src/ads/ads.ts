@@ -75,13 +75,20 @@ type Slot<T> = {
   retry: ReturnType<typeof setTimeout> | null;
 };
 
-const inter: Slot<InterstitialAd> = {
-  ad: null,
-  ready: false,
-  loading: false,
-  fails: 0,
-  retry: null,
-};
+/*
+ * GEÇİŞ REKLAMI İÇİN KUYRUK (tek slot değil).
+ * Tek reklam tutulduğunda şu oluyordu: kullanıcı üst üste test yapınca
+ * reklam gösteriliyor, yerine yenisi yüklenmeye başlıyor, ama kullanıcı
+ * sıradaki testi yükleme bitmeden bitiriyor → reklam atlanıyordu. Birkaç
+ * testten sonra reklam hiç çıkmamış gibi görünüyordu. Artık hazırda 2 reklam
+ * bekletilir ve testin BAŞINDA da doldurma tetiklenir.
+ */
+const INTER_TARGET = 2;
+const readyInters: InterstitialAd[] = [];
+let interLoading = 0;
+let interFails = 0;
+let interRetry: ReturnType<typeof setTimeout> | null = null;
+
 const rew: Slot<RewardedAd> = {
   ad: null,
   ready: false,
@@ -109,30 +116,44 @@ function scheduleRetry(slot: Slot<unknown>, load: () => void): void {
   }, wait);
 }
 
+function scheduleInterRetry(): void {
+  if (interRetry) return;
+  interRetry = setTimeout(() => {
+    interRetry = null;
+    preloadInterstitial();
+  }, backoffMs(interFails));
+}
+
 function preloadInterstitial(): void {
-  if (inter.loading || inter.ready) return;
-  inter.loading = true;
+  // Hedef sayıya ulaşana kadar doldur (hazır + yüklenmekte olanlar birlikte).
+  if (readyInters.length + interLoading >= INTER_TARGET) return;
+  interLoading += 1;
   try {
     const ad = InterstitialAd.createForAdRequest(unitId('interstitial'));
-    inter.ad = ad;
+    // Bu örnek için yükleme aşaması bir kez sonuçlanır. Gösterim sırasında
+    // gelen ERROR olayının sayacı ikinci kez düşürmesini engeller.
+    let settled = false;
     ad.addAdEventListener(AdEventType.LOADED, () => {
-      inter.ready = true;
-      inter.loading = false;
-      inter.fails = 0;
+      if (settled) return;
+      settled = true;
+      interLoading -= 1;
+      interFails = 0;
+      readyInters.push(ad);
+      preloadInterstitial(); // hedefe kadar doldurmaya devam
     });
     ad.addAdEventListener(AdEventType.ERROR, (e) => {
-      inter.ad = null;
-      inter.ready = false;
-      inter.loading = false;
-      inter.fails += 1;
-      console.log('Geçiş reklamı yüklenemedi (deneme ' + inter.fails + '):', e);
-      scheduleRetry(inter, preloadInterstitial);
+      if (settled) return;
+      settled = true;
+      interLoading -= 1;
+      interFails += 1;
+      console.log('Geçiş reklamı yüklenemedi (deneme ' + interFails + '):', e);
+      scheduleInterRetry();
     });
     ad.load();
-  } catch (e) {
-    inter.loading = false;
-    inter.fails += 1;
-    scheduleRetry(inter, preloadInterstitial);
+  } catch {
+    interLoading -= 1;
+    interFails += 1;
+    scheduleInterRetry();
   }
 }
 
@@ -174,24 +195,37 @@ function preloadRewarded(): void {
  * reklamın kazandırdığından fazlasını götürüyordu.
  */
 export async function maybeShowInterstitial(): Promise<void> {
-  if (!inter.ready || !inter.ad) {
+  if (readyInters.length === 0) {
+    // Bekleyen backoff varsa iptal et; kuyruk boş, hemen doldurmayı dene.
+    if (interRetry) {
+      clearTimeout(interRetry);
+      interRetry = null;
+    }
     preloadInterstitial(); // bir dahakine hazır olsun
     return;
   }
   await showPreloadedInterstitial();
 }
 
+/**
+ * Reklam kuyruğunu doldurmayı tetikler. Test BAŞLARKEN çağrılır: kullanıcı
+ * soruları cevaplarken yükleme arka planda tamamlanır, test bitince reklam
+ * hazır olur. Üst üste test yapıldığında reklamın atlanmasını bu önler.
+ */
+export function warmAds(): void {
+  preloadInterstitial();
+  preloadRewarded();
+}
+
 function showPreloadedInterstitial(): Promise<void> {
   return new Promise((resolve) => {
-    const ad = inter.ad;
+    const ad = readyInters.shift();
     if (!ad) return resolve();
     let done = false;
     const finish = () => {
       if (done) return;
       done = true;
-      // Örnek tükendi → yenisini hazırla
-      inter.ad = null;
-      inter.ready = false;
+      // Örnek tükendi → kuyruğu tekrar doldur
       preloadInterstitial();
       resolve();
     };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Pressable,
   StyleSheet,
@@ -23,6 +23,7 @@ import {
 import { Logo } from '../components/Logo';
 import { Avatar } from '../components/Avatar';
 import { S } from '../i18n/strings';
+import { warmAds } from '../ads/ads';
 
 export function PlayQuizScreen({
   quiz,
@@ -45,6 +46,12 @@ export function PlayQuizScreen({
   const [step, setStep] = useState(0);
   const [correct, setCorrect] = useState(0);
   const [guesses, setGuesses] = useState<number[]>([]);
+  // Test başlarken reklamı hazırla: kullanıcı 12 soruyu cevaplarken yükleme
+  // arka planda biter, test bitince reklam anında açılır. Üst üste test
+  // yapıldığında reklamın atlanmasını bu önler.
+  useEffect(() => {
+    warmAds();
+  }, []);
   const category = getCategory(quiz.cat);
   const questions = questionsForQuiz(quiz.cat, quiz.q);
   const total = Math.min(quiz.answers.length, questions.length);

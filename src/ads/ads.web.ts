@@ -5,6 +5,8 @@ export async function initAds(): Promise<void> {}
 
 export async function maybeShowInterstitial(): Promise<void> {}
 
+export function warmAds(): void {}
+
 export async function showRewarded(): Promise<boolean> {
   return true;
 }
