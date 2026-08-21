@@ -36,6 +36,9 @@ jobs:
           cp public/privacy/index.html site/index.html
           touch site/.nojekyll
       - uses: actions/configure-pages@v5
+        with:
+          # Pages repo ayarlarindan acilmadiysa workflow kendisi acsin.
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
