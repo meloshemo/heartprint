@@ -55,3 +55,7 @@ heartprint-upload.keystore
 # Firebase emulator debug log
 firestore-debug.log
 *-debug.log
+
+# Ortam degiskenleri (hicbir .env commitlenmesin)
+.env
+.env.*

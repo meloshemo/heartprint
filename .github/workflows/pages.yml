@@ -1,0 +1,43 @@
+# Gizlilik politikasini GitHub Pages'te yayinlar.
+# Sonuc URL: https://meloshemo.github.io/heartprint/privacy/
+# (Kendi alan adi/hosting kapali olsa bile bu adres her cografyadan acilir.)
+name: Deploy privacy policy to GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'public/privacy/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build static site
+        run: |
+          mkdir -p site/privacy
+          cp public/privacy/index.html site/privacy/index.html
+          # Kok adres de gizlilik politikasina gitsin.
+          cp public/privacy/index.html site/index.html
+          touch site/.nojekyll
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4

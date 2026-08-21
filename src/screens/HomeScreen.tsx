@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import {
   Animated,
   FlatList,
+  Linking,
   Pressable,
   StyleSheet,
   Text,
@@ -14,6 +15,7 @@ import { Screen } from '../components/ui';
 import { Logo } from '../components/Logo';
 import { Avatar } from '../components/Avatar';
 import { S } from '../i18n/strings';
+import { PRIVACY_URL } from '../config';
 
 function CategoryCard({
   item,
@@ -110,6 +112,15 @@ export function HomeScreen({
       >
         <Text style={styles.codeButtonText}>{S.gotCode}</Text>
       </Pressable>
+
+      {/* Play politikası: gizlilik politikasına uygulama içinden de erişilebilmeli. */}
+      <Pressable
+        onPress={() => Linking.openURL(PRIVACY_URL)}
+        hitSlop={8}
+        style={({ pressed }) => [styles.privacyLink, { opacity: pressed ? 0.6 : 1 }]}
+      >
+        <Text style={styles.privacyText}>{S.privacy}</Text>
+      </Pressable>
     </Screen>
   );
 }
@@ -191,6 +202,15 @@ const styles = StyleSheet.create({
     borderColor: theme.success,
     paddingVertical: 16,
     alignItems: 'center',
+  },
+  privacyLink: {
+    marginTop: 10,
+    alignItems: 'center',
+  },
+  privacyText: {
+    color: theme.textDim,
+    fontSize: 12,
+    textDecorationLine: 'underline',
   },
   codeButtonText: {
     color: theme.success,
