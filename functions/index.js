@@ -50,10 +50,10 @@ exports.onQuizResult = onDocumentCreated(
       return;
     }
 
-    const who =
-      result.guesserName && String(result.guesserName).trim()
-        ? String(result.guesserName).trim()
-        : 'Biri';
+    // Ad bildirim başlığına giriyor: istemciden gelen değere güvenme,
+    // kırp ve kısalt (kurallar da 40 karakterle sınırlıyor).
+    const rawName = result.guesserName ? String(result.guesserName).trim() : '';
+    const who = rawName ? rawName.slice(0, 40) : 'Biri';
     const percent = Number(result.percent) || 0;
 
     const message = {

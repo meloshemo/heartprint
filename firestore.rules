@@ -4,8 +4,16 @@ service cloud.firestore {
 
     // Testler
     match /quizzes/{quizId} {
-      // Herkes (anonim dahil) bir testi okuyabilir — link ile açan oynayabilsin.
-      allow read: if true;
+      // TEK doküman okuma herkese açık: link/kod ile gelen testi oynayabilsin.
+      // (Kısa ID 7 karakter, 32'lik alfabe → tahmin edilemez.)
+      allow get: if true;
+
+      // LİSTELEME kapalı — "read: if true" olsaydı herkes tüm quizzes
+      // koleksiyonunu çekip bütün isimleri/cevapları dökebilirdi.
+      // Yalnızca kendi testlerini sorgulayan sahip listeleyebilir
+      // (getMyQuizzes: where creatorId == uid).
+      allow list: if request.auth != null
+        && resource.data.creatorId == request.auth.uid;
 
       // Yalnızca giriş yapmış kullanıcı, kendi adına (creatorId == uid) test
       // oluşturabilir ve alan biçimleri doğruysa.
@@ -64,6 +72,12 @@ service cloud.firestore {
           && (!('guesses' in request.resource.data)
             || (request.resource.data.guesses is list
               && request.resource.data.guesses.size() <= 30))
+          // Çözenin adı bildirim metnine giriyor: tür ve uzunluk sınırlı
+          // olmalı ki kimse test sahibine dev/istenmeyen metin yollamasın.
+          && (!('guesserName' in request.resource.data)
+            || request.resource.data.guesserName == null
+            || (request.resource.data.guesserName is string
+              && request.resource.data.guesserName.size() <= 40))
           && exists(/databases/$(database)/documents/quizzes/$(quizId));
         // Test sahibi tüm sonuçları, çözen ise yalnızca kendi kaydını okur
         // (istemci "bu testi zaten çözdüm mü?" kontrolünü bununla yapar).
@@ -80,7 +94,11 @@ service cloud.firestore {
     // olmalı. Aksi hâlde internetteki herkes sınırsız doküman yazıp
     // Firestore faturasını şişirebilirdi (maliyet saldırısı).
     match /events/{eventId} {
+      // Alan sayısı ve platform da sınırlı: kimse buraya rastgele büyük
+      // doküman yazıp Firestore faturasını şişiremesin.
       allow create: if request.auth != null
+        && request.resource.data.keys().size() <= 8
+        && request.resource.data.platform in ['ios', 'android', 'web']
         && request.resource.data.event in [
           'test_olusturuldu', 'test_paylasildi', 'link_acildi',
           'test_baslatildi', 'test_cozuldu', 'sonuc_paylasildi',
