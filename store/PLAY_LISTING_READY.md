@@ -85,10 +85,12 @@ Seni gerçekten kimin anladığını görmeye hazır mısın? Heartprint'ini yap
 
 ## 2) Uygulama içeriği (App content)
 
-**Gizlilik politikası URL'si:** (store/legal/privacy-policy.html'i herkese açık bir yere koy)
-- Öneri: EAS Hosting'e zaten deploy'lu → `https://heartprint.expo.app/privacy` gibi
-  bir yol yoksa, privacy-policy.html'i public/ altına koyup web deploy et; ya da
-  GitHub Pages / Claude Artifact linkini kullan.
+**Gizlilik politikası URL'si:** `https://meloshemo.github.io/heartprint/privacy/`
+- Kaynak dosya: `public/privacy/index.html`
+- Yayın: `.github/workflows/pages.yml` (GitHub Pages). Tek seferlik kurulum →
+  GitHub → repo → Settings → Pages → "Source: GitHub Actions" seç, sonra
+  Actions sekmesinden "Deploy privacy policy to GitHub Pages" workflow'unu çalıştır.
+- Uygulama içi link: ana ekranın altındaki "Gizlilik Politikası" (src/config.ts → PRIVACY_URL).
 
 **Reklamlar:** Evet, uygulama reklam içeriyor (AdMob).
 

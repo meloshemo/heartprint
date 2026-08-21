@@ -7,6 +7,7 @@ const tr = {
   homeTagline: 'Seni gerçekten tanıyorlar mı?',
   myTests: 'Testlerim',
   gotCode: '🎯 Sana test mi gönderildi? Kodu gir',
+  privacy: 'Gizlilik Politikası',
   // Create
   createNameTitle: 'Adın ne?',
   createNameSub: 'Link "... seni test ediyor" diye gidecek, sonuç kartında da bu isim görünecek.',
@@ -123,6 +124,7 @@ const en: typeof tr = {
   homeTagline: 'Do they really know you?',
   myTests: 'My Tests',
   gotCode: '🎯 Got a test sent to you? Enter the code',
+  privacy: 'Privacy Policy',
   createNameTitle: "What's your name?",
   createNameSub: 'The link will say "... is testing you", and this name shows on the result card.',
   yourName: 'Your name',
