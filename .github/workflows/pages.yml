@@ -8,6 +8,8 @@ on:
     branches: [main, master]
     paths:
       - 'public/privacy/**'
+      - 'public/press/**'
+      - 'store/*.png'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -30,8 +32,12 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build static site
         run: |
-          mkdir -p site/privacy
+          mkdir -p site/privacy site/press/img
           cp public/privacy/index.html site/privacy/index.html
+          # Basin/pazarlama gorselleri: telefondan tek tek indirilebilsin.
+          cp public/press/index.html site/press/index.html
+          cp store/*.png site/press/img/
+          cp assets/icon.png site/press/img/icon.png
           # Kok adres de gizlilik politikasina gitsin.
           cp public/privacy/index.html site/index.html
           touch site/.nojekyll
