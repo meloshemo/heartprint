@@ -40,6 +40,8 @@ jobs:
           cp store/*.png site/press/img/
           mkdir -p site/press/social
           cp store/social/*.png site/press/social/
+          # Toplu indirme icin tek zip (repoda tutulmuyor, yayinda uretiliyor).
+          (cd site/press && zip -qr heartprint-gorseller.zip social img)
           cp assets/icon.png site/press/img/icon.png
           # Kok adres de gizlilik politikasina gitsin.
           cp public/privacy/index.html site/index.html
