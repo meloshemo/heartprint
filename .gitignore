@@ -59,3 +59,8 @@ firestore-debug.log
 # Ortam degiskenleri (hicbir .env commitlenmesin)
 .env
 .env.*
+
+# Local tooling
+CLAUDE.md
+AGENTS.md
+.claude/
