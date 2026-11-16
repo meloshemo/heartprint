@@ -4,6 +4,12 @@ import { Platform } from 'react-native';
 // Web build Vercel'de barınıyor, kendi alan adı: heartprint.app.
 export const WEB_BASE_URL = 'https://heartprint.app';
 
+// Gizlilik politikası — Google Play hem Console'da hem uygulama içinde bu linki ister.
+// GitHub Pages'te barınıyor: repo'daki public/privacy/index.html otomatik yayınlanır
+// (bkz. .github/workflows/pages.yml). Kendi alan adı kapalı olsa bile bu adres
+// her ülkeden erişilebilir olduğu için Play incelemesinde kırık görünmez.
+export const PRIVACY_URL = 'https://meloshemo.github.io/heartprint/privacy/';
+
 // Mağaza linkleri — yayına çıktıktan sonra gerçek ID'lerle güncellenmeli.
 // iOS: id kısmını App Store Connect'teki sayısal uygulama ID'siyle değiştir.
 export const APP_STORE_URL = 'https://apps.apple.com/app/heartprint/id0000000000';

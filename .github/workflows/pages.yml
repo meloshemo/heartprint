@@ -1,0 +1,60 @@
+# Gizlilik politikasini GitHub Pages'te yayinlar.
+# Sonuc URL: https://meloshemo.github.io/heartprint/privacy/
+# (Kendi alan adi/hosting kapali olsa bile bu adres her cografyadan acilir.)
+name: Deploy privacy policy to GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'public/privacy/**'
+      - 'public/press/**'
+      - 'store/*.png'
+      - 'store/social/*.png'
+      - 'store/video/*.mp4'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build static site
+        run: |
+          mkdir -p site/privacy site/press/img
+          cp public/privacy/index.html site/privacy/index.html
+          # Basin/pazarlama gorselleri: telefondan tek tek indirilebilsin.
+          cp public/press/index.html site/press/index.html
+          cp store/*.png site/press/img/
+          mkdir -p site/press/social
+          cp store/social/*.png site/press/social/
+          mkdir -p site/press/video
+          cp store/video/*.mp4 site/press/video/
+          # Toplu indirme icin tek zip (repoda tutulmuyor, yayinda uretiliyor).
+          (cd site/press && zip -qr heartprint-gorseller.zip social img && zip -qr heartprint-videolar.zip video)
+          cp assets/icon.png site/press/img/icon.png
+          # Kok adres de gizlilik politikasina gitsin.
+          cp public/privacy/index.html site/index.html
+          touch site/.nojekyll
+      - uses: actions/configure-pages@v5
+        with:
+          # Pages repo ayarlarindan acilmadiysa workflow kendisi acsin.
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4

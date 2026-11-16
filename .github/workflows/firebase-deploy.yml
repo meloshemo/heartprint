@@ -1,0 +1,46 @@
+# Firestore kurallarini ve Cloud Functions'i telefondan deploy etmek icin.
+# GitHub -> Actions -> "Firebase deploy" -> Run workflow.
+#
+# GEREKLI SECRET: FIREBASE_SERVICE_ACCOUNT
+#   Google Cloud Console -> IAM & Admin -> Service Accounts -> yeni hesap
+#   (roller: Firebase Rules Admin, Cloud Functions Admin, Service Account User,
+#    Cloud Datastore Owner) -> Keys -> Add key -> JSON.
+#   JSON'un tamamini GitHub -> Settings -> Secrets and variables -> Actions
+#   -> New repository secret icine yapistir.
+name: Firebase deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Ne deploy edilsin?'
+        type: choice
+        default: 'firestore:rules'
+        options:
+          - 'firestore:rules'
+          - 'functions'
+          - 'firestore:rules,functions'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install function deps
+        run: npm ci --prefix functions || npm install --prefix functions
+      - name: Write service account key
+        env:
+          KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          if [ -z "$KEY" ]; then
+            echo "FIREBASE_SERVICE_ACCOUNT secret'i tanimli degil." >&2
+            exit 1
+          fi
+          printf '%s' "$KEY" > "$RUNNER_TEMP/sa.json"
+      - name: Deploy
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/sa.json
+        run: npx -y firebase-tools@latest deploy --only "${{ inputs.target }}" --project heartprint-c15f2 --non-interactive
