@@ -3,5 +3,12 @@
   "buildCommand": "npx expo export --platform web",
   "outputDirectory": "dist",
   "framework": null,
-  "installCommand": "npm install"
+  "installCommand": "npm install",
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "query", "key": "q" }],
+      "destination": "/api/share"
+    }
+  ]
 }

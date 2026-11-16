@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="theme-color" content="#0F0F1A" />
+    <!--
+      LINK ONIZLEMESI (WhatsApp / Instagram / iMessage / X / Telegram).
+      Bu blok olmadan paylasilan link ciplak bir URL olarak gorunur ve
+      tiklanmaz; viral dongunun ilk halkasi burasi.
+      api/share.js, test linklerinde (/?q=...) OG_START ile OG_END arasini
+      KISIYE OZEL etiketlerle degistirir ("Melih seni test ediyor").
+      Isaretcileri SILME / yeniden adlandirma.
+    -->
+    <!--OG_START-->
+    <title>Heartprint: Seni gerçekten tanıyorlar mı?</title>
+    <meta name="description" content="Kendin hakkında eğlenceli bir test hazırla, linki gönder, seni kim gerçekten tanıyor gör. İndirmeden, tarayıcıda oynanır." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Heartprint" />
+    <meta property="og:url" content="https://heartprint.app/" />
+    <meta property="og:title" content="Heartprint: Seni gerçekten tanıyorlar mı?" />
+    <meta property="og:description" content="Kendin hakkında bir test hazırla, gönder, seni kim gerçekten tanıyor gör. How well do they really know you?" />
+    <meta property="og:image" content="https://heartprint.app/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Heartprint: Seni gerçekten tanıyorlar mı?" />
+    <meta name="twitter:description" content="Kendin hakkında bir test hazırla, gönder, seni kim gerçekten tanıyor gör." />
+    <meta name="twitter:image" content="https://heartprint.app/og.png" />
+    <!--OG_END-->
+    <link rel="canonical" href="https://heartprint.app/" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
+    <style id="expo-reset">
+      /* These styles make the body full-height */
+      html,
+      body {
+        height: 100%;
+      }
+      /* These styles disable body scrolling if you are using <ScrollView> */
+      body {
+        overflow: hidden;
+        /* JS yuklenene kadar beyaz parlama olmasin */
+        background-color: #0f0f1a;
+      }
+      /* These styles make the root element full-height */
+      #root {
+        display: flex;
+        height: 100%;
+        flex: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <noscript>
+      <h1>Heartprint: Seni gerçekten tanıyorlar mı?</h1>
+      <p>
+        Kendin hakkında eğlenceli bir test hazırla, linki sevgiline, annene, babana,
+        kardeşine ya da en yakın arkadaşına gönder; seni gerçekten kim tanıyor gör.
+        Make a fun quiz about yourself, send the link, and find out who really knows you.
+      </p>
+      <p>Bu uygulamayı kullanmak için JavaScript'i etkinleştir.</p>
+    </noscript>
+    <!-- The root element for your Expo app. -->
+    <div id="root"></div>
+  </body>
+</html>

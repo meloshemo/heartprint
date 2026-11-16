@@ -27,7 +27,11 @@ const tr = {
   // Share
   shareReady: 'Test hazır! 🎉',
   shareSub: (toWhom: string) =>
-    `Linki ${toWhom} at. Tarayıcıda açılıyor, hiçbir şey indirmesi gerekmiyor.`,
+    `Linki ${toWhom} at. Çözdüğü an sana bildirim gelir, sonucunu görürsün.`,
+  sendWhatsApp: "WhatsApp'ta Gönder",
+  shareMore: 'Diğer',
+  shareNoInstall: 'Tarayıcıda açılır, karşı tarafın hiçbir şey indirmesi gerekmez.',
+  samePhoneLink: 'Yanında mı? Telefonu ona uzat, aynı telefonda oynasın',
   yourLink: 'TEST LİNKİN',
   linkPreparing: 'Test linkin hazırlanıyor...',
   share: '📤 Paylaş',
@@ -140,7 +144,11 @@ const en: typeof tr = {
   playHint: 'Your misses are revealed one by one at the end. Think it through 😌',
   shareReady: 'Your test is ready! 🎉',
   shareSub: (toWhom) =>
-    `Send the link to your ${toWhom}. It opens in the browser, nothing to install.`,
+    `Send the link to your ${toWhom}. You get notified the moment they finish.`,
+  sendWhatsApp: 'Send on WhatsApp',
+  shareMore: 'More',
+  shareNoInstall: 'Opens in the browser. They do not need to install anything.',
+  samePhoneLink: 'Sitting next to you? Hand them this phone and play here',
   yourLink: 'YOUR TEST LINK',
   linkPreparing: 'Preparing your link...',
   share: '📤 Share',

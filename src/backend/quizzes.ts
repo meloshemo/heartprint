@@ -14,6 +14,7 @@ import {
 } from 'firebase/firestore';
 import { db, ensureAuth } from './firebase';
 import { CategoryId, Quiz } from '../types';
+import { LANG } from '../i18n/locale';
 
 const ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // karışabilen 0/O/1/I çıkarıldı
 
@@ -68,6 +69,8 @@ export async function createQuiz(
       name: quiz.name,
       answers: quiz.answers,
       q: quiz.q ?? [],
+      // Link onizlemesi (api/share.js) karti kurucunun dilinde yazsin diye.
+      lang: LANG,
       creatorId: uid,
       playCount: 0,
       createdAt: serverTimestamp(),

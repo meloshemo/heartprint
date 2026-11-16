@@ -86,6 +86,7 @@ export function ShareScreen({
   const copy = () => {
     if (!link) return;
     Clipboard.setStringAsync(link);
+    track('test_paylasildi', { cat: quiz.cat, via: 'kopya' });
     setCopied('link');
     setTimeout(() => setCopied(null), 1800);
   };
@@ -115,28 +116,30 @@ export function ShareScreen({
           )}
         </Card>
 
-        <BigButton
-          label={S.share}
-          gradient
+        {/* BİRİNCİL EYLEM: WhatsApp. Veri (Ağustos-Kasım 2026): 60 testin
+            yalnızca 8'i paylaşıldı, WhatsApp ile paylaşım SIFIR, paylaşılan
+            linki açan da sıfırdı. Eski düzende WhatsApp üç küçük düğmeden
+            biriydi ve en büyük düğme genel "Paylaş"tı. Türkiye'de bir linkin
+            birine ulaşmasının en kısa yolu WhatsApp olduğu için artık tek
+            büyük düğme o. */}
+        <Pressable
           disabled={!ready}
           onPress={() => {
-            track('test_paylasildi', { cat: quiz.cat, via: 'sistem' });
-            Share.share({ message });
+            track('test_paylasildi', { cat: quiz.cat, via: 'whatsapp' });
+            shareTextWhatsApp(message);
           }}
-        />
+          style={({ pressed }) => [
+            styles.waBtn,
+            { opacity: !ready ? 0.4 : pressed ? 0.8 : 1 },
+          ]}
+        >
+          <BrandIcon brand="whatsapp" size={26} color="#06280F" />
+          <Text style={styles.waLabel}>{S.sendWhatsApp}</Text>
+        </Pressable>
+        <Text style={styles.hint}>{S.shareNoInstall}</Text>
 
-        {/* Platform butonları */}
+        {/* İkincil kanallar */}
         <View style={styles.platformRow}>
-          <PlatformBtn
-            label="WhatsApp"
-            brand="whatsapp"
-            color="#25D366"
-            disabled={!ready}
-            onPress={() => {
-              track('test_paylasildi', { cat: quiz.cat, via: 'whatsapp' });
-              shareTextWhatsApp(message);
-            }}
-          />
           <PlatformBtn
             label="Instagram"
             brand="instagram"
@@ -157,21 +160,35 @@ export function ShareScreen({
               if (link) openTikTok(link);
             }}
           />
+          <PlatformBtn
+            label={S.shareMore}
+            emoji="📤"
+            color={theme.textDim}
+            disabled={!ready}
+            onPress={() => {
+              track('test_paylasildi', { cat: quiz.cat, via: 'sistem' });
+              Share.share({ message });
+            }}
+          />
         </View>
 
-        <Text style={styles.or}>{S.or}</Text>
+        <View style={{ height: 12 }} />
         <BigButton
           label={copied === 'link' ? S.copied : S.copyLink}
           color={theme.card}
           disabled={!ready}
           onPress={copy}
         />
-        <Text style={styles.or}>{S.or}</Text>
-        <BigButton
-          label={S.playSamePhone}
-          color={theme.success}
+
+        {/* "Aynı telefonda oyna" bilerek KÜÇÜK: bu yol linki hiç dolaşıma
+            sokmuyor (çözümlerin neredeyse tamamı buradan geliyordu ve döngü
+            hiç başlamıyordu). Özellik duruyor, ama artık varsayılan değil. */}
+        <Pressable
           onPress={() => onPlaySamePhone(quizId)}
-        />
+          style={({ pressed }) => [styles.samePhone, { opacity: pressed ? 0.6 : 1 }]}
+        >
+          <Text style={styles.samePhoneText}>{S.samePhoneLink}</Text>
+        </Pressable>
       </FadeIn>
     </Screen>
   );
@@ -180,12 +197,14 @@ export function ShareScreen({
 function PlatformBtn({
   label,
   brand,
+  emoji,
   color,
   disabled,
   onPress,
 }: {
   label: string;
-  brand: Brand;
+  brand?: Brand;
+  emoji?: string;
   color: string;
   disabled?: boolean;
   onPress: () => void;
@@ -199,13 +218,46 @@ function PlatformBtn({
         { borderColor: color, opacity: disabled ? 0.4 : pressed ? 0.7 : 1 },
       ]}
     >
-      <BrandIcon brand={brand} size={24} />
+      {brand ? (
+        <BrandIcon brand={brand} size={24} />
+      ) : (
+        <Text style={styles.platformEmoji}>{emoji}</Text>
+      )}
       <Text style={styles.platformLabel}>{label}</Text>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
+  waBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
+    backgroundColor: '#25D366',
+    borderRadius: theme.radius,
+    paddingVertical: 18,
+  },
+  waLabel: {
+    color: '#06280F',
+    fontSize: 18,
+    fontWeight: '900',
+  },
+  hint: {
+    color: theme.textDim,
+    fontSize: 12.5,
+    textAlign: 'center',
+    marginTop: 8,
+  },
+  platformEmoji: { fontSize: 20, lineHeight: 24 },
+  samePhone: { paddingVertical: 18, alignItems: 'center' },
+  samePhoneText: {
+    color: theme.textDim,
+    fontSize: 13.5,
+    fontWeight: '600',
+    textDecorationLine: 'underline',
+    textAlign: 'center',
+  },
   platformRow: {
     flexDirection: 'row',
     gap: 10,
