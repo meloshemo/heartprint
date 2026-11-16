@@ -4,11 +4,12 @@
   "outputDirectory": "dist",
   "framework": null,
   "installCommand": "npm install",
-  "rewrites": [
+  "routes": [
     {
-      "source": "/",
+      "src": "/",
       "has": [{ "type": "query", "key": "q" }],
-      "destination": "/api/share"
-    }
+      "dest": "/api/share"
+    },
+    { "handle": "filesystem" }
   ]
 }
